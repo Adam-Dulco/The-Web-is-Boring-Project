@@ -1,0 +1,145 @@
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  background-color: #242424;
+  color: #fff;
+}
+
+model-viewer {
+  width: 76.3%; /* fill container width */
+  height: 77%; /* fill container height */
+}
+
+.center-vortex-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Overlay cockpit sits on top */
+.overlay-cockpit {
+  position: fixed; /* sit on top of the model */
+  top: 0; /* align to top of container */
+  left: 50%; /* center horizontally */
+  transform: translateX(-50%); /* center adjustment */
+  pointer-events: none; /* allows clicks to pass through to model-viewer */
+  z-index: 10; /* make sure it’s above model */
+  width: 100%; /* adjust size as needed */
+  height: 100%;
+  display: block;
+  /* object-fit: cover; */
+}
+
+.ww2-background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+
+/* MODEL */
+.tank_model {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 76.3%;
+  height: 77%;
+
+  /* start off right, full size */
+  transform: translate(70vw, -50%);
+  animation: driveInFromRight 10s ease-out forwards;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ANIMATION */
+@keyframes driveInFromRight {
+  0% {
+    transform: translate(70vw, -50%);
+  }
+
+  100% {
+    transform: translate(12vw, -50%);
+  }
+}
+
+/*REMOVES HORIZONTAL LINE ABOVE TANK */
+
+model-viewer::part(default-progress-bar) {
+  display: none;
+}
+
+model-viewer::part(default-ar-button) {
+  display: none;
+}
+
+.soil-background {
+  width: 100%;
+  display: block; /* prevents subtle layout glitches */
+}
+
+.neon-edges img {
+  display: block; /* prevents subtle layout glitches */
+}
+
+.squozen-text {
+  width: 60%;
+  margin-left: 16%;
+  margin-right: 24%;
+  text-align: justify;
+  color: rgb(115, 191, 0);
+}
+
+/*=====================*/
+/*  NEON EDGE DIVIDER  */
+/*=====================*/
+
+.neon-edges {
+  position: relative;
+}
+
+.neon-edges::before,
+.neon-edges::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  pointer-events: none; /* Prevents Interference */
+  z-index: 2;
+
+  background: linear-gradient(90deg, #fff, #ff00ff, #6a00ff, #fff);
+  background-size: 200% 100%;
+  animation: neonFlow 3s linear infinite;
+
+  box-shadow:
+    0 0 8px #fff,
+    0 0 16px #ff00ff,
+    0 0 32px #c300ff,
+    0 0 64px #8a2be2;
+}
+
+.neon-edges::before {
+  top: 0;
+}
+
+/* .neon-edges::after {
+  bottom: 0;
+  animation-direction: reverse;
+} */
+
+@keyframes neonFlow {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
+}

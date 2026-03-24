@@ -1,0 +1,105 @@
+body {
+  background-color: #161616;
+  margin: 0;
+}
+
+model-viewer {
+  display: block;
+  width: 76.3%;
+  height: 77%;
+  margin: 0 auto;
+}
+
+.center-vortex-container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay-cockpit {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+}
+
+.window-panel-container {
+  position: absolute;
+  top: 42%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  width: clamp(180px, 50vw, 800px);
+}
+
+.window-interface {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.window-text {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  color: #00ff9c;
+  font-family: monospace;
+  font-size: clamp(0.78rem, 1.5vw, 1.4rem);
+  line-height: 1.4;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+  text-shadow: 0 0 6px #00ff9c; /* Adds a glow*/
+  z-index: 21;
+}
+
+.window-text::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 4px;
+  vertical-align: -0.1em;
+  background-color: #00ff9c;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.window-text p {
+  margin: 0 0 12px 0; /* 🔥 spacing between lines */
+}
+
+.first-line {
+  margin-bottom: 100px;
+}
+
+/*=================*/
+/*  MOBILE LAYOUT  */
+/*=================*/
+
+@media (max-width: 840px) {
+  .window-panel-container {
+    width: 60%;
+    top: 42%;
+    left: 50%;
+  }
+
+  .window-text {
+    top: 10%;
+    left: 12%;
+    width: 64%;
+    line-height: 1.2;
+  }
+}
