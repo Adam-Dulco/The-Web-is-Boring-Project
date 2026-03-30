@@ -1,3 +1,25 @@
+/* ======================= */
+/*   FRONT DOOR CONTROLS   */
+/* ======================= */
+
+const doorOverlay = document.getElementById("doorOverlay");
+const doorOpenBtn = document.getElementById("doorOpenBtn");
+const exitBtn = document.querySelector(".exit-btn");
+
+/* OPEN DOORS */
+doorOpenBtn.addEventListener("click", () => {
+  doorOverlay.classList.add("open");
+});
+
+/* CLOSE DOORS */
+exitBtn.addEventListener("click", () => {
+  doorOverlay.classList.remove("open");
+});
+
+/* ================ */
+/*   WINDOW TEXT    */
+/* ================ */
+
 const container = document.getElementById("windowText");
 const lines = Array.from(container.querySelectorAll("p"));
 

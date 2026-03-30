@@ -7,9 +7,14 @@ body {
   color: #fff;
 }
 
-model-viewer {
-  width: 76.3%; /* fill container width */
-  height: 77%; /* fill container height */
+/* model-viewer {
+  width: 76.3%; 
+  height: 77%; 
+} */
+
+#tank {
+  width: 69%;
+  height: 77%;
 }
 
 .center-vortex-container {
