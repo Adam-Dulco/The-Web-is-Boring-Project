@@ -6,26 +6,19 @@ const doorOverlay = document.getElementById("doorOverlay");
 const doorOpenBtn = document.getElementById("doorOpenBtn");
 const exitBtn = document.querySelector(".exit-btn");
 
-/* OPEN DOORS */
-doorOpenBtn.addEventListener("click", () => {
-  doorOverlay.classList.add("open");
-});
-
-/* CLOSE DOORS */
-exitBtn.addEventListener("click", () => {
-  doorOverlay.classList.remove("open");
-});
-
 /* ================ */
 /*   WINDOW TEXT    */
 /* ================ */
 
 const container = document.getElementById("windowText");
-const lines = Array.from(container.querySelectorAll("p"));
+const originalLines = Array.from(container.querySelectorAll("p")).map(
+  (p) => p.textContent,
+);
 
-container.innerHTML = ""; // clear
+container.innerHTML = "";
 
 let lineIndex = 0;
+let typingTimeout = null;
 
 function typeLine(text, element, callback) {
   let i = 0;
@@ -34,9 +27,9 @@ function typeLine(text, element, callback) {
     if (i < text.length) {
       element.textContent += text.charAt(i);
       i++;
-      setTimeout(typeChar, 40);
+      typingTimeout = setTimeout(typeChar, 40);
     } else {
-      setTimeout(callback, 400); // pause between lines
+      typingTimeout = setTimeout(callback, 400);
     }
   }
 
@@ -44,15 +37,39 @@ function typeLine(text, element, callback) {
 }
 
 function startTyping() {
-  if (lineIndex < lines.length) {
+  if (lineIndex < originalLines.length) {
     const p = document.createElement("p");
     container.appendChild(p);
 
-    typeLine(lines[lineIndex].textContent, p, () => {
+    typeLine(originalLines[lineIndex], p, () => {
       lineIndex++;
       startTyping();
     });
   }
 }
 
-window.addEventListener("DOMContentLoaded", startTyping);
+/* RESET TEXT */
+function resetTyping() {
+  clearTimeout(typingTimeout);
+  container.innerHTML = "";
+  lineIndex = 0;
+}
+
+/* OPEN DOORS */
+doorOpenBtn.addEventListener("click", () => {
+  doorOverlay.classList.add("open");
+
+  resetTyping();
+
+  // 3s door animation + half a second delay = 3500ms
+  setTimeout(() => {
+    startTyping();
+  }, 3500);
+});
+
+/* CLOSE DOORS */
+exitBtn.addEventListener("click", () => {
+  doorOverlay.classList.remove("open");
+
+  resetTyping(); // optional: clears text when closing
+});
