@@ -120,7 +120,7 @@ video {
 
   color: #ffffff;
   font-family: monospace, serif;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   text-align: center;
   padding: 20px;
@@ -170,9 +170,9 @@ video {
     opacity 0.3s ease 1.6s;
 }
 
-/* ================ */
-/* FIXED BOTTOM NAV */
-/* ================ */
+/* ======================= */
+/* BOTTOM NAVIGATION PANEL */
+/* ======================= */
 
 .cockpit-nav {
   position: absolute;
