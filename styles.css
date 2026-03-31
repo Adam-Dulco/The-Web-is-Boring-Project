@@ -32,6 +32,8 @@ video {
   overflow: hidden;
 }
 
+/* -------------------------- ENTRANCE SCREEN --------------------------- */
+
 /* ================ */
 /* FRONT DOORS      */
 /* ================ */
@@ -39,7 +41,7 @@ video {
 .door-overlay {
   position: absolute;
   inset: 0;
-  z-index: 30;
+  z-index: 10;
   overflow: hidden;
   pointer-events: none;
 }
@@ -92,13 +94,15 @@ video {
   transition: transform 1.6s ease-in;
 }
 
-/* DOOR OPEN BUTTON */
+/* ===================== */
+/*   DOORS OPEN BUTTON   */
+/* ===================== */
 
 .door-open-btn {
   position: absolute;
   left: 50%;
   top: 56%;
-  z-index: 31;
+  z-index: 11;
   transform: translate(-50%, -50%);
   pointer-events: auto;
 
@@ -155,12 +159,7 @@ video {
     0 0 50px rgba(249, 0, 249, 0.6);
 }
 
-.door-overlay.open .door-open-btn {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* When doors finish closing → show AFTER delay */
+/* When doors finish closing, THEN show AFTER delay */
 .door-overlay:not(.open) .door-open-btn {
   opacity: 1;
   pointer-events: auto;
@@ -168,6 +167,182 @@ video {
     transform 0.2s ease 0s,
     box-shadow 0.2s ease 0s,
     opacity 0.3s ease 1.6s;
+}
+
+.door-overlay.open .door-open-btn {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.door-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ----------------------- COCKPIT DESIGN ---------------------- */
+
+/* ================ */
+/* COCKPIT OVERLAY  */
+/* ================ */
+
+.overlay-cockpit {
+  position: absolute;
+  inset: 0 auto 0 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100vh;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* ================ */
+/* WINDOW PANEL     */
+/* ================ */
+
+.window-panel-container {
+  position: absolute;
+  top: 42%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  width: clamp(180px, 50vw, 800px);
+}
+
+.window-interface {
+  width: 100%;
+  height: auto;
+}
+
+.window-text {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  color: #00ff9c;
+  font-size: clamp(0.78rem, 1.5vw, 1.4rem);
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-shadow: 0 0 6px #00ff9c;
+}
+
+.window-text p {
+  margin: 0 0 12px 0;
+}
+
+.window-text::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 4px;
+  vertical-align: -0.1em;
+  background-color: #00ff9c;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ================ */
+/* VIDEO PANEL      */
+/* ================ */
+
+.video-panel {
+  position: absolute;
+  right: 6.3%;
+  top: 14.5%;
+  z-index: 6;
+
+  width: 8.5%;
+  height: 19%;
+  aspect-ratio: 1 / 1;
+
+  transform: perspective(900px) rotateX(12deg) rotateY(-53deg);
+  transform-origin: center;
+  overflow: hidden;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 255, 156, 0.14),
+    rgba(0, 0, 0, 0.82)
+  );
+}
+
+.video-screen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  border-radius: 4px;
+}
+
+/* ============= */
+/*     LOGO      */
+/* ============= */
+.edge-hill-logo {
+  position: absolute;
+  right: 6.5%;
+  top: 45%;
+  z-index: 6;
+
+  width: 8.5%;
+  height: auto;
+
+  transform: perspective(900px) rotateY(-55deg);
+  transform-origin: center;
+}
+
+/* ================== */
+/*     EXIT BUTTON    */
+/* ================== */
+
+.exit-btn {
+  position: absolute;
+  right: 8%;
+  top: 79%;
+  z-index: 6;
+  width: 12%;
+  min-height: 7%;
+
+  transform: perspective(500px) rotate(50deg) rotateX(8deg) rotateY(-65deg);
+  transform-origin: center;
+
+  padding: 7px 10px;
+
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: clamp(0.56rem, 1.5rem, 1.5rem);
+  line-height: 1.1;
+  color: #ffffff;
+
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.2),
+    rgba(0, 0, 0, 0.6)
+  );
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 6px #ffffff;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.exit-btn:hover,
+.exit-btn:focus-visible {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.9);
+  cursor: pointer;
 }
 
 /* ======================= */
@@ -178,17 +353,14 @@ video {
   position: absolute;
   left: 44%;
   bottom: 20px;
-  z-index: 25;
-
+  z-index: 6;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 6px;
-
   width: clamp(320px, 75vw, 90%); /* 🔥 min | preferred | max */
   max-width: 1200px;
   padding: 0 8px;
   height: 20.5%;
-
   transform: translateX(-50%) perspective(900px) rotateX(55deg);
   transform-origin: center;
 }
@@ -256,8 +428,10 @@ video {
   font-size: 1.5rem;
 }
 
+/* -------------------------------- HOME PAGE ----------------------------*/
+
 /* ================ */
-/* 3D MODEL AREA    */
+/* 3D VORTEX MODEL  */
 /* ================ */
 
 .center-vortex-container {
@@ -278,166 +452,9 @@ video {
   margin-left: 10%;
 }
 
-/* ================ */
-/* COCKPIT OVERLAY  */
-/* ================ */
-
-.overlay-cockpit {
-  position: absolute;
-  inset: 0 auto 0 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 100vh;
-  z-index: 10;
-  pointer-events: none;
-}
-
-/* ================ */
-/* WINDOW PANEL     */
-/* ================ */
-
-.window-panel-container {
-  position: absolute;
-  top: 42%;
-  left: 45%;
-  transform: translate(-50%, -50%);
-  z-index: 20;
-  width: clamp(180px, 50vw, 800px);
-}
-
-.window-interface {
-  width: 100%;
-  height: auto;
-}
-
-.window-text {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  width: 80%;
-  z-index: 21;
-
-  color: #00ff9c;
-  font-size: clamp(0.78rem, 1.5vw, 1.4rem);
-  line-height: 1.4;
-  white-space: normal;
-  overflow-wrap: break-word;
-  text-shadow: 0 0 6px #00ff9c;
-}
-
-.window-text p {
-  margin: 0 0 12px 0;
-}
-
-.window-text::after {
-  content: "";
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  margin-left: 4px;
-  vertical-align: -0.1em;
-  background-color: #00ff9c;
-  animation: blink 0.8s step-end infinite;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-/* ================ */
-/* VIDEO PANEL      */
-/* ================ */
-
-.video-panel {
-  position: absolute;
-  right: 6.3%;
-  top: 14.5%;
-  z-index: 25;
-
-  width: 8.5%;
-  height: 19%;
-  aspect-ratio: 1 / 1;
-
-  transform: perspective(900px) rotateX(12deg) rotateY(-53deg) skewX(0deg);
-  transform-origin: center;
-  overflow: hidden;
-
-  background: linear-gradient(
-    to top,
-    rgba(0, 255, 156, 0.14),
-    rgba(0, 0, 0, 0.82)
-  );
-}
-
-.video-screen {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background: #000;
-  border-radius: 4px;
-}
-
-.edge-hill-logo {
-  position: absolute;
-  right: 6.5%;
-  top: 45%;
-  z-index: 24;
-
-  width: 8.5%;
-  height: auto;
-
-  transform: perspective(900px) rotateX(0deg) rotateY(-55deg) skewX(0deg);
-  transform-origin: center;
-}
-
-.exit-btn {
-  position: absolute;
-  right: 8%;
-  top: 79%;
-  z-index: 25;
-  width: 12%;
-  min-height: 7%;
-
-  transform: perspective(500px) rotate(50deg) rotateX(8deg) rotateY(-65deg)
-    skewX(0deg);
-  transform-origin: center;
-
-  padding: 7px 10px;
-
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: clamp(0.56rem, 1.5rem, 1.5rem);
-  line-height: 1.1;
-  color: #ffffff;
-
-  border: 1px solid #ffffff;
-  border-radius: 8px;
-  background: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 0.2),
-    rgba(0, 0, 0, 0.6)
-  );
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-  text-shadow: 0 0 6px #ffffff;
-
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease;
-}
-
-.exit-btn:hover,
-.exit-btn:focus-visible {
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.9);
-  cursor: pointer;
-}
-/* ================ */
-/* TABLET / MOBILE  */
-/* ================ */
+/* ============= */
+/* TABLET SIZING */
+/* ============= */
 
 @media (max-width: 840px) {
   .vortex-model {
@@ -446,7 +463,7 @@ video {
   }
 
   .window-panel-container {
-    width: 31%;
+    width: 28%;
     top: 42%;
     left: 45%;
     transform: translate(-50%, -50%);
@@ -472,14 +489,13 @@ video {
   }
 
   .cockpit-nav {
-    bottom: 10px;
     gap: 5px;
-
     left: 44%;
     bottom: 25px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
+    z-index: 6;
 
     /* width: clamp(320px, 80vw, 90%); */
     height: 120px;
@@ -496,20 +512,19 @@ video {
     font-size: 1.2rem;
   }
 
-  .first-line {
-    margin-bottom: 40px;
-  }
-
   .exit-btn {
     position: absolute;
     right: 7.5%;
     top: 79.5%;
     min-width: 12%;
     min-height: 4%;
-    transform: perspective(300px) rotate(45deg) rotateX(0deg) rotateY(-60deg)
-      skewX(15deg);
+    transform: perspective(300px) rotate(45deg) rotateY(-60deg);
   }
 }
+
+/* ============= */
+/* MOBILE SIZING */
+/* ============= */
 
 /* Very small screens: switch to 2 columns for readability */
 @media (max-width: 560px) {
@@ -523,7 +538,7 @@ video {
   }
 
   .window-panel-container {
-    width: 50%;
+    width: 45%;
     top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -561,17 +576,6 @@ video {
     font-size: 0.6rem;
   }
 
-  .abort-button {
-    position: absolute;
-    right: 1%;
-    top: 80%;
-    z-index: 24;
-    width: 7%;
-
-    transform: perspective(900px) rotate(-45deg) rotateX(45deg) rotateY(0deg)
-      skewX(0deg);
-  }
-
   .video-panel {
     display: none;
   }
@@ -579,13 +583,12 @@ video {
   .edge-hill-logo {
     right: 47%;
     top: 3%;
-    z-index: 24;
+    z-index: 5;
 
     width: 25px;
     height: auto;
 
-    transform: perspective(0px) rotateX(0deg) rotateY(0deg) skewX(0deg)
-      translate(-0%, -57%);
+    transform: translate(-0%, -57%);
     transform-origin: center;
   }
 
@@ -596,7 +599,146 @@ video {
     top: 79%;
     min-width: 17%;
     min-height: 4%;
-    transform: perspective(200px) rotate(45deg) rotateX(0deg) rotateY(-60deg)
-      skewX(15deg);
+    transform: perspective(200px) rotate(45deg) rotateY(-60deg) skewX(15deg);
   }
+}
+
+/*-------------------TANK PAGE-------------*/
+
+#tank {
+  width: 69%;
+  height: 77%;
+}
+
+.center-tank-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* MODEL */
+.tank_model {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 76.3%;
+  height: 77%;
+
+  /* start off right, full size */
+  transform: translate(70vw, -50%);
+  animation: driveInFromRight 10s ease-out forwards;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ANIMATION */
+@keyframes driveInFromRight {
+  0% {
+    transform: translate(70vw, -50%);
+  }
+
+  100% {
+    transform: translate(12vw, -50%);
+  }
+}
+
+/*REMOVES HORIZONTAL LINE ABOVE TANK */
+
+model-viewer::part(default-progress-bar) {
+  display: none;
+}
+
+model-viewer::part(default-ar-button) {
+  display: none;
+}
+
+.ww2-background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+
+.squozen-text {
+  width: 60%;
+  margin-left: 16%;
+  margin-right: 24%;
+  text-align: justify;
+  color: rgb(115, 191, 0);
+}
+
+/*=====================*/
+/*  NEON EDGE DIVIDER  */
+/*=====================*/
+
+.neon-edges {
+  position: relative;
+}
+
+.neon-edges::before,
+.neon-edges::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  pointer-events: none; /* Prevents Interference */
+  z-index: 2;
+
+  background: linear-gradient(90deg, #fff, #ff00ff, #6a00ff, #fff);
+  background-size: 200% 100%;
+  animation: neonFlow 3s linear infinite;
+
+  box-shadow:
+    0 0 8px #fff,
+    0 0 16px #ff00ff,
+    0 0 32px #c300ff,
+    0 0 64px #8a2be2;
+}
+
+.neon-edges::before {
+  top: 0;
+}
+
+@keyframes neonFlow {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
+}
+
+/* ------------ COCKPIT LOCKING FEATURES TO ALLOW SCROLLING -------------- */
+
+/* enables scrolling on the page. */
+body.scrollable {
+  overflow-y: auto;
+}
+
+/* Locks the cockpit to the UI */
+body.scrollable .overlay-cockpit,
+body.scrollable .cockpit-nav,
+body.scrollable .video-panel,
+body.scrollable .edge-hill-logo,
+body.scrollable .exit-btn,
+body.scrollable .door-overlay {
+  position: fixed;
+}
+
+/*  removes the 100vh height cap which prevented the page from scrolling */
+body.scrollable .page-shell {
+  height: auto;
+  overflow: visible;
+}
+
+/* ensures the tank fills the first screen before scroll content begins */
+body.scrollable .tank-hero-section {
+  height: 100vh;
 }

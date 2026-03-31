@@ -1,64 +1,56 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3D Testing</title>
-
     <link rel="stylesheet" href="styles.css" />
-
     <script
       type="module"
       src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.2.0/model-viewer.min.js"
     ></script>
+    <title>Home - EHX530</title>
   </head>
 
   <body>
     <!-- NAVIGATION PANEL -->
     <header>
-      <nav>
-        <nav class="cockpit-nav">
-          <a href="#" class="nav-btn larger-nav-font">Donating</a>
-          <a href="#" class="nav-btn larger-nav-font">About</a>
-          <a href="#" class="nav-btn larger-nav-font">Help</a>
+      <nav class="cockpit-nav">
+        <a href="#" class="nav-btn larger-nav-font">Donating</a>
+        <a href="#" class="nav-btn larger-nav-font">About</a>
+        <a href="#" class="nav-btn larger-nav-font">Help</a>
 
-          <a href="#" class="nav-btn" data-short="Radio Press Packs"
-            >TV &amp; Radio Press Packs (1994 - 2002)</a
-          >
-          <a href="#" class="nav-btn larger-nav-font"> 🌪️ Home </a>
-          <a
-            href="#"
-            class="nav-btn"
-            data-short="Christopher Roby Film Archives"
-          >
-            The Christopher Roby Archive of Film Texts (1919 - 2004)
-          </a>
+        <a href="#" class="nav-btn" data-short="Radio Press Packs"
+          >TV &amp; Radio Press Packs (1994 - 2002)</a
+        >
+        <a href="#" class="nav-btn larger-nav-font"> 🌪️ Home </a>
+        <a href="#" class="nav-btn" data-short="Christopher Roby Film Archives">
+          The Christopher Roby Archive of Film Texts (1919 - 2004)
+        </a>
 
-          <a
-            href="./william-charles-bradshaw-collection/index2.html"
-            class="nav-btn"
-            data-short="The Bradshaw's Collection"
-          >
-            The William &amp; Charles Bradshaw Collection (1914 - 1945)
-          </a>
-          <a
-            href="#"
-            class="nav-btn"
-            data-short="Chloe Fisher Midwifery Collection"
-          >
-            The Chloe Fisher Midwifery Collection &amp; Archive (1932 - 2004)
-          </a>
-          <a href="#" class="nav-btn" data-short="Edge Hill Predecessors">
-            Edge Hill University &amp; Predecessors (1880 - 2019)
-          </a>
-        </nav>
+        <a
+          href="./william-charles-bradshaw-collection/index2.html"
+          class="nav-btn"
+          data-short="The Bradshaw's Collection"
+        >
+          The William &amp; Charles Bradshaw Collection (1914 - 1945)
+        </a>
+        <a
+          href="#"
+          class="nav-btn"
+          data-short="Chloe Fisher Midwifery Collection"
+        >
+          The Chloe Fisher Midwifery Collection &amp; Archive (1932 - 2004)
+        </a>
+        <a href="#" class="nav-btn" data-short="Edge Hill Predecessors">
+          Edge Hill University &amp; Predecessors (1880 - 2019)
+        </a>
       </nav>
     </header>
 
     <main class="page-shell">
-      <!-- FRONT DOORS -->
-      <div class="door-overlay" id="doorOverlay">
+      <!-- MAIN ENTRANCE DOORS -->
+      <section class="door-overlay" id="doorOverlay">
         <picture class="door-picture door-left-wrap">
           <source
             srcset="./front-doors/left-door-mobile.png"
@@ -83,11 +75,10 @@
           />
         </picture>
         <button class="door-open-btn" id="doorOpenBtn">Enter</button>
-      </div>
+      </section>
 
       <!-- CENTER VORTEX-->
-
-      <div class="center-vortex-container">
+      <aside class="center-vortex-container">
         <model-viewer
           disable-zoom
           auto-rotate
@@ -103,8 +94,9 @@
           class="vortex-model"
         >
         </model-viewer>
-      </div>
+      </aside>
 
+      <!-- COCKPIT OVERLAY -->
       <picture>
         <source
           srcset="./cockpit-interface-components/mobile-interface.png"
@@ -117,6 +109,7 @@
         />
       </picture>
 
+      <!-- WINDOW PANEL -->
       <section class="window-panel-container">
         <picture>
           <source
@@ -141,7 +134,7 @@
         </article>
       </section>
 
-      <div class="video-panel">
+      <aside class="video-panel">
         <video
           class="video-screen"
           controls
@@ -150,7 +143,6 @@
           loop
           playsinline
           preload="metadata"
-          poster="./video-poster.jpg"
         >
           <source
             src="./video-clips/14846843_640_360_30fps.mp4"
@@ -158,7 +150,7 @@
           />
           Your browser does not support the video tag.
         </video>
-      </div>
+      </aside>
       <img
         src="./cockpit-interface-components/edge-hill-logo.png"
         alt="Edge Hill University Logo"

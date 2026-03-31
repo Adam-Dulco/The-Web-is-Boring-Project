@@ -11,14 +11,16 @@ const exitBtn = document.querySelector(".exit-btn");
 /* ================ */
 
 const container = document.getElementById("windowText");
-const originalLines = Array.from(container.querySelectorAll("p")).map(
-  (p) => p.textContent,
-);
-
-container.innerHTML = "";
-
+let originalLines = [];
 let lineIndex = 0;
 let typingTimeout = null;
+
+if (container) {
+  originalLines = Array.from(container.querySelectorAll("p")).map(
+    (p) => p.textContent,
+  );
+  container.innerHTML = "";
+}
 
 function typeLine(text, element, callback) {
   let i = 0;
@@ -37,6 +39,8 @@ function typeLine(text, element, callback) {
 }
 
 function startTyping() {
+  if (!container) return;
+
   if (lineIndex < originalLines.length) {
     const p = document.createElement("p");
     container.appendChild(p);
@@ -51,28 +55,45 @@ function startTyping() {
 /* RESET TEXT */
 function resetTyping() {
   clearTimeout(typingTimeout);
-  container.innerHTML = "";
+
+  if (container) {
+    container.innerHTML = "";
+  }
+
   lineIndex = 0;
 }
 
 /* OPEN DOORS */
-doorOpenBtn.addEventListener("click", () => {
-  doorOverlay.classList.add("open");
-
-  resetTyping();
-
-  // 3s door animation + half a second delay = 3500ms
-  setTimeout(() => {
+if (doorOpenBtn && doorOverlay) {
+  // If already entered this session, skip the doors immediately
+  if (sessionStorage.getItem("doorsOpened")) {
+    doorOverlay.classList.add("hidden");
     startTyping();
-  }, 3500);
-});
+  }
+
+  doorOpenBtn.addEventListener("click", () => {
+    doorOverlay.classList.add("open");
+    sessionStorage.setItem("doorsOpened", "true");
+
+    resetTyping();
+
+    setTimeout(() => {
+      doorOverlay.classList.add("hidden");
+      startTyping();
+    }, 3000);
+  });
+}
 
 /* CLOSE DOORS */
-exitBtn.addEventListener("click", () => {
-  doorOverlay.classList.remove("open");
+if (exitBtn && doorOverlay) {
+  exitBtn.addEventListener("click", () => {
+    doorOverlay.classList.remove("hidden");
+    doorOverlay.classList.remove("open");
+    sessionStorage.removeItem("doorsOpened");
 
-  resetTyping(); // optional: clears text when closing
-});
+    resetTyping();
+  });
+}
 
 /*====================*/
 /* TANK SOUND EFFECTS */
@@ -83,11 +104,10 @@ const sound = document.getElementById("tankSound");
 
 let audioUnlocked = false;
 
-// unlock audio on first user interaction
 document.addEventListener(
   "click",
   () => {
-    if (!audioUnlocked) {
+    if (!audioUnlocked && sound) {
       sound
         .play()
         .then(() => {
@@ -103,28 +123,29 @@ document.addEventListener(
   { once: true },
 );
 
-// play when animation starts
-tank.addEventListener("animationstart", () => {
-  sound.currentTime = 0;
-  sound.volume = 0.5;
+if (tank && sound) {
+  tank.addEventListener("animationstart", () => {
+    sound.currentTime = 0;
+    sound.volume = 0.5;
 
-  sound.play().catch((err) => {
-    console.log("Sound play blocked:", err);
+    sound.play().catch((err) => {
+      console.log("Sound play blocked:", err);
+    });
   });
-});
 
-tank.addEventListener("animationend", () => {
-  tank.setAttribute("camera-controls", "");
-  tank.style.pointerEvents = "auto";
+  tank.addEventListener("animationend", () => {
+    tank.setAttribute("camera-controls", "");
+    tank.style.pointerEvents = "auto";
 
-  const fade = setInterval(() => {
-    if (sound.volume > 0.05) {
-      sound.volume -= 0.05;
-    } else {
-      sound.pause();
-      sound.currentTime = 0;
-      sound.volume = 0.5;
-      clearInterval(fade);
-    }
-  }, 100);
-});
+    const fade = setInterval(() => {
+      if (sound.volume > 0.05) {
+        sound.volume -= 0.05;
+      } else {
+        sound.pause();
+        sound.currentTime = 0;
+        sound.volume = 0.5;
+        clearInterval(fade);
+      }
+    }, 100);
+  });
+}

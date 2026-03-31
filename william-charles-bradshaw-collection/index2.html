@@ -1,94 +1,126 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles2.css" />
+    <link rel="stylesheet" href="../styles.css" />
     <script
       type="module"
       src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.2.0/model-viewer.min.js"
     ></script>
-
-    <title>3D Testing</title>
+    <title>Bradshaw's Page - EHX530</title>
   </head>
-  <body>
 
-     <!-- NAVIGATION PANEL -->
-<header>
-      <nav>
-        <nav class="cockpit-nav">
-          <a href="#" class="nav-btn larger-nav-font">Donating</a>
-          <a href="#" class="nav-btn larger-nav-font">About</a>
-          <a href="#" class="nav-btn larger-nav-font">Help</a>
+  <body class="scrollable">
+    <!-- NAVIGATION PANEL -->
+    <header>
+      <nav class="cockpit-nav">
+        <a href="#" class="nav-btn larger-nav-font">Donating</a>
+        <a href="#" class="nav-btn larger-nav-font">About</a>
+        <a href="#" class="nav-btn larger-nav-font">Help</a>
 
-          <a href="#" class="nav-btn" data-short="Radio Press Packs"
-            >TV &amp; Radio Press Packs (1994 - 2002)</a
-          >
-          <a href="#" class="nav-btn larger-nav-font"> 🌪️ Home </a>
-          <a
-            href="#"
-            class="nav-btn"
-            data-short="Christopher Roby Film Archives"
-          >
-            The Christopher Roby Archive of Film Texts (1919 - 2004)
-          </a>
+        <a href="#" class="nav-btn" data-short="Radio Press Packs"
+          >TV &amp; Radio Press Packs (1994 - 2002)</a
+        >
+        <a href="../index.html" class="nav-btn larger-nav-font"> 🌪️ Home </a>
+        <a href="#" class="nav-btn" data-short="Christopher Roby Film Archives">
+          The Christopher Roby Archive of Film Texts (1919 - 2004)
+        </a>
 
-          <a
-            href="./william-charles-bradshaw-collection/index2.html"
-            class="nav-btn"
-            data-short="The Bradshaw's Collection"
-          >
-            The William &amp; Charles Bradshaw Collection (1914 - 1945)
-          </a>
-          <a
-            href="#"
-            class="nav-btn"
-            data-short="Chloe Fisher Midwifery Collection"
-          >
-            The Chloe Fisher Midwifery Collection &amp; Archive (1932 - 2004)
-          </a>
-          <a href="#" class="nav-btn" data-short="Edge Hill Predecessors">
-            Edge Hill University &amp; Predecessors (1880 - 2019)
-          </a>
-        </nav>
+        <a
+          href="../william-charles-bradshaw-collection/index2.html"
+          class="nav-btn"
+          data-short="The Bradshaw's Collection"
+        >
+          The William &amp; Charles Bradshaw Collection (1914 - 1945)
+        </a>
+        <a
+          href="#"
+          class="nav-btn"
+          data-short="Chloe Fisher Midwifery Collection"
+        >
+          The Chloe Fisher Midwifery Collection &amp; Archive (1932 - 2004)
+        </a>
+        <a href="#" class="nav-btn" data-short="Edge Hill Predecessors">
+          Edge Hill University &amp; Predecessors (1880 - 2019)
+        </a>
       </nav>
     </header>
-    <main class="page-shell">
 
-      <div class="door-overlay" id="doorOverlay">
+    <main class="page-shell">
+      <!-- MAIN ENTRANCE DOORS -->
+      <section class="door-overlay" id="doorOverlay">
         <picture class="door-picture door-left-wrap">
           <source
-            srcset="./front-doors/left-door-mobile.png"
+            srcset="../front-doors/left-door-mobile.png"
             media="(max-width: 560px)"
           />
           <img
-            src="./front-doors/left-door.png"
+            src="../front-doors/left-door.png"
             class="door-panel door-left"
             alt="Left door"
           />
         </picture>
-
         <picture class="door-picture door-right-wrap">
           <source
-            srcset="./front-doors/right-door-mobile.png"
+            srcset="../front-doors/right-door-mobile.png"
             media="(max-width: 560px)"
           />
           <img
-            src="./front-doors/right-door.png"
+            src="../front-doors/right-door.png"
             class="door-panel door-right"
             alt="Right door"
           />
         </picture>
         <button class="door-open-btn" id="doorOpenBtn">Enter</button>
-      </div>
+      </section>
 
+      <!-- COCKPIT OVERLAY -->
+      <picture>
+        <source
+          srcset="../cockpit-interface-components/mobile-interface.png"
+          media="(max-width: 560px)"
+        />
+        <img
+          src="../cockpit-interface-components/desktop-interface.png"
+          class="overlay-cockpit"
+          alt=""
+        />
+      </picture>
 
+      <!-- VIDEO PANEL -->
+      <aside class="video-panel">
+        <video
+          class="video-screen"
+          controls
+          muted
+          autoplay
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source
+            src="../video-clips/14846843_640_360_30fps.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+      </aside>
 
+      <!-- LOGO -->
+      <img
+        src="../cockpit-interface-components/edge-hill-logo.png"
+        alt="Edge Hill University Logo"
+        class="edge-hill-logo"
+      />
 
+      <!-- EXIT BUTTON -->
+      <button class="exit-btn">Exit</button>
 
-      <!--Change rotation-per-second="-30deg" to a higher value to increase speed-->
-      <section class="hero-section">
+      <!-- SCROLLABLE CONTENT -->
+
+      <section class="tank-hero-section">
         <audio id="tankSound" preload="auto">
           <source src="./dennish18-tank-moving-143104.mp3" type="audio/mpeg" />
         </audio>
@@ -113,124 +145,75 @@
             alt="landscape from an abandoned war scene"
             class="ww2-background-img"
           />
-          </div>
-
-          <!--OVERLAY COCKPIT-->
-
-          <picture>
-            <source
-              srcset="../cockpit-interface-components/mobile-cockpit-interface.png"
-              media="(max-width: 520px)"
-            />
-            <img src="../cockpit-interface-components/desktop-interface.png" class="overlay-cockpit" />
-          </picture>
-          <!-- <img src="../cockpit-interface.png" alt="" class="overlay-cockpit" /> -->
         </div>
       </section>
 
       <!-- SCROLL CONTENT -->
       <section class="next-content">
         <div class="neon-edges"></div>
-        <h2>More Content</h2>
+        <h2 class="squozen-text">More Content</h2>
+        <h2 class="squozen-text">
+          The William and Charles Bradshaw Collection, 1914-1945
+        </h2>
         <p class="squozen-text">
-          This is where your page continues after where your page continues
-          after the intro. Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. EnThis is where your page continues after where your page
-          continues after the intro. Lorem ipsum dolor sit amet consectetur
-          aThis is where your page continues after where your page continues
-          after the intro. Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Enim nihil velit, ex vitae aperiam aspernatur similique minima
-          accusantium. Harum magnam quibusdam iure recusandae accusamus unde
-          nisi consectetur, delectus iusto cum?This is where your page continues
-          after where your page continues after the intro. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Enim nihil velit, ex vitae aperiam
-          aspernatur similique minima accusantium. Harum magnam quibusdam iure
-          recusandae accusamus unde nisi consectetur, delectus iusto cum?This is
-          where your page continues after where your page continues after the
-          intro. Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-          nihil velit, ex vitae aperiam aspernatur similique minima accusantium.
-          Harum magnam quibusdam iure recusandae accusamus unde nisi
-          consectetur, delectus iusto cum?This is where your page continues
-          after where your page continues after the intro. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Enim nihil velit, ex vitae aperiam
-          aspernatur similique minima accusantium. Harum magnam quibusdam iure
-          recusandae accusamus unde nisi consectetur, delectus iusto cum?This is
-          where your page continues after where your page continues after the
-          intro. Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-          nihil velit, ex vitae aperiam aspernatur similique minima accusantium.
-          Harum magnam quibusdam iure recusandae accusamus unde nisi
-          consectetur, delectus iusto cum?This is where your page continues
-          after where your page continues after the intro. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Enim nihil velit, ex vitae aperiam
-          aspernatur similique minima accusantium. Harum magnam quibusdam iure
-          recusandae accusamus unde nisi consectetur, delectus iusto cum?This is
-          where your page continues after where your page continues after the
-          intro. Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-          nihil velit, ex vitae aperiam aspernatur similique minima accusantium.
-          Harum magnam quibusdam iure recusandae accusamus unde nisi
-          consectetur, delectus iusto cum?This is where your page continues
-          after where your page continues after the intro. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Enim nihil velit, ex vitae aperiam
-          aspernatur similique minima accusantium. Harum magnam quibusdam iure
-          recusandae accusamus unde nisi consectetur, delectus iusto cum?This is
-          where your page continues after where your page continues after the
-          intro. Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-          nihil velit, ex vitae aperiam aspernatur similique minima accusantium.
-          Harum magnam quibusdam iure recusandae accusamus unde nisi
-          consectetur, delectus iusto cum?This is where your page continues
-          after where your page continues after the intro. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Enim nihil velit, ex vitae aperiam
-          aspernatur similique minima accusantium. Harum magnam quibusdam iure
-          recusandae accusamus unde nisi consectetur, delectus iusto cum?This is
-          where your page continues after where your page continues after the
-          intro. Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-          nihil velit, ex vitae aperiam aspernatur similique minima accusantium.
-          Harum magnam quibusdam iure recusandae accusamus unde nisi
-          consectetur, delectus iusto cum?This is where your page continues
-          after where your page continues after the intro. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Enim nihil velit, ex vitae aperiam
-          aspernatur similique minima accusantium. Harum magnam quibusdam iure
-          recusandae accusamus unde nisi consectetur, delectus iusto cum?This is
-          where your page continues after where your page continues after the
-          intro. Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-          nihil velit, ex vitae aperiam aspernatur similique minima accusantium.
-          Harum magnam quibusdam iure recusandae accusamus unde nisi
-          consectetur, delectus iusto cum?This is where your page continues
-          after where your page continues after the intro. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Enim nihil velit, ex vitae aperiam
-          aspernatur similique minima accusantium. Harum magnam quibusdam iure
-          recusandae accusamus unde nisi consectetur, delectus iusto
-          cum?dipisicing elit. Enim nihil velit, ex vitae aperiam aspernatur
-          similique minima accusantium. Harum magnam quibusdam iure recusandae
-          accusamus unde nisi consectetur, delectus iusto cum?This is where your
-          page continues after where your page continues after the intro. Lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Enim nihil velit,
-          ex vitae aperiam aspernatur similique minima accusantium. Harum magnam
-          quibusdam iure recusandae accusamus unde nisi consectetur, delectus
-          iusto cum?This is where your page continues after where your page
-          continues after the intro. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Enim nihil velit, ex vitae aperiam aspernatur
-          similique minima accusantium. Harum magnam quibusdam iure recusandae
-          accusamus unde nisi consectetur, delectus iusto cum?This is where your
-          page continues after where your page continues after the intro. Lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Enim nihil velit,
-          ex vitae aperiam aspernatur similique minima accusantium. Harum magnam
-          quibusdam iure recusandae accusamus unde nisi consectetur, delectus
-          iusto cum?This is where your page continues after where your page
-          continues after the intro. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Enim nihil velit, ex vitae aperiam aspernatur
-          similique minima accusantium. Harum magnam quibusdam iure recusandae
-          accusamus unde nisi consectetur, delectus iusto cum?This is where your
-          page continues after where your page continues after the intro. Lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Enim nihil velit,
-          ex vitae aperiam aspernatur similique minima accusantium. Harum magnam
-          quibusdam iure recusandae accusamus unde nisi consectetur, delectus
-          iusto cum?im nihil velit, ex vitae aperiam aspernatur similique minima
-          accusantium. Harum magnam quibusdam iure recusandae accusamus unde
-          nisi consectetur, delectus iusto cum?
+          This is where your page continues... Lorem, ipsum dolor sit amet
+          consectetur adipisicing elit. Veniam modi laudantium quibusdam
+          incidunt fuga expedita sunt debitis ratione accusantium eaque optio
+          minus, sed adipisci enim cum. Incidunt nihil quidemwhere your page
+          continues... Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+          Veniam modi laudantium quibusdam incidunt fuga expedita sunt debitis
+          ratione accusantium eaque optio minus, sed adipisci enim cum. Incidunt
+          nihil quidemwhere your page continues... Lorem, ipsum dolor sit amet
+          consectetur adipisicing elit. Veniam modi laudantium quibusdam
+          incidunt fuga expedita sunt debitis ratione accusantium eaque optio
+          minus, sed adipisci enim cum. Incidunt nihil quidemwhere your page
+          continues... Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+          Veniam modi laudantium quibusdam incidunt fuga expedita sunt debitis
+          ratione accusantium eaque optio minus, sed adipisci enim cum. Incidunt
+          nihil quidemwhere your page continues... Lorem, ipsum dolor sit amet
+          consectetur adipisicing elit. Veniam modi laudantium quibusdam
+          incidunt fuga expedita sunt debitis ratione accusantium eaque optio
+          minus, sed adipisci enim cum. Incidunt nihil quidemwhere your page
+          continues... Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+          Veniam modi laudantium quibusdam incidunt fuga expedita sunt debitis
+          ratione accusantium eaque optio minus, sed adipisci enim cum. Inues...
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam modi
+          laudantium quibusdam incidunt fuga expedita sunt debitis ratione
+          accusantium eaque optio minus, sed adipisci enim cum. Incidunt nihil
+          quidemwhere your page continues... Lorem, ipsum dolor sit amet
+          consectetur adipisicing elit. Veniam modi laudantium quibusdam
+          incidunt fuga expedita sunt debitis ratione accusantium eaque optio
+          minus, sed adipisci enim cum. Incidunt nihil quidemwhere your page
+          continues... Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+          Veniam modi laudantium quibusdam incidunt fuga expedita sunt debitis
+          ratione accusantium eaque optio minus, sed adipisci enim cum. Inues...
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam modi
+          laudantium quibusdam incidunt fuga expedita sunt debitis ratione
+          accusantium eaque optio minus, sed adipisci enim cum. Incidunt nihil
+          quidemwhere your page continues... Lorem, ipsum dolor sit amet
+          consectetur adipisicing elit. Veniam modi laudantium quibusdam
+          incidunt fuga expedita sunt debitis ratione accusantium eaque optio
+          minus, sed adipisci enim cum. Incidunt nihil quidemwhere your page
+          continues... Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+          Veniam modi laudantium quibusdam incidunt fuga expedita sunt debitis
+          ratione accusantium eaque optio minus, sed adipisci enim cum. Inues...
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam modi
+          laudantium quibusdam incidunt fuga expedita sunt debitis ratione
+          accusantium eaque optio minus, sed adipisci enim cum. Incidunt nihil
+          quidemwhere your page continues... Lorem, ipsum dolor sit amet
+          consectetur adipisicing elit. Veniam modi laudantium quibusdam
+          incidunt fuga expedita sunt debitis ratione accusantium eaque optio
+          minus, sed adipisci enim cum. Incidunt nihil quidemwhere your page
+          continues... Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+          Veniam modi laudantium quibusdam incidunt fuga expedita sunt debitis
+          ratione accusantium eaque optio minus, sed adipisci enim cum. Incidunt
+          nihil quidemwhere your page continues... Lorem, ipsum dolor sit amet
+          consectetur adipisicing elit. Veniam modi laudantium quibusdam
+          incidunt fuga expedita sunt debitis ratione accusantium eaque optio
+          minus, sed adipisci enim cum. Incidunt nihil quidem nostrum!
         </p>
       </section>
     </main>
-    <script src="./script2.js"></script>
+    <script src="../script.js"></script>
   </body>
 </html>
