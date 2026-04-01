@@ -26,7 +26,7 @@ video {
 }
 
 .heading-top-spacer {
-  padding-top: 25px;
+  padding-top: 50px;
 }
 
 .page-shell {
@@ -524,11 +524,14 @@ model-viewer::part(default-ar-button) {
   z-index: 1;
 }
 
+.archive-information-section {
+  background: linear-gradient(180deg, #bfc5ac, #7b806a);
+}
+
 .centered-content {
   width: 60%;
   margin-left: 16%;
   margin-right: 24%;
-  color: rgb(115, 191, 0);
 }
 
 .centered-content-paragraph {
@@ -580,12 +583,20 @@ model-viewer::part(default-ar-button) {
   font-family: "Special Elite", system-ui;
   letter-spacing: 2px;
   line-height: 1.5;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  color: #1b1d16;
+  padding-bottom: 250px;
 }
 
 .bradshaw-heading {
   font-family: "Black Ops One", system-ui;
   letter-spacing: 3px;
+  color: #121c0ceb;
+  margin-top: 0;
+}
+
+.bradshaw-h3 {
+  font-size: 2rem;
 }
 
 /* ============= */
@@ -659,6 +670,10 @@ model-viewer::part(default-ar-button) {
     min-width: 12%;
     min-height: 4%;
     transform: perspective(300px) rotate(45deg) rotateY(-60deg);
+  }
+
+  .centered-content-paragraph {
+    text-align: left;
   }
 }
 
@@ -752,7 +767,6 @@ model-viewer::part(default-ar-button) {
     width: 60%;
     margin-left: 20%;
     margin-right: 20%;
-    color: rgb(115, 191, 0);
   }
 
   .centered-content-paragraph {
@@ -912,5 +926,207 @@ body.scrollable .tank-hero-section {
   }
   50% {
     filter: brightness(1.25);
+  }
+}
+
+/* ========================= */
+/* BRADSHAW ARCHIVE TABLE    */
+/* ========================= */
+
+.bradshaws-archive-table {
+  width: 60%;
+  margin: 3rem 24% 4rem 16%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 28, 12, 0.92),
+    rgba(10, 16, 8, 0.9)
+  );
+  border: 2px solid rgba(115, 191, 0, 0.45);
+  box-shadow:
+    0 0 12px rgba(115, 191, 0, 0.15),
+    0 0 28px rgba(0, 0, 0, 0.45),
+    inset 0 0 18px rgba(115, 191, 0, 0.05);
+  color: #d8efb3;
+  font-family: "Special Elite", monospace;
+}
+
+.bradshaws-archive-table tr:not(:last-child) td {
+  border-bottom: 1px dashed rgba(115, 191, 0, 0.25);
+}
+
+.bradshaws-archive-table td {
+  padding: 1.2rem 1.1rem;
+  vertical-align: top;
+}
+
+.bradshaws-archive-table .label {
+  width: 35%;
+  background: rgba(115, 191, 0, 0.06);
+}
+
+.bradshaws-archive-table .value {
+  width: 65%;
+  color: #dce8c0;
+  line-height: 1.7;
+  font-size: 0.98rem;
+  letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
+}
+
+.bradshaws-archive-table a {
+  color: #9dff66;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(157, 255, 102, 0.7);
+}
+
+.bradshaws-archive-table a:hover,
+.bradshaws-archive-table a:focus-visible {
+  color: #d9ffbf;
+  border-bottom-style: solid;
+}
+
+/* DOG TAG */
+.dog-tag {
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  padding: 0.8rem 1.2rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 999px;
+  border: 2px solid #7f866d;
+  background: linear-gradient(180deg, #bfc5ac, #7b806a);
+  color: #1b1d16;
+  font-family: "Black Ops One", system-ui;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.35),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.22),
+    0 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+.dog-tag::before,
+.dog-tag::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: #4f5346;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+.dog-tag::before {
+  left: 9px;
+}
+
+.dog-tag::after {
+  right: 9px;
+}
+
+/* STAMP */
+.stamp {
+  display: inline-block;
+  margin-top: 0.9rem;
+  padding: 0.35rem 0.75rem;
+  border: 2px solid rgba(190, 70, 70, 0.95);
+  color: #ff9b9b;
+  font-family: "Black Ops One", system-ui;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(-4deg);
+  background: rgba(100, 0, 0, 0.08);
+  box-shadow: 0 0 10px rgba(190, 70, 70, 0.15);
+}
+
+/* TABLET */
+@media (max-width: 840px) {
+  .bradshaws-archive-table .label {
+    width: 38%;
+  }
+
+  .bradshaws-archive-table .value {
+    width: 62%;
+    font-size: 0.94rem;
+  }
+
+  .dog-tag {
+    font-size: 0.5rem;
+    padding: 0.72rem 1rem 0.72rem 1.35rem;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 560px) {
+  .bradshaws-archive-table {
+    margin: 2rem 20% 3rem 20%;
+    display: block;
+    border-spacing: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .bradshaws-archive-table tbody {
+    display: block;
+  }
+
+  .bradshaws-archive-table tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(115, 191, 0, 0.28);
+    background: linear-gradient(
+      180deg,
+      rgba(18, 28, 12, 0.92),
+      rgba(10, 16, 8, 0.9)
+    );
+    box-shadow:
+      0 0 10px rgba(115, 191, 0, 0.08),
+      inset 0 0 14px rgba(115, 191, 0, 0.04);
+  }
+
+  .bradshaws-archive-table tr:not(:last-child) td {
+    border-bottom: none;
+  }
+
+  .bradshaws-archive-table td {
+    display: block;
+    width: 100%;
+    padding: 0.95rem;
+  }
+
+  .bradshaws-archive-table .label {
+    background: rgba(115, 191, 0, 0.08);
+    border-bottom: 1px dashed rgba(115, 191, 0, 0.2);
+  }
+
+  .bradshaws-archive-table .value {
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+
+  .dog-tag {
+    display: block;
+    width: 100%;
+    font-size: 0.68rem;
+    text-align: center;
+  }
+
+  .stamp {
+    font-size: 0.68rem;
+  }
+
+  .bradshaws-archive-table .label {
+    width: 100%;
   }
 }
