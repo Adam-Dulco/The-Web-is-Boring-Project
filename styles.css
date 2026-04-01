@@ -25,11 +25,21 @@ video {
   max-width: 100%;
 }
 
+.heading-top-spacer {
+  padding-top: 25px;
+}
+
 .page-shell {
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
+}
+
+h2 {
+  font-size: 3rem;
+  text-align: center;
+  line-height: 1.5;
 }
 
 /* -------------------------- ENTRANCE SCREEN --------------------------- */
@@ -452,11 +462,141 @@ video {
   margin-left: 10%;
 }
 
+/*-------------------TANK PAGE-------------*/
+
+#tank {
+  width: 69%;
+  height: 77%;
+}
+
+.center-tank-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* MODEL */
+.tank_model {
+  position: absolute;
+  top: 30%;
+  /* left: 0; */
+  width: 76.3%;
+  height: 77%;
+
+  /* start off right, full size */
+  transform: translate(70vw, -50%);
+  animation: driveInFromRight 10s ease-out forwards;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ANIMATION */
+@keyframes driveInFromRight {
+  0% {
+    transform: translate(70vw, -50%);
+  }
+
+  100% {
+    transform: translate(12vw, -50%);
+  }
+}
+
+/*REMOVES HORIZONTAL LINE ABOVE TANK */
+
+model-viewer::part(default-progress-bar) {
+  display: none;
+}
+
+model-viewer::part(default-ar-button) {
+  display: none;
+}
+
+.ww2-background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+
+.centered-content {
+  width: 60%;
+  margin-left: 16%;
+  margin-right: 24%;
+  color: rgb(115, 191, 0);
+}
+
+.centered-content-paragraph {
+  text-align: justify;
+}
+
+/*=====================*/
+/*  NEON EDGE DIVIDER  */
+/*=====================*/
+
+.neon-border {
+  position: relative;
+}
+
+.neon-border::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  pointer-events: none; /* Prevents Interference */
+  z-index: 2;
+
+  background: linear-gradient(90deg, #fff, #ff00ff, #6a00ff, #fff);
+  background-size: 200% 100%;
+  animation: neonFlow 3s linear infinite;
+
+  box-shadow:
+    0 0 8px #fff,
+    0 0 16px #ff00ff,
+    0 0 32px #c300ff,
+    0 0 64px #8a2be2;
+}
+
+.neon-border::before {
+  top: 0;
+}
+
+@keyframes neonFlow {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
+}
+
+.bradshaw-paragraph {
+  font-family: "Special Elite", system-ui;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.bradshaw-heading {
+  font-family: "Black Ops One", system-ui;
+  letter-spacing: 3px;
+}
+
 /* ============= */
 /* TABLET SIZING */
 /* ============= */
 
 @media (max-width: 840px) {
+  h2 {
+    font-size: 2rem;
+  }
+
   .vortex-model {
     width: 70%;
     height: 79%;
@@ -528,6 +668,10 @@ video {
 
 /* Very small screens: switch to 2 columns for readability */
 @media (max-width: 560px) {
+  h2 {
+    font-size: 1.8rem;
+  }
+
   .vortex-model {
     display: block;
     position: relative;
@@ -601,117 +745,18 @@ video {
     min-height: 4%;
     transform: perspective(200px) rotate(45deg) rotateY(-60deg) skewX(15deg);
   }
-}
 
-/*-------------------TANK PAGE-------------*/
+  /* TANK PAGE - MOBILE */
 
-#tank {
-  width: 69%;
-  height: 77%;
-}
-
-.center-tank-container {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-  z-index: 2;
-}
-
-/* MODEL */
-.tank_model {
-  position: absolute;
-  top: 30%;
-  left: 0;
-  width: 76.3%;
-  height: 77%;
-
-  /* start off right, full size */
-  transform: translate(70vw, -50%);
-  animation: driveInFromRight 10s ease-out forwards;
-  pointer-events: none;
-  z-index: 3;
-}
-
-/* ANIMATION */
-@keyframes driveInFromRight {
-  0% {
-    transform: translate(70vw, -50%);
+  .centered-content {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    color: rgb(115, 191, 0);
   }
 
-  100% {
-    transform: translate(12vw, -50%);
-  }
-}
-
-/*REMOVES HORIZONTAL LINE ABOVE TANK */
-
-model-viewer::part(default-progress-bar) {
-  display: none;
-}
-
-model-viewer::part(default-ar-button) {
-  display: none;
-}
-
-.ww2-background-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  z-index: 1;
-}
-
-.squozen-text {
-  width: 60%;
-  margin-left: 16%;
-  margin-right: 24%;
-  text-align: justify;
-  color: rgb(115, 191, 0);
-}
-
-/*=====================*/
-/*  NEON EDGE DIVIDER  */
-/*=====================*/
-
-.neon-edges {
-  position: relative;
-}
-
-.neon-edges::before,
-.neon-edges::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 8px;
-  pointer-events: none; /* Prevents Interference */
-  z-index: 2;
-
-  background: linear-gradient(90deg, #fff, #ff00ff, #6a00ff, #fff);
-  background-size: 200% 100%;
-  animation: neonFlow 3s linear infinite;
-
-  box-shadow:
-    0 0 8px #fff,
-    0 0 16px #ff00ff,
-    0 0 32px #c300ff,
-    0 0 64px #8a2be2;
-}
-
-.neon-edges::before {
-  top: 0;
-}
-
-@keyframes neonFlow {
-  from {
-    background-position: 0% 50%;
-  }
-  to {
-    background-position: 200% 50%;
+  .centered-content-paragraph {
+    text-align: left;
   }
 }
 
@@ -741,4 +786,116 @@ body.scrollable .page-shell {
 /* ensures the tank fills the first screen before scroll content begins */
 body.scrollable .tank-hero-section {
   height: 100vh;
+}
+
+/* ========================= */
+/* 🔥 NEON BORDER SYSTEM 🔥 */
+/* ========================= */
+
+.neon-border {
+  position: relative;
+
+  /* Default (your original pink — best baseline) */
+  --neon-color-1: #ffffff;
+  --neon-color-2: #ff00ff;
+  --neon-color-3: #6a00ff;
+}
+
+/* Main neon line */
+.neon-border::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0; /* overridden by modifiers */
+
+  width: 100%;
+  height: 10px;
+  pointer-events: none;
+  z-index: 2;
+
+  background: linear-gradient(
+    90deg,
+    var(--neon-color-1),
+    var(--neon-color-2),
+    var(--neon-color-3),
+    var(--neon-color-1)
+  );
+
+  background-size: 200% 100%;
+  animation:
+    neonFlow 3s linear infinite,
+    neonPulse 2.5s ease-in-out infinite;
+
+  box-shadow:
+    0 0 8px var(--neon-color-1),
+    0 0 16px var(--neon-color-2),
+    0 0 32px var(--neon-color-2),
+    0 0 64px var(--neon-color-3);
+}
+
+/* ========================= */
+/* POSITION MODIFIERS */
+/* ========================= */
+
+.neon-top::before {
+  top: 0;
+  bottom: auto;
+}
+
+.neon-bottom::before {
+  top: auto;
+  bottom: 0;
+}
+
+/* ========================= */
+/* COLOUR THEMES */
+/* ========================= */
+
+/* 🟣 Default pink (already applied via base) */
+
+.neon-green {
+  --neon-color-1: #eaffea;
+  --neon-color-2: #00ff9c;
+  --neon-color-3: #006644;
+}
+
+.neon-blue {
+  --neon-color-1: #e6faff;
+  --neon-color-2: #00cfff;
+  --neon-color-3: #003a66;
+}
+
+.neon-red {
+  --neon-color-1: #ffeaea;
+  --neon-color-2: #ff2a2a;
+  --neon-color-3: #660000;
+}
+
+.neon-amber {
+  --neon-color-1: #fff6e0;
+  --neon-color-2: #ffb300;
+  --neon-color-3: #663d00;
+}
+
+/* ========================= */
+/* ANIMATIONS */
+/* ========================= */
+
+@keyframes neonFlow {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes neonPulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.25);
+  }
 }
