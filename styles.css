@@ -42,6 +42,133 @@ h2 {
   line-height: 1.5;
 }
 
+/* ========================= */
+/*     NEON BORDER SYSTEM    */
+/* ========================= */
+
+.neon-border {
+  position: relative;
+
+  /* Default = pink (baseline) */
+  --neon-color-1: #ffffff;
+  --neon-color-2: #ff00ff;
+  --neon-color-3: #6a00ff;
+
+  /* glow strength (can be overridden per theme) */
+  --neon-glow-1: 10px;
+  --neon-glow-2: 20px;
+  --neon-glow-3: 40px;
+  --neon-glow-4: 80px;
+}
+
+/* Main neon line */
+.neon-border::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0; /* overridden by modifiers */
+
+  width: 100%;
+  height: 10px;
+  pointer-events: none;
+  z-index: 2;
+
+  background: linear-gradient(
+    90deg,
+    var(--neon-color-1),
+    var(--neon-color-2),
+    var(--neon-color-3),
+    var(--neon-color-1)
+  );
+
+  background-size: 200% 100%;
+  animation:
+    neonFlow 3s linear infinite,
+    neonPulse 2.5s ease-in-out infinite;
+
+  box-shadow:
+    0 0 var(--neon-glow-1) var(--neon-color-1),
+    0 0 var(--neon-glow-2) var(--neon-color-2),
+    0 0 var(--neon-glow-3) var(--neon-color-2),
+    0 0 var(--neon-glow-4) var(--neon-color-3);
+}
+
+/* ========================= */
+/* POSITION MODIFIERS */
+/* ========================= */
+
+.neon-top::before {
+  top: 0;
+  bottom: auto;
+}
+
+.neon-bottom::before {
+  top: auto;
+  bottom: 0;
+}
+
+/* ========================= */
+/* COLOUR THEMES */
+/* ========================= */
+
+/* 🟣 PINK (default but reusable explicitly) */
+.neon-pink {
+  --neon-color-1: #ffffff;
+  --neon-color-2: #ff00ff;
+  --neon-color-3: #6a00ff;
+}
+
+/* 🟢 SCI-FI GREEN (plasma style) */
+.neon-green {
+  --neon-color-1: #e8fff6;
+  --neon-color-2: #00ffa6;
+  --neon-color-3: #003b2f;
+}
+
+/* 🔵 SYSTEM BLUE */
+.neon-blue {
+  --neon-color-1: #e6faff;
+  --neon-color-2: #00cfff;
+  --neon-color-3: #003a66;
+}
+
+/* 🔴 WARNING RED */
+.neon-red {
+  --neon-color-1: #ffeaea;
+  --neon-color-2: #ff2a2a;
+  --neon-color-3: #660000;
+}
+
+/* 🟡 AMBER (UI warning tone) */
+.neon-amber {
+  --neon-color-1: #fff6e0;
+  --neon-color-2: #ffb300;
+  --neon-color-3: #663d00;
+}
+
+/* ========================= */
+/* ANIMATIONS */
+/* ========================= */
+
+@keyframes neonFlow {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes neonPulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.25);
+  }
+}
+
 /* -------------------------- ENTRANCE SCREEN --------------------------- */
 
 /* ================ */
@@ -191,7 +318,7 @@ h2 {
   pointer-events: none;
 }
 
-/* ----------------------- COCKPIT DESIGN ---------------------- */
+/* --------------------------- COCKPIT DESIGN -------------------------- */
 
 /* ================ */
 /* COCKPIT OVERLAY  */
@@ -462,12 +589,12 @@ h2 {
   margin-left: 10%;
 }
 
-/*-------------------TANK PAGE-------------*/
+/* -------------------------------- TANK PAGE ----------------------------*/
 
-#tank {
+/* #tank {
   width: 69%;
   height: 77%;
-}
+} */
 
 .center-tank-container {
   width: 100vw;
@@ -524,6 +651,7 @@ model-viewer::part(default-ar-button) {
   z-index: 1;
 }
 
+/* MAIN TEXT SECTION OF TANK PAGE */
 .archive-information-section {
   background: linear-gradient(180deg, #bfc5ac, #7b806a);
 }
@@ -536,47 +664,6 @@ model-viewer::part(default-ar-button) {
 
 .centered-content-paragraph {
   text-align: justify;
-}
-
-/*=====================*/
-/*  NEON EDGE DIVIDER  */
-/*=====================*/
-
-.neon-border {
-  position: relative;
-}
-
-.neon-border::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 10px;
-  pointer-events: none; /* Prevents Interference */
-  z-index: 2;
-
-  background: linear-gradient(90deg, #fff, #ff00ff, #6a00ff, #fff);
-  background-size: 200% 100%;
-  animation: neonFlow 3s linear infinite;
-
-  box-shadow:
-    0 0 8px #fff,
-    0 0 16px #ff00ff,
-    0 0 32px #c300ff,
-    0 0 64px #8a2be2;
-}
-
-.neon-border::before {
-  top: 0;
-}
-
-@keyframes neonFlow {
-  from {
-    background-position: 0% 50%;
-  }
-  to {
-    background-position: 200% 50%;
-  }
 }
 
 .bradshaw-paragraph {
@@ -593,340 +680,11 @@ model-viewer::part(default-ar-button) {
   letter-spacing: 3px;
   color: #121c0ceb;
   margin-top: 0;
+  text-decoration: underline;
 }
 
 .bradshaw-h3 {
   font-size: 2rem;
-}
-
-/* ============= */
-/* TABLET SIZING */
-/* ============= */
-
-@media (max-width: 840px) {
-  h2 {
-    font-size: 2rem;
-  }
-
-  .vortex-model {
-    width: 70%;
-    height: 79%;
-  }
-
-  .window-panel-container {
-    width: 28%;
-    top: 42%;
-    left: 45%;
-    transform: translate(-50%, -50%);
-
-    overflow: hidden; /* 🔥 contains text inside */
-    position: absolute;
-  }
-
-  .window-text {
-    position: absolute;
-    top: 10%;
-    left: 12%;
-    width: 64%;
-    line-height: 1.2;
-    font-size: clamp(0.62rem, 3vw, 0.9rem);
-
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-
-    max-height: 70%;
-    overflow-y: auto;
-  }
-
-  .cockpit-nav {
-    gap: 5px;
-    left: 44%;
-    bottom: 25px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-    z-index: 6;
-
-    /* width: clamp(320px, 80vw, 90%); */
-    height: 120px;
-  }
-
-  .nav-btn {
-    min-height: 30px;
-    padding: 4px 6px;
-    font-size: clamp(0.42rem, 1.55vw, 0.7rem);
-    line-height: 1.05;
-  }
-
-  .larger-nav-font {
-    font-size: 1.2rem;
-  }
-
-  .exit-btn {
-    position: absolute;
-    right: 7.5%;
-    top: 79.5%;
-    min-width: 12%;
-    min-height: 4%;
-    transform: perspective(300px) rotate(45deg) rotateY(-60deg);
-  }
-
-  .centered-content-paragraph {
-    text-align: left;
-  }
-}
-
-/* ============= */
-/* MOBILE SIZING */
-/* ============= */
-
-/* Very small screens: switch to 2 columns for readability */
-@media (max-width: 560px) {
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  .vortex-model {
-    display: block;
-    position: relative;
-    z-index: 1;
-    width: 80%;
-    height: 79%;
-    margin: 0 17% 0 12%;
-  }
-
-  .window-panel-container {
-    width: 45%;
-    top: 42%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    overflow: hidden; /* 🔥 contains text inside */
-    position: absolute;
-  }
-
-  .cockpit-nav {
-    grid-template-columns: repeat(3, 1fr);
-    width: min(96vw, 84%);
-    min-height: 20%;
-    gap: 5px;
-    left: 49%;
-    bottom: 10px;
-    /* width: clamp(320px, 80vw, 90%); */
-  }
-
-  .nav-btn {
-    min-height: 28px;
-    font-size: 0.42rem;
-    padding: 4px 6px;
-  }
-
-  .larger-nav-font {
-    font-size: 1.2rem;
-  }
-
-  .nav-btn[data-short] {
-    font-size: 0; /* only buttons with data-short */
-  }
-
-  .nav-btn::after {
-    content: attr(data-short);
-    font-size: 0.6rem;
-  }
-
-  .video-panel {
-    display: none;
-  }
-
-  .edge-hill-logo {
-    right: 47%;
-    top: 3%;
-    z-index: 5;
-
-    width: 25px;
-    height: auto;
-
-    transform: translate(-0%, -57%);
-    transform-origin: center;
-  }
-
-  .exit-btn {
-    position: absolute;
-    font-size: 1rem;
-    left: 88%;
-    top: 79%;
-    min-width: 17%;
-    min-height: 4%;
-    transform: perspective(200px) rotate(45deg) rotateY(-60deg) skewX(15deg);
-  }
-
-  /* TANK PAGE - MOBILE */
-
-  .centered-content {
-    width: 60%;
-    margin-left: 20%;
-    margin-right: 20%;
-  }
-
-  .centered-content-paragraph {
-    text-align: left;
-  }
-}
-
-/* ------------ COCKPIT LOCKING FEATURES TO ALLOW SCROLLING -------------- */
-
-/* enables scrolling on the page. */
-body.scrollable {
-  overflow-y: auto;
-}
-
-/* Locks the cockpit to the UI */
-body.scrollable .overlay-cockpit,
-body.scrollable .cockpit-nav,
-body.scrollable .video-panel,
-body.scrollable .edge-hill-logo,
-body.scrollable .exit-btn,
-body.scrollable .door-overlay {
-  position: fixed;
-}
-
-/*  removes the 100vh height cap which prevented the page from scrolling */
-body.scrollable .page-shell {
-  height: auto;
-  overflow: visible;
-}
-
-/* ensures the tank fills the first screen before scroll content begins */
-body.scrollable .tank-hero-section {
-  height: 100vh;
-}
-
-/* ========================= */
-/* 🔥 NEON BORDER SYSTEM 🔥 */
-/* ========================= */
-
-.neon-border {
-  position: relative;
-
-  /* Default = pink (baseline) */
-  --neon-color-1: #ffffff;
-  --neon-color-2: #ff00ff;
-  --neon-color-3: #6a00ff;
-
-  /* glow strength (can be overridden per theme) */
-  --neon-glow-1: 10px;
-  --neon-glow-2: 20px;
-  --neon-glow-3: 40px;
-  --neon-glow-4: 80px;
-}
-
-/* Main neon line */
-.neon-border::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0; /* overridden by modifiers */
-
-  width: 100%;
-  height: 10px;
-  pointer-events: none;
-  z-index: 2;
-
-  background: linear-gradient(
-    90deg,
-    var(--neon-color-1),
-    var(--neon-color-2),
-    var(--neon-color-3),
-    var(--neon-color-1)
-  );
-
-  background-size: 200% 100%;
-  animation:
-    neonFlow 3s linear infinite,
-    neonPulse 2.5s ease-in-out infinite;
-
-  box-shadow:
-    0 0 var(--neon-glow-1) var(--neon-color-1),
-    0 0 var(--neon-glow-2) var(--neon-color-2),
-    0 0 var(--neon-glow-3) var(--neon-color-2),
-    0 0 var(--neon-glow-4) var(--neon-color-3);
-}
-
-/* ========================= */
-/* POSITION MODIFIERS */
-/* ========================= */
-
-.neon-top::before {
-  top: 0;
-  bottom: auto;
-}
-
-.neon-bottom::before {
-  top: auto;
-  bottom: 0;
-}
-
-/* ========================= */
-/* COLOUR THEMES */
-/* ========================= */
-
-/* 🟣 PINK (default but reusable explicitly) */
-.neon-pink {
-  --neon-color-1: #ffffff;
-  --neon-color-2: #ff00ff;
-  --neon-color-3: #6a00ff;
-}
-
-/* 🟢 SCI-FI GREEN (plasma style) */
-.neon-green {
-  --neon-color-1: #e8fff6;
-  --neon-color-2: #00ffa6;
-  --neon-color-3: #003b2f;
-}
-
-/* 🔵 SYSTEM BLUE */
-.neon-blue {
-  --neon-color-1: #e6faff;
-  --neon-color-2: #00cfff;
-  --neon-color-3: #003a66;
-}
-
-/* 🔴 WARNING RED */
-.neon-red {
-  --neon-color-1: #ffeaea;
-  --neon-color-2: #ff2a2a;
-  --neon-color-3: #660000;
-}
-
-/* 🟡 AMBER (UI warning tone) */
-.neon-amber {
-  --neon-color-1: #fff6e0;
-  --neon-color-2: #ffb300;
-  --neon-color-3: #663d00;
-}
-
-/* ========================= */
-/* ANIMATIONS */
-/* ========================= */
-
-@keyframes neonFlow {
-  from {
-    background-position: 0% 50%;
-  }
-  to {
-    background-position: 200% 50%;
-  }
-}
-
-@keyframes neonPulse {
-  0%,
-  100% {
-    filter: brightness(1);
-  }
-  50% {
-    filter: brightness(1.25);
-  }
 }
 
 /* ========================= */
@@ -1049,8 +807,127 @@ body.scrollable .tank-hero-section {
   box-shadow: 0 0 10px rgba(190, 70, 70, 0.15);
 }
 
-/* TABLET */
+.william-bradshaw-info-and-img {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 10px 20px;
+  align-items: start;
+  padding-bottom: 40px;
+}
+
+.william-bradshaw-img {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.william-bradshaw-caption {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.william-bradshaw-img-2 {
+  grid-column: 2;
+  grid-row: 2;
+  transform: rotate(1deg);
+}
+
+.william-bradshaw-caption {
+  font-size: 1rem;
+}
+
+.william-bradshaw-img,
+.william-bradshaw-img-2 {
+  width: 100%;
+  height: auto;
+  display: block;
+  box-sizing: border-box;
+}
+
+.bradshaw-paragraph-line-break {
+  border: none;
+  height: 2px;
+  background-color: #4f5346;
+}
+
+/* ============= */
+/* TABLET SIZING */
+/* ============= */
+
 @media (max-width: 840px) {
+  h2 {
+    font-size: 2rem;
+  }
+
+  .vortex-model {
+    width: 70%;
+    height: 79%;
+  }
+
+  .window-panel-container {
+    width: 28%;
+    top: 42%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+
+    overflow: hidden; /* 🔥 contains text inside */
+    position: absolute;
+  }
+
+  .window-text {
+    position: absolute;
+    top: 10%;
+    left: 12%;
+    width: 64%;
+    line-height: 1.2;
+    font-size: clamp(0.62rem, 3vw, 0.9rem);
+
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+
+    max-height: 70%;
+    overflow-y: auto;
+  }
+
+  .cockpit-nav {
+    gap: 5px;
+    left: 44%;
+    bottom: 25px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    z-index: 6;
+
+    /* width: clamp(320px, 80vw, 90%); */
+    height: 120px;
+  }
+
+  .nav-btn {
+    min-height: 30px;
+    padding: 4px 6px;
+    font-size: clamp(0.42rem, 1.55vw, 0.7rem);
+    line-height: 1.05;
+  }
+
+  .larger-nav-font {
+    font-size: 1.2rem;
+  }
+
+  .exit-btn {
+    position: absolute;
+    right: 7.5%;
+    top: 79.5%;
+    min-width: 12%;
+    min-height: 4%;
+    transform: perspective(300px) rotate(45deg) rotateY(-60deg);
+  }
+
+  /* ---------- TANK PAGE TABLET ------------ */
+
+  .centered-content-paragraph {
+    text-align: left;
+  }
+
   .bradshaws-archive-table .label {
     width: 38%;
   }
@@ -1066,8 +943,97 @@ body.scrollable .tank-hero-section {
   }
 }
 
-/* MOBILE */
+/* ============= */
+/* MOBILE SIZING */
+/* ============= */
+
 @media (max-width: 560px) {
+  /* ----- HOME PAGE - MOBILE ----- */
+
+  .vortex-model {
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: 80%;
+    height: 79%;
+    margin: 0 17% 0 12%;
+  }
+
+  .window-panel-container {
+    width: 45%;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    overflow: hidden; /* 🔥 contains text inside */
+    position: absolute;
+  }
+
+  .cockpit-nav {
+    grid-template-columns: repeat(3, 1fr);
+    width: min(96vw, 84%);
+    min-height: 20%;
+    gap: 5px;
+    left: 49%;
+    bottom: 10px;
+    /* width: clamp(320px, 80vw, 90%); */
+  }
+
+  .nav-btn {
+    min-height: 28px;
+    font-size: 0.42rem;
+    padding: 4px 6px;
+  }
+
+  .larger-nav-font {
+    font-size: 1.2rem;
+  }
+
+  .nav-btn[data-short] {
+    font-size: 0; /* only buttons with data-short */
+  }
+
+  .nav-btn::after {
+    content: attr(data-short);
+    font-size: 0.6rem;
+  }
+
+  .video-panel {
+    display: none;
+  }
+
+  .edge-hill-logo {
+    right: 47%;
+    top: 3%;
+    z-index: 5;
+    width: 25px;
+    height: auto;
+    transform: translate(-0%, -57%);
+    transform-origin: center;
+  }
+
+  .exit-btn {
+    position: absolute;
+    font-size: 1rem;
+    left: 88%;
+    top: 79%;
+    min-width: 17%;
+    min-height: 4%;
+    transform: perspective(200px) rotate(45deg) rotateY(-60deg) skewX(15deg);
+  }
+
+  /* --- TANK PAGE - MOBILE --- */
+
+  .centered-content {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
   .bradshaws-archive-table {
     margin: 2rem 20% 3rem 20%;
     display: block;
@@ -1129,4 +1095,63 @@ body.scrollable .tank-hero-section {
   .bradshaws-archive-table .label {
     width: 100%;
   }
+
+  .bradshaw-paragraph {
+    font-size: 1.25rem;
+  }
+
+  .william-bradshaw-info-and-img {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 15px;
+  }
+
+  .william-bradshaw-caption,
+  .william-bradshaw-img,
+  .william-bradshaw-img-2 {
+    grid-column: 1;
+  }
+
+  .william-bradshaw-caption {
+    grid-row: 1;
+    text-align: center;
+  }
+
+  .william-bradshaw-img {
+    grid-row: 2;
+  }
+
+  .william-bradshaw-img-2 {
+    grid-row: 3;
+  }
+}
+
+/* END OF MOBILE SIZING */
+
+/* ------------ COCKPIT LOCKING FEATURES TO ALLOW SCROLLING OF NON-HOME PAGES -------------- */
+
+/* enables scrolling on the page. */
+body.scrollable {
+  overflow-y: auto;
+}
+
+/* Locks the cockpit to the UI */
+body.scrollable .overlay-cockpit,
+body.scrollable .cockpit-nav,
+body.scrollable .video-panel,
+body.scrollable .edge-hill-logo,
+body.scrollable .exit-btn,
+body.scrollable .door-overlay {
+  position: fixed;
+}
+
+/*  removes the 100vh height cap which prevented the page from scrolling */
+body.scrollable .page-shell {
+  height: auto;
+  overflow: visible;
+}
+
+/* ensures the tank fills the first screen before scroll content begins */
+body.scrollable .tank-hero-section {
+  height: 100vh;
 }
