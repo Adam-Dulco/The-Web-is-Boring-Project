@@ -795,10 +795,16 @@ body.scrollable .tank-hero-section {
 .neon-border {
   position: relative;
 
-  /* Default (your original pink — best baseline) */
+  /* Default = pink (baseline) */
   --neon-color-1: #ffffff;
   --neon-color-2: #ff00ff;
   --neon-color-3: #6a00ff;
+
+  /* glow strength (can be overridden per theme) */
+  --neon-glow-1: 10px;
+  --neon-glow-2: 20px;
+  --neon-glow-3: 40px;
+  --neon-glow-4: 80px;
 }
 
 /* Main neon line */
@@ -827,10 +833,10 @@ body.scrollable .tank-hero-section {
     neonPulse 2.5s ease-in-out infinite;
 
   box-shadow:
-    0 0 8px var(--neon-color-1),
-    0 0 16px var(--neon-color-2),
-    0 0 32px var(--neon-color-2),
-    0 0 64px var(--neon-color-3);
+    0 0 var(--neon-glow-1) var(--neon-color-1),
+    0 0 var(--neon-glow-2) var(--neon-color-2),
+    0 0 var(--neon-glow-3) var(--neon-color-2),
+    0 0 var(--neon-glow-4) var(--neon-color-3);
 }
 
 /* ========================= */
@@ -851,26 +857,35 @@ body.scrollable .tank-hero-section {
 /* COLOUR THEMES */
 /* ========================= */
 
-/* 🟣 Default pink (already applied via base) */
-
-.neon-green {
-  --neon-color-1: #eaffea;
-  --neon-color-2: #00ff9c;
-  --neon-color-3: #006644;
+/* 🟣 PINK (default but reusable explicitly) */
+.neon-pink {
+  --neon-color-1: #ffffff;
+  --neon-color-2: #ff00ff;
+  --neon-color-3: #6a00ff;
 }
 
+/* 🟢 SCI-FI GREEN (plasma style) */
+.neon-green {
+  --neon-color-1: #e8fff6;
+  --neon-color-2: #00ffa6;
+  --neon-color-3: #003b2f;
+}
+
+/* 🔵 SYSTEM BLUE */
 .neon-blue {
   --neon-color-1: #e6faff;
   --neon-color-2: #00cfff;
   --neon-color-3: #003a66;
 }
 
+/* 🔴 WARNING RED */
 .neon-red {
   --neon-color-1: #ffeaea;
   --neon-color-2: #ff2a2a;
   --neon-color-3: #660000;
 }
 
+/* 🟡 AMBER (UI warning tone) */
 .neon-amber {
   --neon-color-1: #fff6e0;
   --neon-color-2: #ffb300;
