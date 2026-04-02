@@ -1156,6 +1156,7 @@ model-viewer::part(default-ar-button) {
       rgba(255, 255, 255, 0.04)
     );
   mix-blend-mode: screen;
+  z-index: 1;
 }
 
 .lightning.flash {
