@@ -25,6 +25,34 @@ video {
   max-width: 100%;
 }
 
+/* ------------ COCKPIT LOCKING FEATURES TO ALLOW SCROLLING OF NON-HOME PAGES -------------- */
+
+/* enables scrolling on the page. */
+body.scrollable {
+  overflow-y: auto;
+}
+
+/* Locks the cockpit to the UI */
+body.scrollable .overlay-cockpit,
+body.scrollable .cockpit-nav,
+body.scrollable .video-panel,
+body.scrollable .edge-hill-logo,
+body.scrollable .exit-btn,
+body.scrollable .door-overlay {
+  position: fixed;
+}
+
+/*  removes the 100vh height cap which prevented the page from scrolling */
+body.scrollable .page-shell {
+  height: auto;
+  overflow: visible;
+}
+
+/* ensures the tank fills the first screen before scroll content begins */
+body.scrollable .tank-hero-section {
+  height: 100vh;
+}
+
 .heading-top-spacer {
   padding-top: 60px;
 }
@@ -40,6 +68,175 @@ h2 {
   font-size: 3rem;
   text-align: center;
   line-height: 1.5;
+}
+
+/* ========================= */
+/*    ARCHIVE TABLE SYSTEM   */
+/* ========================= */
+
+.archive-table {
+  width: 60%;
+  margin: 3rem 24% 4rem 16%;
+  padding: 30px;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+.archive-table table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.archive-table th,
+.archive-table td {
+  padding: 14px 16px;
+  vertical-align: top;
+}
+
+.archive-table th {
+  width: 35%;
+  text-align: left;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.archive-table td {
+  width: 65%;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.archive-table a {
+  text-decoration: underline;
+}
+
+/* ========================= */
+/* PAPER THEME               */
+/* ========================= */
+
+.archive-table--paper {
+  background: linear-gradient(180deg, #f6f1e7, #e8dcc4);
+  border: 1px solid #b9a77a;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 0 40px rgba(120, 90, 40, 0.15);
+  color: #2e2a23;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+.archive-table--paper th {
+  border-bottom: 1px solid rgba(120, 100, 60, 0.3);
+}
+
+.archive-table--paper td {
+  border-bottom: 1px solid rgba(120, 100, 60, 0.2);
+}
+
+.archive-table--paper tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.archive-table--paper a {
+  color: #5a4a2f;
+}
+
+.archive-table--paper a:hover,
+.archive-table--paper a:focus-visible {
+  color: #2f2416;
+}
+
+/* ========================= */
+/* SCI-FI THEME              */
+/* ========================= */
+
+.archive-table--scifi {
+  background: linear-gradient(
+    180deg,
+    rgba(10, 20, 24, 0.95),
+    rgba(5, 10, 14, 0.94)
+  );
+  border: 1px solid rgba(0, 255, 156, 0.35);
+  box-shadow:
+    0 0 12px rgba(0, 255, 156, 0.14),
+    0 0 28px rgba(0, 0, 0, 0.45),
+    inset 0 0 18px rgba(0, 255, 156, 0.05);
+  color: #d7fff0;
+  font-family: monospace, serif;
+}
+
+.archive-table--scifi th {
+  color: #9affd6;
+  border-bottom: 1px dashed rgba(0, 255, 156, 0.28);
+  background: rgba(0, 255, 156, 0.05);
+  text-shadow: 0 0 5px rgba(0, 255, 156, 0.15);
+}
+
+.archive-table--scifi td {
+  color: #e8fff8;
+  border-bottom: 1px dashed rgba(0, 255, 156, 0.18);
+  letter-spacing: 0.03em;
+}
+
+.archive-table--scifi tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.archive-table--scifi a {
+  color: #00ff9c;
+}
+
+.archive-table--scifi a:hover,
+.archive-table--scifi a:focus-visible {
+  color: #8affcf;
+}
+
+/* ========================= */
+/* MEDICAL THEME             */
+/* ========================= */
+
+.archive-table--medical {
+  background: linear-gradient(180deg, #f4f8fb, #e6eef5);
+  border: 1px solid rgba(120, 160, 190, 0.35);
+  box-shadow:
+    0 4px 14px rgba(0, 40, 80, 0.08),
+    inset 0 0 30px rgba(120, 160, 190, 0.08);
+  color: #1f2d3a;
+  font-family: "Old Standard TT", serif;
+}
+
+/* headers */
+.archive-table--medical th {
+  color: #2c4e68;
+  background: rgba(120, 170, 210, 0.08);
+  border-bottom: 1px solid rgba(120, 160, 190, 0.35);
+  letter-spacing: 0.04em;
+}
+
+/* values */
+.archive-table--medical td {
+  border-bottom: 1px solid rgba(120, 160, 190, 0.2);
+  color: #2a3b47;
+}
+
+/* alternating rows */
+.archive-table--medical tr:nth-child(even) {
+  background: rgba(120, 170, 210, 0.04);
+}
+
+/* links */
+.archive-table--medical a {
+  color: #2b7da8;
+  text-decoration: underline;
+}
+
+.archive-table--medical a:hover,
+.archive-table--medical a:focus-visible {
+  color: #1a5a7a;
+}
+
+.archive-table--medical th::before {
+  content: "✚ ";
+  color: #3aa6d0;
 }
 
 /* ========================= */
@@ -1015,10 +1212,9 @@ model-viewer::part(default-ar-button) {
   }
 }
 
-/* MAIN TEXT SECTION OF TANK PAGE */
+/* MAIN TEXT SECTION OF PREDECESSORS PAGE */
 .predecessors-information-section {
   background: linear-gradient(180deg, #e3e0f0, #b7b3c9);
-  font-family: "Old Standard TT", serif;
 }
 
 .predecessors-heading {
@@ -1028,6 +1224,42 @@ model-viewer::part(default-ar-button) {
   margin-top: 0;
 }
 
+/* MAIN TEXT SECTION OF CHLOE FISHER PAGE */
+.chloe-fisher-information-section {
+  background: linear-gradient(180deg, #d1eeff, #72e3ff);
+}
+
+.chloe-fisher-heading {
+  font-family: "Kavoon", serif;
+  font-weight: 200;
+  color: rgb(0, 100, 131);
+  margin-top: 0;
+}
+
+/* ---------------- CHLOE FISHER MIDWIFERY PAGE ------------------ */
+
+.midwifery-img {
+  width: 100%;
+  height: 100vh;
+}
+
+/* ---------------- CHRISTOPHER ROBY MOVIE ARCHIVE PAGE ------------------ */
+
+.cinema-img {
+  width: 80%;
+  position: relative;
+  margin-left: 6%;
+  margin-top: 60px;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.christopher-roby-information-section {
+  background-color: #000;
+}
+
+/* ---------------- END OF DESKTOP SIZING ELEMENTS ----------------- */
+
 /* ============= */
 /* TABLET SIZING */
 /* ============= */
@@ -1036,6 +1268,8 @@ model-viewer::part(default-ar-button) {
   h2 {
     font-size: 2rem;
   }
+
+  /* ------------- COCKPIT MODEL ---------------- */
 
   .vortex-model {
     width: 70%;
@@ -1101,7 +1335,7 @@ model-viewer::part(default-ar-button) {
     transform: perspective(300px) rotate(45deg) rotateY(-60deg);
   }
 
-  /* ---------- TANK PAGE TABLET ------------ */
+  /* ---------- TANK PAGE & PREDECESSORS TABLE - TABLET ------------ */
 
   .centered-content-paragraph {
     text-align: left;
@@ -1109,16 +1343,48 @@ model-viewer::part(default-ar-button) {
 
   .bradshaws-archive-table .bradshaw-label {
     width: 38%;
+    font-size: 0.8rem;
   }
 
   .bradshaws-archive-table .bradshaw-value {
     width: 62%;
-    font-size: 0.94rem;
+    font-size: 0.9rem;
   }
 
   .dog-tag {
     font-size: 0.5rem;
     padding: 0.72rem 1rem 0.72rem 1.35rem;
+  }
+
+  /* ====================================== */
+  /*      ARCHIVE TABLE SYSTEM - TABLET     */
+  /* ====================================== */
+
+  @media (max-width: 840px) {
+    .archive-table {
+      width: 60%;
+      margin: 2.5rem 24% 3rem 16%;
+      padding: 20px;
+    }
+
+    .archive-table table {
+      table-layout: auto;
+    }
+
+    .archive-table th {
+      width: 42%;
+      font-size: 0.95rem;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .archive-table td {
+      width: 58%;
+      font-size: 0.94rem;
+      line-height: 1.55;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
   }
 }
 
@@ -1303,93 +1569,120 @@ model-viewer::part(default-ar-button) {
   .william-bradshaw-img-2 {
     grid-row: 3;
   }
+
+  /* =================================== */
+  /*    ARCHIVE TABLE SYSTEM - MOBILE    */
+  /* =================================== */
+
+  .archive-table {
+    width: 60%;
+    margin: 2rem 20% 3rem 20%;
+    padding: 0;
+    display: block;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .archive-table table {
+    display: block;
+    width: 100%;
+    border-spacing: 0;
+  }
+
+  .archive-table tbody {
+    display: block;
+  }
+
+  .archive-table tr {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .archive-table th,
+  .archive-table td {
+    display: block;
+    width: 100%;
+    padding: 0.95rem;
+  }
+
+  .archive-table th {
+    text-align: left;
+  }
+
+  .archive-table td {
+    border-bottom: none;
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+
+  /* mobile paper cards */
+  .archive-table--paper tr {
+    border: 1px solid rgba(120, 100, 60, 0.28);
+    background: linear-gradient(180deg, #f6f1e7, #e8dcc4);
+    box-shadow:
+      0 0 10px rgba(120, 90, 40, 0.08),
+      inset 0 0 14px rgba(120, 90, 40, 0.04);
+  }
+
+  .archive-table--paper tr:nth-child(even) {
+    background: linear-gradient(180deg, #f6f1e7, #e8dcc4);
+  }
+
+  .archive-table--paper th {
+    border-bottom: 1px dashed rgba(120, 100, 60, 0.25);
+  }
+
+  /* mobile sci-fi cards */
+  .archive-table--scifi tr {
+    border: 1px solid rgba(0, 255, 156, 0.28);
+    background: linear-gradient(
+      180deg,
+      rgba(10, 20, 24, 0.95),
+      rgba(5, 10, 14, 0.94)
+    );
+    box-shadow:
+      0 0 10px rgba(0, 255, 156, 0.08),
+      inset 0 0 14px rgba(0, 255, 156, 0.04);
+  }
+
+  .archive-table--scifi tr:nth-child(even) {
+    background: linear-gradient(
+      180deg,
+      rgba(10, 20, 24, 0.95),
+      rgba(5, 10, 14, 0.94)
+    );
+  }
+
+  .archive-table--scifi th {
+    border-bottom: 1px dashed rgba(0, 255, 156, 0.22);
+    background: rgba(0, 255, 156, 0.06);
+  }
+
+  /* mobile medical cards */
+  .archive-table--medical tr {
+    border: 1px solid rgba(120, 160, 190, 0.3);
+    background: linear-gradient(180deg, #f4f8fb, #e6eef5);
+    box-shadow:
+      0 0 10px rgba(120, 160, 190, 0.08),
+      inset 0 0 14px rgba(120, 160, 190, 0.05);
+    overflow: hidden;
+  }
+
+  .archive-table--medical tr:nth-child(even) {
+    background: linear-gradient(180deg, #f4f8fb, #e6eef5);
+  }
+
+  .archive-table--medical th {
+    background: rgba(120, 170, 210, 0.1);
+    border-bottom: 1px dashed rgba(120, 160, 190, 0.25);
+  }
+
+  /* CHRISTOPHER ROBY PAGE - MOBILE */
+  .cinema-img {
+    margin-left: 10%;
+    margin-top: -80px;
+  }
 }
 
 /* END OF MOBILE SIZING */
-
-/* ------------ COCKPIT LOCKING FEATURES TO ALLOW SCROLLING OF NON-HOME PAGES -------------- */
-
-/* enables scrolling on the page. */
-body.scrollable {
-  overflow-y: auto;
-}
-
-/* Locks the cockpit to the UI */
-body.scrollable .overlay-cockpit,
-body.scrollable .cockpit-nav,
-body.scrollable .video-panel,
-body.scrollable .edge-hill-logo,
-body.scrollable .exit-btn,
-body.scrollable .door-overlay {
-  position: fixed;
-}
-
-/*  removes the 100vh height cap which prevented the page from scrolling */
-body.scrollable .page-shell {
-  height: auto;
-  overflow: visible;
-}
-
-/* ensures the tank fills the first screen before scroll content begins */
-body.scrollable .tank-hero-section {
-  height: 100vh;
-}
-
-.archive-table {
-  padding: 30px;
-
-  background: linear-gradient(180deg, #f6f1e7, #e8dcc4);
-  border: 1px solid #b9a77a;
-
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.2),
-    inset 0 0 40px rgba(120, 90, 40, 0.15);
-
-  font-family: "Georgia", "Times New Roman", serif;
-  color: #2e2a23;
-}
-
-.archive-table table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.archive-table th {
-  text-align: left;
-  vertical-align: top;
-  padding: 14px 16px;
-  width: 30%;
-
-  font-weight: bold;
-  letter-spacing: 0.5px;
-
-  border-bottom: 1px solid rgba(120, 100, 60, 0.3);
-}
-
-.archive-table td {
-  padding: 14px 16px;
-  line-height: 1.6;
-
-  border-bottom: 1px solid rgba(120, 100, 60, 0.2);
-}
-
-/* subtle row variation for aged look */
-.archive-table tr:nth-child(even) {
-  background: rgba(0, 0, 0, 0.03);
-}
-
-/* links styled like old documents */
-.archive-table a {
-  color: #5a4a2f;
-  text-decoration: underline;
-}
-
-.archive-table a:hover {
-  color: #2f2416;
-}
-
-/* optional: slightly faded text effect */
-.archive-table td,
-.archive-table th {
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.05);
-}
