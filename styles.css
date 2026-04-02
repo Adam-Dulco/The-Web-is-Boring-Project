@@ -26,7 +26,7 @@ video {
 }
 
 .heading-top-spacer {
-  padding-top: 50px;
+  padding-top: 60px;
 }
 
 .page-shell {
@@ -596,6 +596,10 @@ h2 {
   height: 77%;
 } */
 
+.tank-hero-section {
+  margin-top: 60px;
+}
+
 .center-tank-container {
   width: 100vw;
   height: 100vh;
@@ -652,7 +656,7 @@ model-viewer::part(default-ar-button) {
 }
 
 /* MAIN TEXT SECTION OF TANK PAGE */
-.archive-information-section {
+.bradshaw-information-section {
   background: linear-gradient(180deg, #bfc5ac, #7b806a);
 }
 
@@ -720,12 +724,12 @@ model-viewer::part(default-ar-button) {
   vertical-align: top;
 }
 
-.bradshaws-archive-table .label {
+.bradshaws-archive-table .bradshaw-label {
   width: 35%;
   background: rgba(115, 191, 0, 0.06);
 }
 
-.bradshaws-archive-table .value {
+.bradshaws-archive-table .bradshaw-value {
   width: 65%;
   color: #dce8c0;
   line-height: 1.7;
@@ -849,6 +853,181 @@ model-viewer::part(default-ar-button) {
   background-color: #4f5346;
 }
 
+/* ---------------------- EDGE HILL PREDECESSORS PAGE ----------------*/
+
+/* EDGE HILL UNIVERSITY HERO SECTION IMAGE */
+.rain-img-container {
+  position: relative;
+  width: 80%;
+  margin-left: 9%;
+  margin-top: 60px;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.edge-hill-rain-img {
+  display: block;
+  width: 100%;
+  height: 100%; /* ✅ must be 100% */
+  object-fit: cover; /* now it works properly */
+  position: relative;
+  z-index: 1;
+}
+
+/* Makes the image have a dark overlay */
+.rain-img-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 30, 40, 0.15);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Rain Container - holds all the drops */
+.rain {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.rain-drop {
+  position: absolute;
+  top: -120px;
+  width: 2px;
+  height: 80px;
+  border-radius: 999px;
+  opacity: 0.5;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 30%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+  filter: blur(0.3px);
+  transform: rotate(12deg);
+  animation: rain-fall linear infinite;
+}
+
+.rain-drop.small {
+  width: 1px;
+  height: 45px;
+  opacity: 0.3;
+}
+
+/* .rain-drop.medium {
+  width: 2px;
+  height: 70px;
+  opacity: 0.5;
+} */
+
+/* .rain-drop.large {
+  width: 3px;
+  height: 100px;
+  opacity: 0.65;
+} */
+
+@keyframes rain-fall {
+  from {
+    transform: translate3d(0, -120px, 0) rotate(12deg);
+  }
+  to {
+    transform: translate3d(60px, 120vh, 0) rotate(12deg);
+  }
+}
+
+/* LIGHTNING EFFECT */
+
+.lightning {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  background:
+    radial-gradient(
+      circle at 75% 15%,
+      rgba(255, 255, 255, 0.95),
+      rgba(255, 255, 255, 0.12) 18%,
+      rgba(255, 255, 255, 0) 40%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.22),
+      rgba(255, 255, 255, 0.04)
+    );
+  mix-blend-mode: screen;
+}
+
+.lightning.flash {
+  animation: lightning-flash 0.22s ease-out;
+}
+
+.lightning.flash-double {
+  animation: lightning-flash-double 0.45s ease-out;
+}
+/* Alter lightning brightness */
+.rain-img-container.lightning-active .edge-hill-rain-img {
+  filter: brightness(1.22) contrast(1.08);
+}
+
+@keyframes lightning-flash {
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.95;
+  }
+  18% {
+    opacity: 0.18;
+  }
+  28% {
+    opacity: 0.72;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes lightning-flash-double {
+  0% {
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 0.12;
+  }
+  20% {
+    opacity: 0.82;
+  }
+  30% {
+    opacity: 0.08;
+  }
+  42% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* MAIN TEXT SECTION OF TANK PAGE */
+.predecessors-information-section {
+  background: linear-gradient(180deg, #e3e0f0, #b7b3c9);
+  font-family: "Old Standard TT", serif;
+}
+
+.predecessors-heading {
+  font-family: "Old Standard TT", serif;
+  font-weight: 700;
+  color: #3a0c51;
+  margin-top: 0;
+}
+
 /* ============= */
 /* TABLET SIZING */
 /* ============= */
@@ -928,11 +1107,11 @@ model-viewer::part(default-ar-button) {
     text-align: left;
   }
 
-  .bradshaws-archive-table .label {
+  .bradshaws-archive-table .bradshaw-label {
     width: 38%;
   }
 
-  .bradshaws-archive-table .value {
+  .bradshaws-archive-table .bradshaw-value {
     width: 62%;
     font-size: 0.94rem;
   }
@@ -1071,12 +1250,12 @@ model-viewer::part(default-ar-button) {
     padding: 0.95rem;
   }
 
-  .bradshaws-archive-table .label {
+  .bradshaws-archive-table .bradshaw-label {
     background: rgba(115, 191, 0, 0.08);
     border-bottom: 1px dashed rgba(115, 191, 0, 0.2);
   }
 
-  .bradshaws-archive-table .value {
+  .bradshaws-archive-table .bradshaw-value {
     font-size: 0.9rem;
     line-height: 1.65;
   }
@@ -1092,7 +1271,7 @@ model-viewer::part(default-ar-button) {
     font-size: 0.68rem;
   }
 
-  .bradshaws-archive-table .label {
+  .bradshaws-archive-table .bradshaw-label {
     width: 100%;
   }
 
@@ -1154,4 +1333,63 @@ body.scrollable .page-shell {
 /* ensures the tank fills the first screen before scroll content begins */
 body.scrollable .tank-hero-section {
   height: 100vh;
+}
+
+.archive-table {
+  padding: 30px;
+
+  background: linear-gradient(180deg, #f6f1e7, #e8dcc4);
+  border: 1px solid #b9a77a;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 0 40px rgba(120, 90, 40, 0.15);
+
+  font-family: "Georgia", "Times New Roman", serif;
+  color: #2e2a23;
+}
+
+.archive-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.archive-table th {
+  text-align: left;
+  vertical-align: top;
+  padding: 14px 16px;
+  width: 30%;
+
+  font-weight: bold;
+  letter-spacing: 0.5px;
+
+  border-bottom: 1px solid rgba(120, 100, 60, 0.3);
+}
+
+.archive-table td {
+  padding: 14px 16px;
+  line-height: 1.6;
+
+  border-bottom: 1px solid rgba(120, 100, 60, 0.2);
+}
+
+/* subtle row variation for aged look */
+.archive-table tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* links styled like old documents */
+.archive-table a {
+  color: #5a4a2f;
+  text-decoration: underline;
+}
+
+.archive-table a:hover {
+  color: #2f2416;
+}
+
+/* optional: slightly faded text effect */
+.archive-table td,
+.archive-table th {
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.05);
 }

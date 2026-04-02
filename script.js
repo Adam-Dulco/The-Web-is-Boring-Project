@@ -149,3 +149,88 @@ if (tank && sound) {
     }, 100);
   });
 }
+
+/*====================*/
+/*    RAIN EFFECT     */
+/*====================*/
+
+window.addEventListener("DOMContentLoaded", () => {
+  const rainContainer = document.querySelector(".rain");
+  const dropCount = 180;
+
+  for (let i = 0; i < dropCount; i++) {
+    const drop = document.createElement("span");
+    drop.classList.add("rain-drop");
+
+    const size = Math.random();
+    if (size < 0.33) {
+      drop.classList.add("small");
+    } else if (size < 0.66) {
+      drop.classList.add("medium");
+    } else {
+      drop.classList.add("large");
+    }
+
+    drop.style.left = Math.random() * 100 + "%";
+    drop.style.animationDuration = 0.45 + Math.random() * 0.55 + "s";
+    drop.style.animationDelay = -Math.random() * 2 + "s";
+
+    rainContainer.appendChild(drop);
+  }
+});
+
+/*====================*/
+/*  LIGHTNING EFFECT  */
+/*====================*/
+
+window.addEventListener("DOMContentLoaded", () => {
+  const rainContainer = document.querySelector(".rain");
+  const imageContainer = document.querySelector(".rain-img-container");
+  const lightning = document.querySelector(".lightning");
+  const dropCount = 180;
+
+  for (let i = 0; i < dropCount; i++) {
+    const drop = document.createElement("span");
+    drop.classList.add("rain-drop");
+
+    const size = Math.random();
+    if (size < 0.33) {
+      drop.classList.add("small");
+    } else if (size < 0.66) {
+      drop.classList.add("medium");
+    } else {
+      drop.classList.add("large");
+    }
+
+    drop.style.left = Math.random() * 100 + "%";
+    drop.style.animationDuration = 0.45 + Math.random() * 0.55 + "s";
+    drop.style.animationDelay = -Math.random() * 2 + "s";
+
+    rainContainer.appendChild(drop);
+  }
+
+  function triggerLightning() {
+    const isDouble = Math.random() > 0.55;
+
+    lightning.classList.remove("flash", "flash-double");
+    void lightning.offsetWidth;
+
+    imageContainer.classList.add("lightning-active");
+    lightning.classList.add(isDouble ? "flash-double" : "flash");
+
+    setTimeout(
+      () => {
+        imageContainer.classList.remove("lightning-active");
+        lightning.classList.remove("flash", "flash-double");
+      },
+      isDouble ? 450 : 220,
+    );
+
+    /* Reduce this to produce more frequent lightning e.g. 1500 */
+    const nextStrike = 1500 + Math.random() * 7000;
+    setTimeout(triggerLightning, nextStrike);
+  }
+
+  const firstStrike = 1000 + Math.random() * 1000;
+  setTimeout(triggerLightning, firstStrike);
+});
