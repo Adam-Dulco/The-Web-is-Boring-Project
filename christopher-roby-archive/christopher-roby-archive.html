@@ -138,16 +138,34 @@
       <button class="exit-btn">Exit</button>
 
       <!------------------------------------- CONTENT PAGE ----------------------------->
-      <!-- SCROLLABLE CONTENT -->
-      <section class="">
-        <picture>
+      <!-- CINEMA SECTION -->
+      <section class="cinema-scene">
+        <aside class="black-and-white-movie-container">
+          <video
+            class="black-and-white-movie"
+            controls
+            muted
+            autoplay
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source
+              src="./black-and-white-movie-clipped.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </aside>
+
+        <picture class="cinema-seating-img-container">
           <source
             srcset="./cinema-img-mobile-4.webp"
             media="(max-width: 560px)"
           />
           <img
             src="./cinema-img.webp"
-            class="cinema-img"
+            class="cinema-seating-img"
             alt="inside a cinema with the cinema screen directly infront"
           />
         </picture>
