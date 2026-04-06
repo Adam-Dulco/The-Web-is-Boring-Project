@@ -156,6 +156,8 @@ if (tank && sound) {
 
 window.addEventListener("DOMContentLoaded", () => {
   const rainContainer = document.querySelector(".rain");
+  if (!rainContainer) return;
+
   const dropCount = 180;
 
   for (let i = 0; i < dropCount; i++) {
@@ -187,6 +189,9 @@ window.addEventListener("DOMContentLoaded", () => {
   const rainContainer = document.querySelector(".rain");
   const imageContainer = document.querySelector(".rain-img-container");
   const lightning = document.querySelector(".lightning");
+
+  if (!rainContainer || !imageContainer || !lightning) return;
+
   const dropCount = 180;
 
   for (let i = 0; i < dropCount; i++) {
@@ -226,7 +231,6 @@ window.addEventListener("DOMContentLoaded", () => {
       isDouble ? 450 : 220,
     );
 
-    /* Reduce this to produce more frequent lightning e.g. 1500 */
     const nextStrike = 1500 + Math.random() * 7000;
     setTimeout(triggerLightning, nextStrike);
   }
@@ -238,18 +242,21 @@ window.addEventListener("DOMContentLoaded", () => {
 /* CLOCK */
 
 function updateClock() {
-  const now = new Date();
+  const clock = document.getElementById("clock");
+  if (!clock) return;
 
+  const now = new Date();
   const hours = String(now.getHours()).padStart(2, "0");
   const minutes = String(now.getMinutes()).padStart(2, "0");
   const seconds = String(now.getSeconds()).padStart(2, "0");
 
-  document.getElementById("clock").textContent =
-    `${hours}:${minutes}:${seconds}`;
+  clock.textContent = `${hours}:${minutes}:${seconds}`;
 }
 
-updateClock();
-setInterval(updateClock, 1000);
+if (document.getElementById("clock")) {
+  updateClock();
+  setInterval(updateClock, 1000);
+}
 
 /* MEDIA TEXT BOX REVEAL ON SCROLL */
 
@@ -306,3 +313,47 @@ window.addEventListener("DOMContentLoaded", updateMediaTextReveal);
 //     }, 1000); // 1 second delay so CSS transition triggers properly
 //   }
 // });
+
+/* ============================== */
+/*   PAGE VORTEX NAV TRANSITION   */
+/* ============================== */
+
+function setupPageLinkTransitions() {
+  const links = document.querySelectorAll(".cockpit-nav a");
+  const vortex = document.querySelector(
+    ".center-vortex-container model-viewer",
+  );
+
+  links.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href");
+
+      if (
+        !href ||
+        href.startsWith("#") ||
+        link.target === "_blank" ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+
+      document.body.classList.add("is-transitioning");
+      document.body.style.overflow = "hidden";
+
+      if (vortex) {
+        vortex.setAttribute("rotation-per-second", "-3000deg");
+      }
+
+      setTimeout(() => {
+        window.location.href = link.href;
+      }, 2000);
+    });
+  });
+}
+
+window.addEventListener("DOMContentLoaded", setupPageLinkTransitions);

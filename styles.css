@@ -1260,9 +1260,9 @@ model-viewer::part(default-ar-button) {
 
 .midwife-room-img {
   position: relative;
-  width: 69%;
+  width: 70%;
   height: 100vh;
-  margin-left: 12%;
+  margin-left: 11%;
   margin-top: 0;
   z-index: 2;
 }
@@ -1904,3 +1904,97 @@ model-viewer::part(default-ar-button) {
 }
 
 /* END OF MOBILE SIZING */
+
+/* ======================= */
+/*   VORTEX SYSTEM         */
+/* ======================= */
+
+.center-vortex-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+body.home-page .center-vortex-container,
+body.is-transitioning .center-vortex-container {
+  visibility: visible;
+}
+
+/* scrollable subpages: keep vortex fixed in place */
+body.scrollable .center-vortex-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.vortex-model {
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: 70%;
+  height: 79%;
+  margin-left: 10%;
+}
+
+/* Home Page */
+
+/* transition state */
+
+body.is-transitioning .window-panel-container,
+body.is-transitioning .video-panel,
+body.is-transitioning .door-overlay {
+  visibility: hidden;
+}
+
+/* TANK PAGE*/
+body.is-transitioning .center-tank-container,
+body.is-transitioning .ww2-background-img,
+body.is-transitioning #tank {
+  visibility: hidden;
+}
+
+/* CHLOE FISHER PAGE */
+body.is-transitioning
+  .neon-border
+  body.is-transitioning
+  .midwife-room-container,
+body.is-transitioning .midwife-room-img,
+body.is-transitioning .midwife-scan-video {
+  visibility: hidden;
+}
+
+/* EDGE HILL PREDECESSORS PAGE */
+body.is-transitioning .rain-img-container,
+body.is-transitioning .edge-hill-rain-img,
+body.is-transitioning .rain,
+body.is-transitioning .lightning {
+  visibility: hidden;
+}
+
+body.is-transitioning .vortex-model {
+  animation: vortexTransitionZoom 6s ease forwards;
+}
+
+body.is-transitioning .neon-border,
+body.is-transitioning .neon-border::before {
+  display: none;
+}
+
+@keyframes vortexTransitionZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(2.5);
+  }
+}
