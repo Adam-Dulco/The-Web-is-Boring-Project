@@ -250,3 +250,59 @@ function updateClock() {
 
 updateClock();
 setInterval(updateClock, 1000);
+
+/* MEDIA TEXT BOX REVEAL ON SCROLL */
+
+function updateMediaTextReveal() {
+  const section = document.querySelector(".media-room-container");
+  const box1 = document.querySelector(".box-1");
+  const box2 = document.querySelector(".box-2");
+  const box3 = document.querySelector(".box-3");
+
+  if (!section || !box1 || !box2 || !box3) return;
+
+  const rect = section.getBoundingClientRect();
+  const viewportHeight = window.innerHeight;
+  const isMobile = window.innerWidth <= 560;
+
+  const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
+
+  let box1Trigger;
+  let box2Trigger;
+  let box3Trigger;
+
+  if (isMobile) {
+    box1Trigger = 0.5;
+    box2Trigger = 0.5;
+    box3Trigger = 0.5;
+  } else {
+    box1Trigger = 0.5;
+    box2Trigger = 0.5;
+    box3Trigger = 0.5;
+  }
+
+  // Only remove if user scrolls back up ABOVE trigger
+  if (progress < box1Trigger) box1.classList.remove("is-visible");
+  if (progress < box2Trigger) box2.classList.remove("is-visible");
+  if (progress < box3Trigger) box3.classList.remove("is-visible");
+
+  if (progress > box1Trigger) box1.classList.add("is-visible");
+  if (progress > box2Trigger) box2.classList.add("is-visible");
+  if (progress > box3Trigger) box3.classList.add("is-visible");
+}
+
+window.addEventListener("scroll", updateMediaTextReveal);
+window.addEventListener("resize", updateMediaTextReveal);
+window.addEventListener("DOMContentLoaded", updateMediaTextReveal);
+
+/* GRADUALLY FADE IN THE TV & RADIO TEXT ON PAGE LOAD */
+
+// window.addEventListener("DOMContentLoaded", () => {
+//   const box1 = document.querySelector(".box-1");
+
+//   if (box1) {
+//     setTimeout(() => {
+//       box1.classList.add("is-visible");
+//     }, 1000); // 1 second delay so CSS transition triggers properly
+//   }
+// });

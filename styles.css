@@ -810,7 +810,8 @@ h2 {
   position: absolute;
   top: 30%;
   /* left: 0; */
-  width: 76.3%;
+  /* width: 76.3%; */
+  width: 60%;
   height: 77%;
 
   /* start off right, full size */
@@ -827,7 +828,7 @@ h2 {
   }
 
   100% {
-    transform: translate(12vw, -50%);
+    transform: translate(15vw, -50%);
   }
 }
 
@@ -845,7 +846,7 @@ model-viewer::part(default-ar-button) {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 80%;
   height: 100%;
   object-fit: cover;
   display: block;
@@ -1240,11 +1241,30 @@ model-viewer::part(default-ar-button) {
 
 /* ---------------- CHLOE FISHER MIDWIFERY PAGE ------------------ */
 
-.midwifery-img {
-  width: 70%;
+.midwife-room-container {
+  position: relative;
+  width: 100%;
   height: 100vh;
-  margin-left: 11%;
+  overflow: hidden;
+}
+
+.midwife-scan-video {
+  position: absolute;
+  top: 31.5%;
+  left: 12.5%;
+  width: 30%;
+  height: 35%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.midwife-room-img {
+  position: relative;
+  width: 69%;
+  height: 100vh;
+  margin-left: 12%;
   margin-top: 0;
+  z-index: 2;
 }
 
 /* ---------------- CHRISTOPHER ROBY MOVIE ARCHIVE PAGE ------------------ */
@@ -1253,7 +1273,7 @@ model-viewer::part(default-ar-button) {
   position: relative;
   width: 80%;
   margin-left: 6%;
-  margin-top: 60px;
+  margin-top: 6px;
   height: 100vh; /* ✅ full viewport height */
   overflow: hidden; /* ✅ prevents overflow gaps */
 }
@@ -1290,32 +1310,107 @@ model-viewer::part(default-ar-button) {
 
 /* ------------ TV MEDIA & PRESS PACKS PAGE ------------- */
 
-.media-room {
-  margin-top: 3%;
-  width: 80%;
-  height: 100vh;
-}
-
 .media-room-container {
   position: relative;
-  width: 80%;
+  width: 70%;
+  height: 100vh;
   margin-left: 10%;
   margin-top: 3%;
+  overflow: hidden;
+}
+
+.media-text-layer {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1400px;
+  height: 100vh;
+  z-index: 2;
+  font-family: "VT323", Arial, Helvetica, sans-serif;
 }
 
 .media-room {
-  display: block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   height: 100vh;
+  max-width: none;
   object-fit: cover;
+  z-index: 3;
+}
+
+.media-text-box {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: goldenrod;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.5s ease,
+    visibility 0s linear 0.5s;
+}
+
+.media-text-box.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.5s ease,
+    visibility 0s linear 0s;
+}
+
+.media-text-box p {
+  margin: 0;
+}
+
+.box-1 {
+  top: 53.5%;
+  left: 41.5%;
+  width: 70px;
+  rotate: -13deg;
+  transition:
+    opacity 3s ease,
+    visibility 0s linear 0s;
+}
+
+.box-2 {
+  top: 52%;
+  left: 47.7%;
+  width: 5%;
+
+  rotate: -13deg;
+}
+
+.box-3 {
+  top: 50%;
+  left: 53.3%;
+  width: 5%;
+  rotate: -5deg;
+}
+
+.box-1.is-visible {
+  transition-delay: 0s;
+}
+
+.box-2.is-visible {
+  transition-delay: 0.5s;
+}
+
+.box-3.is-visible {
+  transition-delay: 1s;
 }
 
 .clock {
   position: absolute;
 
   /* move these values until it sits in the right place on the image */
-  top: 1%;
-  left: 66%;
+  top: 6%;
+  left: 65%;
   transform: translate(-50%, -50%);
   z-index: 0;
   padding: 12px 20px;
@@ -1548,6 +1643,27 @@ model-viewer::part(default-ar-button) {
     margin-right: 20%;
   }
 
+  .ww2-background-img {
+    width: 100%;
+  }
+
+  .tank_model {
+    position: absolute;
+    top: 32%;
+    width: 70%;
+  }
+
+  /* TANK ANIMATION */
+  @keyframes driveInFromRight {
+    0% {
+      transform: translate(70vw, -50%);
+    }
+
+    100% {
+      transform: translate(15vw, -50%);
+    }
+  }
+
   h2 {
     font-size: 1.8rem;
   }
@@ -1755,7 +1871,7 @@ model-viewer::part(default-ar-button) {
   .cinema-scene {
     width: 100vw;
     margin-left: 0;
-    margin-top: 0;
+    margin-top: -50px;
     height: 100vh;
     overflow: hidden;
   }
@@ -1767,6 +1883,23 @@ model-viewer::part(default-ar-button) {
     display: block;
     object-fit: cover;
     object-position: center;
+  }
+
+  .black-and-white-movie-container {
+    position: absolute;
+    top: 25%;
+    left: 50%; /* ✅ center anchor */
+    transform: translateX(-50%); /* ✅ perfect centering */
+    width: 60%; /* ✅ control width here */
+    height: 48%;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .black-and-white-movie {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
   }
 }
 
