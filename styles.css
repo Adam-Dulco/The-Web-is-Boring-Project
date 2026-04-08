@@ -1446,6 +1446,7 @@ model-viewer::part(default-ar-button) {
 .christopher-roby-heading {
   font-family: "Limelight", sans-serif;
   color: #f7f7f7;
+  margin-top: 0;
 }
 
 .christopher-roby-information-section th {
@@ -1484,6 +1485,22 @@ model-viewer::part(default-ar-button) {
   font-family: "VT323", Arial, Helvetica, sans-serif;
 }
 
+.modern-day-media-room {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+
+  z-index: 3; /* MUST be above */
+
+  opacity: 1;
+  animation: modernRoomFade 4s ease-in-out forwards;
+  animation-delay: 0.5s; /* wait 5 seconds BEFORE fading */
+}
+
 .media-room {
   position: absolute;
   top: 0;
@@ -1491,9 +1508,52 @@ model-viewer::part(default-ar-button) {
   transform: translateX(-50%);
   width: 100%;
   height: 100vh;
-  max-width: none;
+  object-fit: cover;
+
+  z-index: 2; /* underneath */
+}
+
+/* GLITCH EFFECT */
+.modern-day-media-room {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100vh;
   object-fit: cover;
   z-index: 3;
+
+  animation: glitchOut 3s steps(2, end) 0.5s forwards;
+}
+
+@keyframes glitchOut {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translate(0, 0);
+  }
+  20% {
+    transform: translateX(-50%) translate(-10px, 5px);
+  }
+  25% {
+    opacity: 0.2;
+  }
+  30% {
+    opacity: 1;
+    transform: translateX(-50%) translate(10px, -5px);
+  }
+  40% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .media-text-box {
@@ -1565,7 +1625,7 @@ model-viewer::part(default-ar-button) {
   /* move these values until it sits in the right place on the image */
   top: 7%;
   left: 65%;
-  rotate: -3.2deg;
+  rotate: -3.3deg;
   z-index: 0;
   padding: 12px 20px;
   width: 40px;
@@ -2314,4 +2374,19 @@ body.is-transitioning .neon-border::before {
   100% {
     background-position: 300% 50%;
   }
+}
+
+/* TV & RADIO PAGE: force-hide during vortex transition */
+body.is-transitioning .media-room-container,
+body.is-transitioning .media-text-layer,
+body.is-transitioning .media-text-box,
+body.is-transitioning .media-text-box.is-visible,
+body.is-transitioning .modern-day-media-room,
+body.is-transitioning .media-room,
+body.is-transitioning .clock,
+body.is-transitioning .neon-border,
+body.is-transitioning .tv-and-radio-information-section {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
