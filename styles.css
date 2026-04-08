@@ -201,7 +201,6 @@ h2 {
     0 4px 14px rgba(0, 40, 80, 0.08),
     inset 0 0 30px rgba(120, 160, 190, 0.08);
   color: #1f2d3a;
-  font-family: "Old Standard TT", serif;
 }
 
 /* headers */
@@ -210,12 +209,15 @@ h2 {
   background: rgba(120, 170, 210, 0.08);
   border-bottom: 1px solid rgba(120, 160, 190, 0.35);
   letter-spacing: 0.04em;
+  font-family: "Kavoon", serif;
+  font-weight: 400;
 }
 
 /* values */
 .archive-table--medical td {
   border-bottom: 1px solid rgba(120, 160, 190, 0.2);
   color: #2a3b47;
+  font-family: "Happy Monkey", system-ui;
 }
 
 /* alternating rows */
@@ -274,6 +276,7 @@ h2 {
   color: #fff2f2;
   border-bottom: 1px solid rgba(180, 30, 30, 0.18);
   line-height: 1.7;
+  font-family: "Montserrat", sans-serif;
 }
 
 .archive-table--cinema tr:nth-child(even) {
@@ -295,12 +298,83 @@ h2 {
   color: #ff4d4d;
 }
 
+/* ================= */
+/* TV & RADIO THEME  */
+/* ================= */
+
+.archive-table--tv-radio {
+  background:
+    linear-gradient(180deg, #1b1f2a 0%, #0f1218 100%),
+    radial-gradient(
+      circle at top left,
+      rgba(255, 180, 60, 0.08),
+      transparent 40%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.015) 0,
+      rgba(255, 255, 255, 0.015) 2px,
+      transparent 2px,
+      transparent 10px
+    );
+  border: 1px solid rgba(255, 190, 80, 0.35);
+  box-shadow:
+    0 0 14px rgba(255, 180, 60, 0.12),
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    inset 0 0 24px rgba(255, 210, 120, 0.04);
+  color: #f4efe4;
+  font-family: "Trebuchet MS", "Verdana", sans-serif;
+}
+
+.archive-table--tv-radio th {
+  color: #ffd36a;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 190, 80, 0.14),
+    rgba(255, 190, 80, 0.04)
+  );
+  border-bottom: 1px solid rgba(255, 190, 80, 0.3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px rgba(255, 200, 90, 0.15);
+}
+
+.archive-table--tv-radio td {
+  color: #f8f3ea;
+  border-bottom: 1px solid rgba(255, 190, 80, 0.14);
+  line-height: 1.7;
+  font-family: "Gill Sans", "Trebuchet MS", sans-serif;
+}
+
+.archive-table--tv-radio tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.archive-table--tv-radio a {
+  color: #ffbf47;
+  text-decoration: underline;
+}
+
+.archive-table--tv-radio a:hover,
+.archive-table--tv-radio a:focus-visible {
+  color: #ffe29a;
+}
+
+.archive-table--tv-radio th::before {
+  content: "📻 ";
+  color: #ffbf47;
+}
+
 /* ========================= */
 /*     NEON BORDER SYSTEM    */
 /* ========================= */
 
 .neon-border {
   position: relative;
+  display: block;
+  width: 100%;
+  height: 10px;
+  z-index: 3;
 
   /* Default = pink (baseline) */
   --neon-color-1: #ffffff;
@@ -1295,6 +1369,11 @@ model-viewer::part(default-ar-button) {
   margin-top: 0;
 }
 
+.chloe-fisher-paragraph {
+  font-family: "Happy Monkey", system-ui;
+  line-height: 1.75;
+}
+
 /* ---------------- CHLOE FISHER MIDWIFERY PAGE ------------------ */
 
 .midwife-room-container {
@@ -1307,10 +1386,10 @@ model-viewer::part(default-ar-button) {
 
 .midwife-scan-video {
   position: absolute;
-  top: 31.5%;
+  top: 31%;
   left: 11.5%;
-  width: 30%;
-  height: 35%;
+  width: 28%;
+  height: 39%;
   object-fit: cover;
   z-index: 1;
 }
@@ -1364,7 +1443,26 @@ model-viewer::part(default-ar-button) {
   background-color: #000;
 }
 
-/* ------------ TV MEDIA & PRESS PACKS PAGE ------------- */
+.christopher-roby-heading {
+  font-family: "Limelight", sans-serif;
+  color: #f7f7f7;
+}
+
+.christopher-roby-information-section th {
+  font-family: "Limelight", sans-serif;
+}
+
+.roby-heading {
+  font-family: "Limelight", sans-serif;
+  color: #ff4d4d;
+}
+
+.roby-paragraph {
+  font-family: "Montserrat", sans-serif;
+  color: #fff2f2;
+}
+
+/* ------------ TV & RADIO PRESS PACKS PAGE ------------- */
 
 .media-room-container {
   position: relative;
@@ -1465,12 +1563,12 @@ model-viewer::part(default-ar-button) {
   position: absolute;
 
   /* move these values until it sits in the right place on the image */
-  top: 6%;
+  top: 7%;
   left: 65%;
-  transform: translate(-50%, -50%);
+  rotate: -3.2deg;
   z-index: 0;
   padding: 12px 20px;
-  width: 5%;
+  width: 40px;
   text-align: center;
   font-family: "VT323", Arial, Helvetica, sans-serif;
   font-size: 1.6rem;
@@ -1479,7 +1577,21 @@ model-viewer::part(default-ar-button) {
   text-shadow:
     0 0 4px rgba(152, 152, 152, 0.7),
     0 0 10px rgba(65, 64, 63, 0.35);
-  transform: skew(-1deg) rotate(-1.5deg);
+  /* transform: skew(-1deg) rotate(-1.5deg); */
+}
+
+.tv-and-radio-information-section {
+  background: linear-gradient(180deg, #e3e0f0, #b7b3c9);
+}
+
+.tv-and-radio-heading {
+  font-family: "Fascinate Inline", system-ui;
+  margin-top: 0;
+}
+
+.tv-and-radio-paragraph {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  padding-bottom: 600px;
 }
 
 /* ---------------- END OF DESKTOP SIZING ELEMENTS ----------------- */
@@ -1869,7 +1981,7 @@ model-viewer::part(default-ar-button) {
   }
 
   .archive-table th {
-    text-align: left;
+    text-align: center;
   }
 
   .archive-table td {
@@ -1973,6 +2085,67 @@ model-viewer::part(default-ar-button) {
     width: 100%;
     height: 50%;
     object-fit: cover;
+  }
+
+  /* mobile tv & radio cards */
+  .archive-table--tv-radio tr {
+    border: 1px solid rgba(255, 190, 80, 0.28);
+    background:
+      linear-gradient(180deg, #1b1f2a 0%, #0f1218 100%),
+      radial-gradient(
+        circle at top left,
+        rgba(255, 180, 60, 0.08),
+        transparent 40%
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.015) 0,
+        rgba(255, 255, 255, 0.015) 2px,
+        transparent 2px,
+        transparent 10px
+      );
+    box-shadow:
+      0 0 10px rgba(255, 180, 60, 0.08),
+      inset 0 0 14px rgba(255, 210, 120, 0.04);
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+
+  .archive-table--tv-radio tr:nth-child(even) {
+    background:
+      linear-gradient(180deg, #1b1f2a 0%, #0f1218 100%),
+      radial-gradient(
+        circle at top left,
+        rgba(255, 180, 60, 0.08),
+        transparent 40%
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.015) 0,
+        rgba(255, 255, 255, 0.015) 2px,
+        transparent 2px,
+        transparent 10px
+      );
+  }
+
+  .archive-table--tv-radio th {
+    color: #ffd36a;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 190, 80, 0.14),
+      rgba(255, 190, 80, 0.04)
+    );
+    border-bottom: 1px dashed rgba(255, 190, 80, 0.22);
+  }
+
+  .archive-table--tv-radio td {
+    color: #f8f3ea;
+  }
+
+  /* TV & RADIO PRESS PACKS - MOBILE PAGE */
+
+  .media-room-container {
+    width: 80%;
   }
 }
 
@@ -2089,5 +2262,56 @@ body.is-transitioning .neon-border::before {
   }
   to {
     transform: scale(2.5);
+  }
+}
+
+/* ========================= */
+/* DISCO BORDER (OUTSET)     */
+/* ========================= */
+
+.archive-table--tv-radio {
+  position: relative;
+  border-radius: 6px;
+  z-index: 0;
+}
+
+/* outer animated border */
+.archive-table--tv-radio::before {
+  content: "";
+  position: absolute;
+  inset: -8px; /* pushes border OUTSIDE */
+  border-radius: 8px;
+  z-index: -1;
+
+  background: linear-gradient(
+    90deg,
+    #ff004c,
+    #ff9900,
+    #ffee00,
+    #00ffcc,
+    #0066ff,
+    #cc00ff,
+    #ff004c
+  );
+  background-size: 300% 300%;
+  animation: disco-border 6s linear infinite;
+
+  /* cut out the middle so it's ONLY a border */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  padding: 10px; /* border thickness */
+}
+
+/* animation */
+@keyframes disco-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
   }
 }
