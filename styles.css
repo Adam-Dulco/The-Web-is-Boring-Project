@@ -239,6 +239,62 @@ h2 {
   color: #3aa6d0;
 }
 
+/* ================ */
+/*   CINEMA THEME   */
+/* ================ */
+
+.archive-table--cinema {
+  background:
+    linear-gradient(180deg, rgba(28, 10, 10, 0.96), rgba(10, 4, 4, 0.98)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(180, 30, 30, 0.05) 0,
+      rgba(180, 30, 30, 0.05) 12px,
+      transparent 12px,
+      transparent 24px
+    );
+  border: 1px solid rgba(180, 30, 30, 0.45);
+  box-shadow:
+    0 0 18px rgba(0, 0, 0, 0.5),
+    0 0 32px rgba(180, 30, 30, 0.12),
+    inset 0 0 30px rgba(255, 80, 80, 0.05);
+  color: #fbeaea;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+.archive-table--cinema th {
+  color: #ff4d4d;
+  background: rgba(180, 30, 30, 0.12);
+  border-bottom: 1px solid rgba(180, 30, 30, 0.35);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.archive-table--cinema td {
+  color: #fff2f2;
+  border-bottom: 1px solid rgba(180, 30, 30, 0.18);
+  line-height: 1.7;
+}
+
+.archive-table--cinema tr:nth-child(even) {
+  background: rgba(255, 80, 80, 0.04);
+}
+
+.archive-table--cinema a {
+  color: #ff6b6b;
+  text-decoration: underline;
+}
+
+.archive-table--cinema a:hover,
+.archive-table--cinema a:focus-visible {
+  color: #ffb3b3;
+}
+
+.archive-table--cinema th::before {
+  content: "🎞 ";
+  color: #ff4d4d;
+}
+
 /* ========================= */
 /*     NEON BORDER SYSTEM    */
 /* ========================= */
@@ -1246,12 +1302,13 @@ model-viewer::part(default-ar-button) {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  margin-top: -40px;
 }
 
 .midwife-scan-video {
   position: absolute;
   top: 31.5%;
-  left: 12.5%;
+  left: 11.5%;
   width: 30%;
   height: 35%;
   object-fit: cover;
@@ -1263,7 +1320,6 @@ model-viewer::part(default-ar-button) {
   width: 70%;
   height: 100vh;
   margin-left: 11%;
-  margin-top: 0;
   z-index: 2;
 }
 
@@ -1388,7 +1444,7 @@ model-viewer::part(default-ar-button) {
 
 .box-3 {
   top: 50%;
-  left: 53.3%;
+  left: 53%;
   width: 5%;
   rotate: -5deg;
 }
@@ -1759,6 +1815,23 @@ model-viewer::part(default-ar-button) {
     grid-row: 3;
   }
 
+  /* CHLOE FISHER - MOBILE PAGE */
+
+  .midwife-room-container {
+    margin-top: 10px;
+  }
+
+  .midwife-room-img {
+    width: 80%;
+  }
+
+  .midwife-scan-video {
+    top: 38%;
+    left: 13%;
+    width: 40%;
+    height: 30%;
+  }
+
   /* =================================== */
   /*    ARCHIVE TABLE SYSTEM - MOBILE    */
   /* =================================== */
@@ -1981,10 +2054,30 @@ body.is-transitioning .lightning {
   visibility: hidden;
 }
 
-body.is-transitioning .vortex-model {
-  animation: vortexTransitionZoom 6s ease forwards;
+/* CHRISTOPHER ROBY PAGE */
+body.is-transitioning .cinema-scene,
+body.is-transitioning .cinema-seating-img-container,
+body.is-transitioning .cinema-seating-img,
+body.is-transitioning .black-and-white-movie-container,
+body.is-transitioning .black-and-white-movie {
+  visibility: hidden;
 }
 
+/* TV & RADIO PRESS PACKS PAGE */
+body.is-transitioning .media-room-container,
+body.is-transitioning .media-text-layer,
+body.is-transitioning .media-text-box,
+body.is-transitioning .media-room,
+body.is-transitioning .clock {
+  visibility: hidden;
+}
+
+/* VORTEX SPEEED DURATION */
+body.is-transitioning .vortex-model {
+  animation: vortexTransitionZoom 2s ease forwards;
+}
+
+/* HIDES NEON BORDER DURING PAGE TRANSITION */
 body.is-transitioning .neon-border,
 body.is-transitioning .neon-border::before {
   display: none;

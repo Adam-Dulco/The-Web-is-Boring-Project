@@ -349,9 +349,10 @@ function setupPageLinkTransitions() {
         vortex.setAttribute("rotation-per-second", "-3000deg");
       }
 
+      /* VORTEX TRANSITION DURATION*/
       setTimeout(() => {
         window.location.href = link.href;
-      }, 2000);
+      }, 700);
     });
   });
 }
