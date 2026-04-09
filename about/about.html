@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script
+      type="module"
+      src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.2.0/model-viewer.min.js"
+    ></script>
+    <title>About - EHX530</title>
+  </head>
+
+  <body class="scrollable">
+    <!-- NAVIGATION PANEL -->
+    <header>
+      <nav class="cockpit-nav">
+        <a href="../donating/donating.html" class="nav-btn larger-nav-font"
+          >Donating</a
+        >
+        <a href="./about.html" class="nav-btn larger-nav-font">About</a>
+        <a href="../help/help.html" class="nav-btn larger-nav-font">Help</a>
+
+        <a
+          href="../tv-radio-press-packs/tv-radio-press-packs.html"
+          class="nav-btn"
+          data-short="Radio Press Packs"
+          >TV &amp; Radio Press Packs (1994 - 2002)</a
+        >
+        <a href="../index.html" class="nav-btn larger-nav-font"> 🌪️ Home </a>
+        <a
+          href="../christopher-roby-archive/christopher-roby-archive.html"
+          class="nav-btn"
+          data-short="Christopher Roby Film Archives"
+        >
+          The Christopher Roby Archive of Film Texts (1919 - 2004)
+        </a>
+
+        <a
+          href="../william-charles-bradshaw-collection/bradshaw-collection.html"
+          class="nav-btn"
+          data-short="The Bradshaw's Collection"
+        >
+          The William &amp; Charles Bradshaw Collection (1914 - 1945)
+        </a>
+        <a
+          href="../chloe-fisher-archive/chloe-fisher-archive.html"
+          class="nav-btn"
+          data-short="Chloe Fisher Midwifery Collection"
+        >
+          The Chloe Fisher Midwifery Collection &amp; Archive (1932 - 2004)
+        </a>
+        <a
+          href="../edge-hill-predecessors/edge-hill-and-predecessors.html"
+          class="nav-btn"
+          data-short="Edge Hill Predecessors"
+        >
+          Edge Hill University &amp; Predecessors (1880 - 2019)
+        </a>
+      </nav>
+    </header>
+
+    <main class="page-shell">
+      <!-- MAIN ENTRANCE DOORS -->
+      <section class="door-overlay" id="doorOverlay">
+        <picture class="door-picture door-left-wrap">
+          <source
+            srcset="../front-doors/left-door-mobile.png"
+            media="(max-width: 560px)"
+          />
+          <img
+            src="../front-doors/left-door.png"
+            class="door-panel door-left"
+            alt="Left door"
+          />
+        </picture>
+        <picture class="door-picture door-right-wrap">
+          <source
+            srcset="../front-doors/right-door-mobile.png"
+            media="(max-width: 560px)"
+          />
+          <img
+            src="../front-doors/right-door.png"
+            class="door-panel door-right"
+            alt="Right door"
+          />
+        </picture>
+        <button class="door-open-btn" id="doorOpenBtn">Enter</button>
+      </section>
+
+      <!-- CENTER VORTEX -->
+      <aside class="center-vortex-container">
+        <model-viewer
+          disable-zoom
+          auto-rotate
+          auto-rotate-delay="0"
+          rotation-per-second="-30deg"
+          shadow-intensity="1"
+          exposure="1"
+          environment-image="neutral"
+          min-camera-orbit="0deg 0deg 1m"
+          max-camera-orbit="360deg 0deg 1.7m"
+          alt="Model"
+          src="../spinning_vortex.glb"
+          class="vortex-model"
+        >
+        </model-viewer>
+      </aside>
+
+      <!-- COCKPIT OVERLAY -->
+      <picture>
+        <source
+          srcset="../cockpit-interface-components/mobile-interface.png"
+          media="(max-width: 560px)"
+        />
+        <img
+          src="../cockpit-interface-components/desktop-interface.png"
+          class="overlay-cockpit"
+          alt=""
+        />
+      </picture>
+
+      <!-- VIDEO PANEL -->
+      <aside class="video-panel">
+        <video
+          class="video-screen"
+          controls
+          muted
+          autoplay
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source
+            src="../video-clips/14846843_640_360_30fps.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+      </aside>
+
+      <!-- LOGO -->
+      <img
+        src="../cockpit-interface-components/edge-hill-logo.png"
+        alt="Edge Hill University Logo"
+        class="edge-hill-logo"
+      />
+
+      <!-- EXIT BUTTON -->
+      <button class="exit-btn">Exit</button>
+
+      <!------------------------------------- CONTENT PAGE ----------------------------->
+      <!-- SCROLLABLE CONTENT -->
+    </main>
+    <script src="../script.js"></script>
+  </body>
+</html>

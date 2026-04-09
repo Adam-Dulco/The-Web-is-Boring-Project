@@ -211,6 +211,7 @@ h2 {
   letter-spacing: 0.04em;
   font-family: "Kavoon", serif;
   font-weight: 400;
+  font-size: 1.25rem;
 }
 
 /* values */
@@ -218,6 +219,7 @@ h2 {
   border-bottom: 1px solid rgba(120, 160, 190, 0.2);
   color: #2a3b47;
   font-family: "Happy Monkey", system-ui;
+  font-size: 1.25rem;
 }
 
 /* alternating rows */
@@ -905,6 +907,8 @@ h2 {
   margin: 0 auto;
   overflow: hidden;
   z-index: 1;
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .vortex-model {
@@ -1353,8 +1357,15 @@ model-viewer::part(default-ar-button) {
 .predecessors-heading {
   font-family: "Old Standard TT", serif;
   font-weight: 700;
+  font-size: 3em;
   color: #3a0c51;
   margin-top: 0;
+}
+
+.predecessors-paragraph {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 1.5;
+  padding-bottom: 300px;
 }
 
 /* MAIN TEXT SECTION OF CHLOE FISHER PAGE */
@@ -1372,6 +1383,44 @@ model-viewer::part(default-ar-button) {
 .chloe-fisher-paragraph {
   font-family: "Happy Monkey", system-ui;
   line-height: 1.75;
+  padding-bottom: 300px;
+}
+
+.chloe-fisher-img-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 40px 0;
+  gap: 3%;
+  padding: 3%;
+  border: 3px solid rgba(120, 160, 190, 0.3);
+  background: linear-gradient(180deg, #f4f8fb, #e6eef5);
+}
+
+.chloe-fisher-caption {
+  display: block; /* moves it above the paragraph text */
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.chloe-fisher-img {
+  flex-shrink: 0;
+  width: auto;
+  height: auto;
+  border: 1px solid rgba(120, 160, 190, 0.3);
+}
+
+.chloe-fisher-img-container p {
+  flex: 1 1 300px;
+  margin-top: 10px;
+  align-self: flex-start; /* 👈 key fix */
+}
+
+.chloe-fisher-list {
+  list-style: circle;
+}
+
+.chloe-fisher-list li:not(:last-child) {
+  margin-bottom: 10px;
 }
 
 /* ---------------- CHLOE FISHER MIDWIFERY PAGE ------------------ */
@@ -1445,22 +1494,24 @@ model-viewer::part(default-ar-button) {
 
 .christopher-roby-heading {
   font-family: "Limelight", sans-serif;
-  color: #f7f7f7;
+  color: #ffeaea;
   margin-top: 0;
+  text-shadow:
+    0 0 4px #ffeaea,
+    0 0 8px #ff2a2a,
+    0 0 16px #ff2a2a,
+    0 0 28px #660000,
+    0 0 40px #660000;
 }
 
 .christopher-roby-information-section th {
   font-family: "Limelight", sans-serif;
 }
 
-.roby-heading {
-  font-family: "Limelight", sans-serif;
-  color: #ff4d4d;
-}
-
-.roby-paragraph {
+.christopher-roby-paragraph {
   font-family: "Montserrat", sans-serif;
   color: #fff2f2;
+  padding-bottom: 300px;
 }
 
 /* ------------ TV & RADIO PRESS PACKS PAGE ------------- */
@@ -1623,7 +1674,7 @@ model-viewer::part(default-ar-button) {
   position: absolute;
 
   /* move these values until it sits in the right place on the image */
-  top: 7%;
+  top: 6.5%;
   left: 65%;
   rotate: -3.3deg;
   z-index: 0;
@@ -1640,18 +1691,76 @@ model-viewer::part(default-ar-button) {
   /* transform: skew(-1deg) rotate(-1.5deg); */
 }
 
+/* ========================= */
+/* DISCO BORDER (OUTSET)     */
+/* ========================= */
+
+.archive-table--tv-radio {
+  position: relative;
+  border-radius: 6px;
+  z-index: 0;
+}
+
+/* outer animated border */
+.archive-table--tv-radio::before {
+  content: "";
+  position: absolute;
+  inset: -8px; /* pushes border OUTSIDE */
+  border-radius: 8px;
+  z-index: -1;
+
+  background: linear-gradient(
+    90deg,
+    #ff004c,
+    #ff9900,
+    #ffee00,
+    #00ffcc,
+    #0066ff,
+    #cc00ff,
+    #ff004c
+  );
+  background-size: 300% 300%;
+  animation: disco-border 6s linear infinite;
+
+  /* cut out the middle so it's ONLY a border */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  padding: 10px; /* border thickness */
+}
+
+/* animation */
+@keyframes disco-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
 .tv-and-radio-information-section {
   background: linear-gradient(180deg, #e3e0f0, #b7b3c9);
 }
 
-.tv-and-radio-heading {
+.tv-and-radio-heading,
+.tv-and-radio-description-heading {
   font-family: "Fascinate Inline", system-ui;
   margin-top: 0;
 }
 
+.tv-and-radio-description-heading {
+  font-size: 2.5rem;
+}
+
 .tv-and-radio-paragraph {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  padding-bottom: 600px;
+  padding-bottom: 300px;
+  font-size: 1.25rem;
+  line-height: 1.5;
 }
 
 /* ---------------- END OF DESKTOP SIZING ELEMENTS ----------------- */
@@ -1666,11 +1775,6 @@ model-viewer::part(default-ar-button) {
   }
 
   /* ------------- COCKPIT MODEL ---------------- */
-
-  .vortex-model {
-    width: 70%;
-    height: 79%;
-  }
 
   .window-panel-container {
     width: 28%;
@@ -1792,9 +1896,6 @@ model-viewer::part(default-ar-button) {
   /* ----- HOME PAGE - MOBILE ----- */
 
   .vortex-model {
-    display: block;
-    position: relative;
-    z-index: 1;
     width: 80%;
     height: 79%;
     margin: 0 17% 0 12%;
@@ -1805,8 +1906,7 @@ model-viewer::part(default-ar-button) {
     top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    overflow: hidden; /* 🔥 contains text inside */
+    overflow: hidden; /*contains text inside */
     position: absolute;
   }
 
@@ -2202,6 +2302,12 @@ model-viewer::part(default-ar-button) {
     color: #f8f3ea;
   }
 
+  /* PREDECESSORS MOBILE PAGE */
+
+  .predecessors-heading {
+    font-size: 2.5rem;
+  }
+
   /* TV & RADIO PRESS PACKS - MOBILE PAGE */
 
   .media-room-container {
@@ -2214,17 +2320,6 @@ model-viewer::part(default-ar-button) {
 /* ======================= */
 /*   VORTEX SYSTEM         */
 /* ======================= */
-
-.center-vortex-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  margin: 0 auto;
-  overflow: hidden;
-  z-index: 1;
-  pointer-events: none;
-  visibility: hidden;
-}
 
 body.home-page .center-vortex-container,
 body.is-transitioning .center-vortex-container {
@@ -2241,15 +2336,6 @@ body.scrollable .center-vortex-container {
   overflow: hidden;
   z-index: 1;
   pointer-events: none;
-}
-
-.vortex-model {
-  display: block;
-  position: relative;
-  z-index: 1;
-  width: 70%;
-  height: 79%;
-  margin-left: 10%;
 }
 
 /* Home Page */
@@ -2270,10 +2356,8 @@ body.is-transitioning #tank {
 }
 
 /* CHLOE FISHER PAGE */
-body.is-transitioning
-  .neon-border
-  body.is-transitioning
-  .midwife-room-container,
+body.is-transitioning .neon-border,
+body.is-transitioning .midwife-room-container,
 body.is-transitioning .midwife-room-img,
 body.is-transitioning .midwife-scan-video {
   visibility: hidden;
@@ -2322,57 +2406,6 @@ body.is-transitioning .neon-border::before {
   }
   to {
     transform: scale(2.5);
-  }
-}
-
-/* ========================= */
-/* DISCO BORDER (OUTSET)     */
-/* ========================= */
-
-.archive-table--tv-radio {
-  position: relative;
-  border-radius: 6px;
-  z-index: 0;
-}
-
-/* outer animated border */
-.archive-table--tv-radio::before {
-  content: "";
-  position: absolute;
-  inset: -8px; /* pushes border OUTSIDE */
-  border-radius: 8px;
-  z-index: -1;
-
-  background: linear-gradient(
-    90deg,
-    #ff004c,
-    #ff9900,
-    #ffee00,
-    #00ffcc,
-    #0066ff,
-    #cc00ff,
-    #ff004c
-  );
-  background-size: 300% 300%;
-  animation: disco-border 6s linear infinite;
-
-  /* cut out the middle so it's ONLY a border */
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-
-  padding: 10px; /* border thickness */
-}
-
-/* animation */
-@keyframes disco-border {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 300% 50%;
   }
 }
 
