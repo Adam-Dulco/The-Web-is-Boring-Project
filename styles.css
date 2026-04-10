@@ -219,7 +219,6 @@ h2 {
   border-bottom: 1px solid rgba(120, 160, 190, 0.2);
   color: #2a3b47;
   font-family: "Happy Monkey", system-ui;
-  font-size: 1.25rem;
 }
 
 /* alternating rows */
@@ -496,6 +495,69 @@ h2 {
   50% {
     filter: brightness(1.25);
   }
+}
+
+/* ================================ */
+/*   RETURN TO TOP OF PAGE BUTTON   */
+/* ================================ */
+
+.return-to-landing-destination-container {
+  text-align: center;
+  padding-bottom: 220px;
+  margin-right: 12%;
+}
+
+.return-to-landing-destination-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  width: clamp(220px, 25%, 600px);
+  text-align: center;
+  font-family: monospace, serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  color: #00ff9c;
+
+  border: 1px solid #00ff9c;
+  border-radius: 6px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 255, 156, 0.25),
+    rgba(0, 0, 0, 0.6)
+  );
+
+  box-shadow:
+    0 0 10px rgba(0, 255, 156, 0.7),
+    0 0 20px rgba(0, 255, 156, 0.3);
+
+  text-shadow: 0 0 6px #00ff9c;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.return-to-landing-destination-btn:hover,
+.return-to-landing-destination-btn:focus-visible {
+  transform: translateY(-3px) scale(1.05);
+
+  background: rgba(2, 50, 32, 0.15);
+
+  box-shadow:
+    0 0 12px rgba(0, 255, 156, 0.8),
+    0 0 25px rgba(0, 255, 156, 1),
+    0 0 40px rgba(0, 255, 156, 0.5);
+}
+
+.return-arrow {
+  font-size: 1.5rem; /* increase as needed */
+  display: inline-block;
+  margin-left: 6px;
 }
 
 /* -------------------------- ENTRANCE SCREEN --------------------------- */
@@ -1008,7 +1070,7 @@ model-viewer::part(default-ar-button) {
   line-height: 1.5;
   font-size: 1.5rem;
   color: #1b1d16;
-  padding-bottom: 250px;
+  padding-bottom: 75px;
 }
 
 .bradshaw-heading {
@@ -1206,17 +1268,6 @@ model-viewer::part(default-ar-button) {
   z-index: 1;
 }
 
-/* Makes the image have a dark overlay */
-
-/* .rain-img-container::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(20, 30, 40, 0.02);
-  pointer-events: none;
-  z-index: 2;
-} */
-
 /* Rain Container - holds all the drops */
 .rain {
   position: absolute;
@@ -1365,10 +1416,45 @@ model-viewer::part(default-ar-button) {
 .predecessors-paragraph {
   font-family: Georgia, "Times New Roman", Times, serif;
   line-height: 1.5;
-  padding-bottom: 300px;
+  padding-bottom: 75px;
 }
 
-/* MAIN TEXT SECTION OF CHLOE FISHER PAGE */
+.durning-road-garden-img {
+  padding-bottom: 35px;
+}
+
+.durning-road-img-caption,
+.edge-hill-ormskirk-img-container p {
+  text-align: center;
+  font-weight: bold;
+  padding-top: 30px;
+}
+
+.principles-img-container {
+  display: flex;
+  gap: 20px;
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 30px;
+}
+
+.principles-img-container p {
+  height: 30px;
+}
+
+.predecessors-line-break {
+  border: none;
+  height: 2px;
+  background: #3a0c51;
+  border-radius: 12px;
+  margin: 30px 0;
+}
+
+.edge-hill-ormskirk-img-container {
+  padding-bottom: 30px;
+}
+
+/* ----------------- MAIN TEXT SECTION OF CHLOE FISHER PAGE ----------------------- */
 .chloe-fisher-information-section {
   background: linear-gradient(180deg, #d1eeff, #72e3ff);
 }
@@ -1383,7 +1469,7 @@ model-viewer::part(default-ar-button) {
 .chloe-fisher-paragraph {
   font-family: "Happy Monkey", system-ui;
   line-height: 1.75;
-  padding-bottom: 300px;
+  padding-bottom: 75px;
 }
 
 .chloe-fisher-img-container {
@@ -1511,7 +1597,7 @@ model-viewer::part(default-ar-button) {
 .christopher-roby-paragraph {
   font-family: "Montserrat", sans-serif;
   color: #fff2f2;
-  padding-bottom: 300px;
+  padding-bottom: 75px;
 }
 
 /* ------------ TV & RADIO PRESS PACKS PAGE ------------- */
@@ -1758,7 +1844,7 @@ model-viewer::part(default-ar-button) {
 
 .tv-and-radio-paragraph {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  padding-bottom: 300px;
+  padding-bottom: 75px;
   font-size: 1.25rem;
   line-height: 1.5;
 }
@@ -2308,18 +2394,45 @@ model-viewer::part(default-ar-button) {
     font-size: 2.5rem;
   }
 
+  .principles-img-container {
+    display: block;
+  }
+
+  .principles-img-containerr p {
+    height: 10px;
+  }
+
+  .principles-img-container img {
+    padding-bottom: 40px;
+  }
+
+  .durning-road-img-caption {
+    padding-top: 15px;
+    margin-bottom: 5px;
+  }
+
+  .edge-hill-ormskirk-img-container {
+    padding-bottom: 20px;
+  }
+
   /* TV & RADIO PRESS PACKS - MOBILE PAGE */
 
   .media-room-container {
     width: 80%;
   }
+
+  /* RETURN TO LANDING DESTINATION BUTTON - MOBILE */
+
+  .return-to-landing-destination-container {
+    margin-right: 0%;
+  }
 }
 
 /* END OF MOBILE SIZING */
 
-/* ======================= */
-/*   VORTEX SYSTEM         */
-/* ======================= */
+/* ============================ */
+/*   VORTEX TRANSITION SYSTEM   */
+/* ============================ */
 
 body.home-page .center-vortex-container,
 body.is-transitioning .center-vortex-container {

@@ -6,6 +6,9 @@ const doorOverlay = document.getElementById("doorOverlay");
 const doorOpenBtn = document.getElementById("doorOpenBtn");
 const exitBtn = document.querySelector(".exit-btn");
 
+let doorState = "closed"; // "closed" | "opening" | "open" | "closing"
+let doorTimer = null;
+
 /* ================ */
 /*   WINDOW TEXT    */
 /* ================ */
@@ -20,6 +23,13 @@ if (container) {
     (p) => p.textContent,
   );
   container.innerHTML = "";
+}
+
+function clearDoorTimer() {
+  if (doorTimer) {
+    clearTimeout(doorTimer);
+    doorTimer = null;
+  }
 }
 
 function typeLine(text, element, callback) {
@@ -52,7 +62,6 @@ function startTyping() {
   }
 }
 
-/* RESET TEXT */
 function resetTyping() {
   clearTimeout(typingTimeout);
 
@@ -63,36 +72,108 @@ function resetTyping() {
   lineIndex = 0;
 }
 
-/* OPEN DOORS */
-if (doorOpenBtn && doorOverlay) {
-  // If already entered this session, skip the doors immediately
-  if (sessionStorage.getItem("doorsOpened")) {
-    doorOverlay.classList.add("hidden");
-    startTyping();
-  }
+/* ======================= */
+/*   DOOR STATE CONTROL    */
+/* ======================= */
 
-  doorOpenBtn.addEventListener("click", () => {
-    doorOverlay.classList.add("open");
-    sessionStorage.setItem("doorsOpened", "true");
+function showDoorOverlay() {
+  if (!doorOverlay) return;
+  doorOverlay.classList.remove("hidden");
+}
 
-    resetTyping();
+function hideDoorOverlay() {
+  if (!doorOverlay) return;
+  doorOverlay.classList.add("hidden");
+}
 
-    setTimeout(() => {
-      doorOverlay.classList.add("hidden");
+function setDoorsOpen() {
+  if (!doorOverlay) return;
+  doorOverlay.classList.add("open");
+}
+
+function setDoorsClosed() {
+  if (!doorOverlay) return;
+  doorOverlay.classList.remove("open");
+}
+
+function nextPaint(callback) {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(callback);
+  });
+}
+
+function openDoors() {
+  if (!doorOverlay) return;
+  if (doorState === "opening" || doorState === "open") return;
+
+  clearDoorTimer();
+  resetTyping();
+
+  doorState = "opening";
+  sessionStorage.setItem("doorsOpened", "true");
+
+  showDoorOverlay();
+
+  nextPaint(() => {
+    setDoorsOpen();
+
+    doorTimer = setTimeout(() => {
+      hideDoorOverlay();
+      doorState = "open";
       startTyping();
+      doorTimer = null;
     }, 3000);
   });
 }
 
-/* CLOSE DOORS */
-if (exitBtn && doorOverlay) {
-  exitBtn.addEventListener("click", () => {
-    doorOverlay.classList.remove("hidden");
-    doorOverlay.classList.remove("open");
-    sessionStorage.removeItem("doorsOpened");
+function closeDoors() {
+  if (!doorOverlay) return;
+  if (doorState === "closing" || doorState === "closed") return;
 
-    resetTyping();
+  clearDoorTimer();
+  resetTyping();
+
+  doorState = "closing";
+  sessionStorage.removeItem("doorsOpened");
+
+  showDoorOverlay();
+
+  nextPaint(() => {
+    setDoorsClosed();
+
+    doorTimer = setTimeout(() => {
+      doorState = "closed";
+      doorTimer = null;
+
+      /* Re-open on homepage each time doors close on exit */
+      window.location.href = "../index.html";
+    }, 1600);
   });
+}
+
+/* INITIAL STATE */
+
+if (doorOverlay) {
+  if (sessionStorage.getItem("doorsOpened")) {
+    setDoorsOpen();
+    hideDoorOverlay();
+    doorState = "open";
+    startTyping();
+  } else {
+    setDoorsClosed();
+    showDoorOverlay();
+    doorState = "closed";
+  }
+}
+
+/* BUTTON EVENTS */
+
+if (doorOpenBtn) {
+  doorOpenBtn.addEventListener("click", openDoors);
+}
+
+if (exitBtn) {
+  exitBtn.addEventListener("click", closeDoors);
 }
 
 /*====================*/
@@ -151,38 +232,7 @@ if (tank && sound) {
 }
 
 /*====================*/
-/*    RAIN EFFECT     */
-/*====================*/
-
-window.addEventListener("DOMContentLoaded", () => {
-  const rainContainer = document.querySelector(".rain");
-  if (!rainContainer) return;
-
-  const dropCount = 180;
-
-  for (let i = 0; i < dropCount; i++) {
-    const drop = document.createElement("span");
-    drop.classList.add("rain-drop");
-
-    const size = Math.random();
-    if (size < 0.33) {
-      drop.classList.add("small");
-    } else if (size < 0.66) {
-      drop.classList.add("medium");
-    } else {
-      drop.classList.add("large");
-    }
-
-    drop.style.left = Math.random() * 100 + "%";
-    drop.style.animationDuration = 0.45 + Math.random() * 0.55 + "s";
-    drop.style.animationDelay = -Math.random() * 2 + "s";
-
-    rainContainer.appendChild(drop);
-  }
-});
-
-/*====================*/
-/*  LIGHTNING EFFECT  */
+/* RAIN + LIGHTNING   */
 /*====================*/
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -190,29 +240,31 @@ window.addEventListener("DOMContentLoaded", () => {
   const imageContainer = document.querySelector(".rain-img-container");
   const lightning = document.querySelector(".lightning");
 
-  if (!rainContainer || !imageContainer || !lightning) return;
+  if (rainContainer) {
+    const dropCount = 180;
 
-  const dropCount = 180;
+    for (let i = 0; i < dropCount; i++) {
+      const drop = document.createElement("span");
+      drop.classList.add("rain-drop");
 
-  for (let i = 0; i < dropCount; i++) {
-    const drop = document.createElement("span");
-    drop.classList.add("rain-drop");
+      const size = Math.random();
+      if (size < 0.33) {
+        drop.classList.add("small");
+      } else if (size < 0.66) {
+        drop.classList.add("medium");
+      } else {
+        drop.classList.add("large");
+      }
 
-    const size = Math.random();
-    if (size < 0.33) {
-      drop.classList.add("small");
-    } else if (size < 0.66) {
-      drop.classList.add("medium");
-    } else {
-      drop.classList.add("large");
+      drop.style.left = Math.random() * 100 + "%";
+      drop.style.animationDuration = 0.45 + Math.random() * 0.55 + "s";
+      drop.style.animationDelay = -Math.random() * 2 + "s";
+
+      rainContainer.appendChild(drop);
     }
-
-    drop.style.left = Math.random() * 100 + "%";
-    drop.style.animationDuration = 0.45 + Math.random() * 0.55 + "s";
-    drop.style.animationDelay = -Math.random() * 2 + "s";
-
-    rainContainer.appendChild(drop);
   }
+
+  if (!rainContainer || !imageContainer || !lightning) return;
 
   function triggerLightning() {
     const isDouble = Math.random() > 0.55;
@@ -270,49 +322,18 @@ function updateMediaTextReveal() {
 
   const rect = section.getBoundingClientRect();
   const viewportHeight = window.innerHeight;
-  const isMobile = window.innerWidth <= 560;
-
   const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
 
-  let box1Trigger;
-  let box2Trigger;
-  let box3Trigger;
+  const trigger = 0.5;
 
-  if (isMobile) {
-    box1Trigger = 0.5;
-    box2Trigger = 0.5;
-    box3Trigger = 0.5;
-  } else {
-    box1Trigger = 0.5;
-    box2Trigger = 0.5;
-    box3Trigger = 0.5;
-  }
-
-  // Only remove if user scrolls back up ABOVE trigger
-  if (progress < box1Trigger) box1.classList.remove("is-visible");
-  if (progress < box2Trigger) box2.classList.remove("is-visible");
-  if (progress < box3Trigger) box3.classList.remove("is-visible");
-
-  if (progress > box1Trigger) box1.classList.add("is-visible");
-  if (progress > box2Trigger) box2.classList.add("is-visible");
-  if (progress > box3Trigger) box3.classList.add("is-visible");
+  box1.classList.toggle("is-visible", progress > trigger);
+  box2.classList.toggle("is-visible", progress > trigger);
+  box3.classList.toggle("is-visible", progress > trigger);
 }
 
 window.addEventListener("scroll", updateMediaTextReveal);
 window.addEventListener("resize", updateMediaTextReveal);
 window.addEventListener("DOMContentLoaded", updateMediaTextReveal);
-
-/* GRADUALLY FADE IN THE TV & RADIO TEXT ON PAGE LOAD */
-
-// window.addEventListener("DOMContentLoaded", () => {
-//   const box1 = document.querySelector(".box-1");
-
-//   if (box1) {
-//     setTimeout(() => {
-//       box1.classList.add("is-visible");
-//     }, 1000); // 1 second delay so CSS transition triggers properly
-//   }
-// });
 
 /* ============================== */
 /*   PAGE VORTEX NAV TRANSITION   */
@@ -349,7 +370,6 @@ function setupPageLinkTransitions() {
         vortex.setAttribute("rotation-per-second", "-3000deg");
       }
 
-      /* VORTEX TRANSITION DURATION*/
       setTimeout(() => {
         window.location.href = link.href;
       }, 700);
@@ -359,4 +379,19 @@ function setupPageLinkTransitions() {
 
 window.addEventListener("DOMContentLoaded", setupPageLinkTransitions);
 
+/* ================================ */
+/*   RETURN TO TOP OF PAGE BUTTON   */
+/* ================================ */
 
+const returnToLandingDestinationButton = document.getElementById(
+  "returnToLandingDestinationButton",
+);
+
+if (returnToLandingDestinationButton) {
+  returnToLandingDestinationButton.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+}
