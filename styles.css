@@ -1498,7 +1498,7 @@ model-viewer::part(default-ar-button) {
 .chloe-fisher-img-container p {
   flex: 1 1 300px;
   margin-top: 10px;
-  align-self: flex-start; /* 👈 key fix */
+  align-self: flex-start;
 }
 
 .chloe-fisher-list {
@@ -1849,6 +1849,145 @@ model-viewer::part(default-ar-button) {
   line-height: 1.5;
 }
 
+/* ------------- DONATING PAGE -----------------*/
+
+.donating-container {
+  position: relative;
+  width: 72%;
+  margin-left: 10%;
+  margin-top: 40px;
+  height: 95vh;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.donating-page-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.donating-heading {
+  position: absolute;
+  width: 83%;
+  top: 10%; /* adjust vertical position */
+  left: 48.5%;
+  transform: translate(-50%, -50%);
+  font-family: "Permanent Marker", "Comic Sans MS", cursive;
+  font-weight: 400;
+  text-decoration: underline;
+  z-index: 2;
+  color: #1f1f1f;
+  text-align: center;
+  font-size: clamp(1.5rem, 2.25rem, 3rem);
+  letter-spacing: 0.08em;
+}
+
+/* ======================= */
+/* WHITEBOARD WRITING AREA */
+/* ======================= */
+
+.whiteboard-text-box {
+  position: absolute;
+  top: 20%;
+  left: 18%;
+  width: 62%;
+  height: 32%;
+  z-index: 3;
+  overflow-y: auto;
+  color: #1f1f1f;
+  font-family: "Permanent Marker", "Comic Sans MS", cursive;
+  font-size: clamp(0.95rem, 1.2vw, 1.4rem);
+  line-height: 1.7;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ---------- HIDE SCROLLBAR ------------- */
+.whiteboard-text-box {
+  overflow-y: auto;
+
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* IE/old Edge */
+  -ms-overflow-style: none;
+}
+
+/* Chrome, Safari, Edge */
+.whiteboard-text-box::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============== */
+/*   PARCEL BOX   */
+/* ============== */
+
+.parcel-container {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: visible;
+}
+
+.parcel-img {
+  position: absolute;
+  top: 59%;
+  left: 70%;
+  transform: translate(-50%, -60%);
+  z-index: 2;
+  width: 170px;
+  display: block;
+}
+
+.donate {
+  position: absolute;
+  top: 60.7%;
+  left: 68%;
+  transform: translate(-50%, -60%);
+  rotate: 6deg;
+  z-index: 3;
+  width: 170px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: "Rock Salt", cursive;
+  font-size: 1.5rem;
+  color: #1f1f1f;
+}
+
+/* ======================= */
+/* PARCEL CONFETTI BURST   */
+/* ======================= */
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 16px;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 1;
+  border-radius: 2px;
+  animation: confetti-burst 1200ms ease-out forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes confetti-burst {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(var(--confetti-x), var(--confetti-y))
+      rotate(var(--confetti-rotate)) scale(0.7);
+    opacity: 0;
+  }
+}
+
 /* ---------------- END OF DESKTOP SIZING ELEMENTS ----------------- */
 
 /* ============= */
@@ -1971,6 +2110,22 @@ model-viewer::part(default-ar-button) {
       overflow-wrap: break-word;
       word-break: break-word;
     }
+  }
+
+  /* ---------- DONATING PAGE - TABLET -------------- */
+
+  .donating-heading {
+    top: 11%; /* adjust vertical position */
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+  }
+
+  .whiteboard-text-box {
+    position: absolute;
+    top: 20%;
+    left: 7.5%;
+    width: 85%;
+    height: 32%;
   }
 }
 
@@ -2426,6 +2581,45 @@ model-viewer::part(default-ar-button) {
   .return-to-landing-destination-container {
     margin-right: 0%;
   }
+
+  /* -------------- DONATING PAGE - MOBILE ------------- */
+
+  .donating-container {
+    width: 90%;
+    margin-left: 5.5%;
+  }
+
+  .donating-heading {
+    font-size: 1rem;
+    top: 12%;
+    left: 50%;
+  }
+
+  .whiteboard-text-box {
+    top: 18%;
+    left: 20.6%;
+    width: 59%;
+    height: 28%;
+    font-size: 0.8rem;
+  }
+
+  .parcel-img {
+    position: absolute;
+    top: 51%;
+    left: 70%;
+    transform: translate(-50%, -60%);
+    width: 110px;
+  }
+
+  .donate {
+    top: 52.3%;
+    left: 66.5%;
+    rotate: 6deg;
+    transform: translate(-50%, -60%);
+    width: 150px;
+    font-size: 1rem;
+    color: #1f1f1f;
+  }
 }
 
 /* END OF MOBILE SIZING */
@@ -2536,3 +2730,35 @@ body.is-transitioning .tv-and-radio-information-section {
   visibility: hidden !important;
   pointer-events: none !important;
 }
+
+/* DONATING PAGE */
+body.is-transitioning .donating-container,
+body.is-transitioning .donating-page-img,
+body.is-transitioning .donating-heading,
+body.is-transitioning .whiteboard-text-box {
+  visibility: hidden;
+}
+
+/* ---------- COME BACK TO THIS LATER FOR ABOUT PAGE ------------ */
+
+.about-img-container {
+  position: relative;
+  width: 80%;
+  margin-left: 9%;
+  margin-right: 80%;
+  margin-top: 40px;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.edge-hill-campus-about-page-img {
+  display: block;
+  width: 100%;
+  height: 100%; /* ✅ must be 100% */
+  object-fit: cover; /* now it works properly */
+  position: relative;
+  z-index: 1;
+  margin-top: -90px;
+}
+
+/*-----------------------------------------------------------------*/

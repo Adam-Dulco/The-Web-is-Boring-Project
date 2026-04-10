@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rock+Salt&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../styles.css" />
     <script
       type="module"
@@ -123,7 +129,6 @@
       <aside class="video-panel">
         <video
           class="video-screen"
-          controls
           muted
           autoplay
           loop
@@ -150,6 +155,70 @@
 
       <!------------------------------------- CONTENT PAGE ----------------------------->
       <!-- SCROLLABLE CONTENT -->
+
+      <section class="donating-container">
+        <!-- <img
+          src="./donating-room-desktop-3.webp"
+          alt="Edge Hill University Catalyst Building"
+          class="donating-page-img"
+        /> -->
+
+        <picture>
+          <source
+            srcset="donating-room-mobile-2.webp"
+            media="(max-width: 560px)"
+          />
+          <img
+            src="./donating-room-desktop-3.webp"
+            alt=""
+            class="donating-page-img"
+          />
+        </picture>
+
+        <h1 class="donating-heading">Donating to the Archive</h1>
+
+        <article class="whiteboard-text-box" id="whiteboardTextBox">
+          <p>
+            We are actively looking to expand and develop our archive
+            collections: supporting teaching and research within the university,
+            filling in the blanks of our institution’s history and opening up
+            our collections for researchers everywhere.
+          </p>
+
+          <p>
+            We are always keen to hear about any documents or objects that
+            relate to the history of Edge Hill and might help tell our story. If
+            you have any photographs, films, correspondence, journals,
+            publications, mementos or other items that might be of interest and
+            that you are willing to donate to us, please get in touch.
+          </p>
+          <p>
+            Our archive and special collections also include items and
+            publications that do not have a direct connection to the history of
+            Edge Hill, but match the research interests of the university.
+          </p>
+          <p>
+            We are very interested in receiving donations of archive collections
+            and/or publications that could support research in areas including
+            the arts and creative industries, science and the humanities, sport,
+            law, education, health, social care and medicine. For more
+            information on the research interests of the university please see
+            the university’s website.
+          </p>
+          <p>
+            For further information and to find out more about the donation
+            options available to you, please get in touch.
+          </p>
+        </article>
+        <div class="parcel-container">
+          <button class="donate">Donate</button>
+          <img
+            src="./parcel-img.webp"
+            alt="brown parcel box"
+            class="parcel-img"
+          />
+        </div>
+      </section>
     </main>
     <script src="../script.js"></script>
   </body>

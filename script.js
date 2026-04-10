@@ -395,3 +395,170 @@ if (returnToLandingDestinationButton) {
     });
   });
 }
+
+/* ========================== */
+/* WHITEBOARD WRITING SYSTEM  */
+/* ========================== */
+
+const whiteboardTextBox = document.getElementById("whiteboardTextBox");
+
+let whiteboardLines = [];
+let whiteboardLineIndex = 0;
+let whiteboardTypingTimeout = null;
+let whiteboardAutoScroll = true;
+
+if (whiteboardTextBox) {
+  whiteboardLines = Array.from(whiteboardTextBox.querySelectorAll("p")).map(
+    (p) => p.textContent,
+  );
+
+  whiteboardTextBox.innerHTML = "";
+
+  whiteboardTextBox.addEventListener("scroll", () => {
+    const distanceFromBottom =
+      whiteboardTextBox.scrollHeight -
+      whiteboardTextBox.scrollTop -
+      whiteboardTextBox.clientHeight;
+
+    whiteboardAutoScroll = distanceFromBottom < 30;
+  });
+}
+
+function clearWhiteboardTypingTimeout() {
+  if (whiteboardTypingTimeout) {
+    clearTimeout(whiteboardTypingTimeout);
+    whiteboardTypingTimeout = null;
+  }
+}
+
+function whiteboardScrollToBottom(force = false) {
+  if (!whiteboardTextBox) return;
+
+  if (force || whiteboardAutoScroll) {
+    whiteboardTextBox.scrollTop = whiteboardTextBox.scrollHeight;
+  }
+}
+
+function typeWhiteboardLine(text, element, callback) {
+  let i = 0;
+
+  function typeChar() {
+    if (i < text.length) {
+      element.textContent += text.charAt(i);
+      i++;
+
+      whiteboardScrollToBottom();
+
+      const char = text.charAt(i - 1);
+      const nextDelay = [".", ",", "!", "?", ":"].includes(char) ? 110 : 45;
+
+      whiteboardTypingTimeout = setTimeout(typeChar, nextDelay);
+    } else {
+      whiteboardTypingTimeout = setTimeout(callback, 180);
+    }
+  }
+
+  typeChar();
+}
+
+function startWhiteboardTyping() {
+  if (!whiteboardTextBox) return;
+
+  if (whiteboardLineIndex < whiteboardLines.length) {
+    const p = document.createElement("p");
+    whiteboardTextBox.appendChild(p);
+
+    whiteboardScrollToBottom();
+
+    typeWhiteboardLine(whiteboardLines[whiteboardLineIndex], p, () => {
+      whiteboardLineIndex++;
+      startWhiteboardTyping();
+    });
+  }
+}
+
+function resetWhiteboardTyping() {
+  clearWhiteboardTypingTimeout();
+
+  if (whiteboardTextBox) {
+    whiteboardTextBox.innerHTML = "";
+    whiteboardTextBox.scrollTop = 0;
+  }
+
+  whiteboardLineIndex = 0;
+  whiteboardAutoScroll = true;
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  startWhiteboardTyping();
+});
+
+/* ======================= */
+/* PARCEL CONFETTI BURST   */
+/* ======================= */
+
+const parcelImage = document.querySelector(".parcel-img");
+const donateButton = document.querySelector(".donate");
+
+if (parcelImage) {
+  parcelImage.addEventListener("click", burstConfettiFromParcel);
+}
+
+if (donateButton) {
+  donateButton.addEventListener("click", burstConfettiFromParcel);
+}
+
+function burstConfettiFromParcel() {
+  const container = document.querySelector(".parcel-container");
+  const parcelImage = document.querySelector(".parcel-img");
+
+  if (!container || !parcelImage) return;
+
+  const containerRect = container.getBoundingClientRect();
+  const parcelRect = parcelImage.getBoundingClientRect();
+
+  const originX = parcelRect.left - containerRect.left + parcelRect.width / 2;
+  const originY = parcelRect.top - containerRect.top + parcelRect.height / 2;
+
+  const colours = [
+    "#ff4d6d",
+    "#ffd166",
+    "#06d6a0",
+    "#118ab2",
+    "#8338ec",
+    "#ffffff",
+  ];
+
+  const totalPieces = 36;
+
+  for (let i = 0; i < totalPieces; i++) {
+    const piece = document.createElement("span");
+    piece.classList.add("confetti-piece");
+
+    const angle = Math.random() * Math.PI * 2;
+    const distance = 80 + Math.random() * 140;
+    const x = Math.cos(angle) * distance;
+    const y = Math.sin(angle) * distance + 40;
+    const rotate = `${Math.random() * 720 - 360}deg`;
+
+    piece.style.left = `${originX}px`;
+    piece.style.top = `${originY}px`;
+    piece.style.backgroundColor =
+      colours[Math.floor(Math.random() * colours.length)];
+    piece.style.setProperty("--confetti-x", `${x}px`);
+    piece.style.setProperty("--confetti-y", `${y}px`);
+    piece.style.setProperty("--confetti-rotate", rotate);
+
+    if (Math.random() > 0.5) {
+      piece.style.width = "8px";
+      piece.style.height = "8px";
+      piece.style.borderRadius = "50%";
+    }
+
+    container.appendChild(piece);
+
+    piece.addEventListener("animationend", () => {
+      piece.remove();
+    });
+  }
+}
