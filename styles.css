@@ -1758,12 +1758,10 @@ model-viewer::part(default-ar-button) {
 
 .clock {
   position: absolute;
-
-  /* move these values until it sits in the right place on the image */
   top: 6.5%;
   left: 65%;
-  rotate: -3.3deg;
-  z-index: 0;
+  rotate: -2.6deg;
+  z-index: 3;
   padding: 12px 20px;
   width: 40px;
   text-align: center;
@@ -1775,6 +1773,98 @@ model-viewer::part(default-ar-button) {
     0 0 4px rgba(152, 152, 152, 0.7),
     0 0 10px rgba(65, 64, 63, 0.35);
   /* transform: skew(-1deg) rotate(-1.5deg); */
+}
+
+/*==============================================*/
+/* TV & RADIO - CLOCK POSITIONING MEDIA QUERIES */
+/*==============================================*/
+
+@media (max-width: 1300px) {
+  .clock {
+    top: 6%;
+    left: 65.5%;
+  }
+}
+
+@media (max-width: 1225px) {
+  .clock {
+    left: 66.5%;
+  }
+}
+
+@media (max-width: 1150px) {
+  .clock {
+    left: 67.5%;
+  }
+}
+
+@media (max-width: 1085px) {
+  .clock {
+    left: 69.5%;
+    rotate: (3deg);
+  }
+}
+
+@media (max-width: 995px) {
+  .clock {
+    left: 71.5%;
+  }
+}
+
+@media (max-width: 890px) {
+  .clock {
+    left: 73.5%;
+  }
+}
+
+@media (max-width: 805px) {
+  .clock {
+    left: 74.5%;
+  }
+}
+
+@media (max-width: 765px) {
+  .clock {
+    top: 6.5%;
+    left: 77.5%;
+    font-size: 1.25rem;
+    rotate: -2deg;
+  }
+}
+
+@media (max-width: 705px) {
+  .clock {
+    left: 79.5%;
+  }
+}
+
+@media (max-width: 650px) {
+  .clock {
+    left: 80.5%;
+  }
+}
+
+@media (max-width: 630px) {
+  .clock {
+    top: 7%;
+    left: 82.5%;
+    font-size: 1rem;
+    rotate: -2.25deg;
+  }
+}
+
+@media (max-width: 590px) {
+  .clock {
+    font-size: 0.8rem;
+    left: 84%;
+    rotate: -1.75deg;
+  }
+}
+
+@media (max-width: 500px) {
+  .clock {
+    display: none;
+  }
 }
 
 /* ========================= */
