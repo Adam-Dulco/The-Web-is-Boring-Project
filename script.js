@@ -562,3 +562,175 @@ function burstConfettiFromParcel() {
     });
   }
 }
+
+/* ================================== */
+/* ABOUT PAGE HORIZONTAL IMAGE MOTION */
+/* ================================== */
+
+// window.addEventListener("DOMContentLoaded", () => {
+//   if (!document.body.classList.contains("about-horizontal")) return;
+
+//   const stage = document.querySelector(".about-horizontal-stage");
+//   const track = document.getElementById("aboutHorizontalTrack");
+//   if (!stage || !track) return;
+
+//   let currentX = 0;
+//   let targetX = 0;
+//   let maxScroll = 0;
+//   let ticking = false;
+
+//   function updateBounds() {
+//     const stageWidth = stage.clientWidth;
+//     const trackWidth = track.scrollWidth;
+//     maxScroll = Math.max(0, trackWidth - stageWidth);
+
+//     targetX = Math.max(0, Math.min(targetX, maxScroll));
+//     currentX = Math.max(0, Math.min(currentX, maxScroll));
+//     track.style.transform = `translate3d(${-currentX}px, 0, 0)`;
+//   }
+
+//   function animate() {
+//     currentX += (targetX - currentX) * 0.12;
+
+//     if (Math.abs(targetX - currentX) < 0.2) {
+//       currentX = targetX;
+//     }
+
+//     track.style.transform = `translate3d(${-currentX}px, 0, 0)`;
+
+//     if (Math.abs(targetX - currentX) > 0.2) {
+//       requestAnimationFrame(animate);
+//     } else {
+//       ticking = false;
+//     }
+//   }
+
+//   function startAnimation() {
+//     if (!ticking) {
+//       ticking = true;
+//       requestAnimationFrame(animate);
+//     }
+//   }
+
+//   updateBounds();
+//   window.addEventListener("resize", updateBounds);
+
+//   window.addEventListener(
+//     "wheel",
+//     (event) => {
+//       event.preventDefault();
+//       targetX += event.deltaY;
+//       targetX = Math.max(0, Math.min(targetX, maxScroll));
+//       startAnimation();
+//     },
+//     { passive: false },
+//   );
+// });
+
+/* LATEST VERSION (WITH SPIN BUTTON) */
+
+/* ================================== */
+/* ABOUT PAGE HORIZONTAL IMAGE MOTION */
+/* ================================== */
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (!document.body.classList.contains("about-horizontal")) return;
+
+  const stage = document.querySelector(".about-horizontal-stage");
+  const track = document.getElementById("aboutHorizontalTrack");
+  const spinBtn = document.getElementById("spinBtn");
+  if (!stage || !track) return;
+
+  /* duplicate panels once for seamless looping */
+  const panels = Array.from(track.children);
+  panels.forEach((panel) => {
+    const clone = panel.cloneNode(true);
+    track.appendChild(clone);
+  });
+
+  let currentX = 0;
+  let targetX = 0;
+  let loopPoint = 0;
+  let ticking = false;
+
+  let isSpinning = false;
+  let spinTimeout = null;
+  const spinSpeed = 500; // increase for faster spin
+
+  function updateBounds() {
+    const trackWidth = track.scrollWidth;
+    loopPoint = trackWidth / 2;
+
+    track.style.transform = `translate3d(${-currentX}px, 0, 0)`;
+  }
+
+  function wrapLoop() {
+    if (currentX >= loopPoint) {
+      currentX -= loopPoint;
+      targetX -= loopPoint;
+    }
+
+    if (currentX < 0) {
+      currentX += loopPoint;
+      targetX += loopPoint;
+    }
+  }
+
+  function animate() {
+    /* force fast spin while active */
+    if (isSpinning) {
+      targetX += spinSpeed;
+    }
+
+    currentX += (targetX - currentX) * 0.12;
+
+    wrapLoop();
+
+    track.style.transform = `translate3d(${-currentX}px, 0, 0)`;
+
+    const stillEasing = Math.abs(targetX - currentX) > 0.2;
+    const stillSpinning = isSpinning;
+
+    if (stillEasing || stillSpinning) {
+      requestAnimationFrame(animate);
+    } else {
+      ticking = false;
+    }
+  }
+
+  function startAnimation() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(animate);
+    }
+  }
+
+  updateBounds();
+  window.addEventListener("resize", updateBounds);
+
+  window.addEventListener(
+    "wheel",
+    (event) => {
+      event.preventDefault();
+      targetX += event.deltaY;
+      startAnimation();
+    },
+    { passive: false },
+  );
+
+  if (spinBtn) {
+    spinBtn.addEventListener("click", () => {
+      if (spinTimeout) {
+        clearTimeout(spinTimeout);
+      }
+
+      isSpinning = true;
+      startAnimation();
+
+      spinTimeout = setTimeout(() => {
+        isSpinning = false;
+        spinTimeout = null;
+      }, 1000);
+    });
+  }
+});

@@ -446,6 +446,12 @@ h2 {
   --neon-color-3: #6a00ff;
 }
 
+.neon-purple {
+  --neon-color-1: #f3e8ff;
+  --neon-color-2: #a100ff;
+  --neon-color-3: #3a0066;
+}
+
 /* 🟢 SCI-FI GREEN (plasma style) */
 .neon-green {
   --neon-color-1: #e8fff6;
@@ -1760,7 +1766,7 @@ model-viewer::part(default-ar-button) {
   position: absolute;
   top: 6.5%;
   left: 65%;
-  rotate: -2.6deg;
+  rotate: -2.57deg;
   z-index: 3;
   padding: 12px 20px;
   width: 40px;
@@ -1856,12 +1862,12 @@ model-viewer::part(default-ar-button) {
 @media (max-width: 590px) {
   .clock {
     font-size: 0.8rem;
-    left: 84%;
+    left: 85%;
     rotate: -1.75deg;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 480px) {
   .clock {
     display: none;
   }
@@ -2829,26 +2835,228 @@ body.is-transitioning .whiteboard-text-box {
   visibility: hidden;
 }
 
-/* ---------- COME BACK TO THIS LATER FOR ABOUT PAGE ------------ */
-
-.about-img-container {
-  position: relative;
-  width: 80%;
-  margin-left: 9%;
-  margin-right: 80%;
-  margin-top: 40px;
-  overflow: hidden;
-  height: 100vh;
-}
-
-.edge-hill-campus-about-page-img {
-  display: block;
-  width: 100%;
-  height: 100%; /* ✅ must be 100% */
-  object-fit: cover; /* now it works properly */
-  position: relative;
-  z-index: 1;
-  margin-top: -90px;
+/* ABOUT PAGE */
+body.is-transitioning .about-horizontal-stage,
+body.is-transitioning .about-horizontal-track,
+body.is-transitioning .about-panel,
+body.is-transitioning .about-panel img,
+body.is-transitioning .about-panel-text,
+body.is-transitioning .spin-btn {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /*-----------------------------------------------------------------*/
+
+/* ============================ */
+/* ABOUT PAGE HORIZONTAL IMAGES */
+/* ============================ */
+
+/* ABOUT PAGE - BACKGROUND COLOUR */
+.about-horizontal {
+  background: #000;
+  background: linear-gradient(
+    270deg,
+    var(--neon-color-1),
+    var(--neon-color-2),
+    var(--neon-color-3),
+    var(--neon-color-2),
+    var(--neon-color-1)
+  );
+  background-size: 400% 400%;
+  animation: neonBackgroundPulse 10s ease-in-out infinite;
+}
+
+@keyframes neonBackgroundPulse {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.about-horizontal-stage {
+  position: absolute;
+  inset: 0;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.about-horizontal-track {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  height: 100vh;
+  width: max-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.about-panel {
+  position: relative;
+  flex: 0 0 auto;
+  width: 80vw;
+  min-width: 80vw;
+  height: 100vh;
+  overflow: hidden;
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 6%,
+    rgba(0, 0, 0, 0.6) 12%,
+    black 20%,
+    black 80%,
+    rgba(0, 0, 0, 0.6) 88%,
+    rgba(0, 0, 0, 0.2) 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 6%,
+    rgba(0, 0, 0, 0.6) 12%,
+    black 20%,
+    black 80%,
+    rgba(0, 0, 0, 0.6) 88%,
+    rgba(0, 0, 0, 0.2) 94%,
+    transparent 100%
+  );
+
+  /* Optimises browser consistency */
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.about-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.about-panel-text {
+  position: absolute;
+  top: 8.5%;
+  left: 15%;
+  max-width: 30%;
+  padding: 1rem 1.25rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(4px);
+  z-index: 3;
+}
+
+.about-panel-text h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  text-align: left;
+  line-height: 1.1;
+}
+
+.about-panel-text p {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.2vw, 1.2rem);
+  line-height: 1.5;
+}
+
+@media (max-width: 840px) {
+  .about-panel {
+    width: 88vw;
+    min-width: 88vw;
+  }
+
+  .about-panel-text {
+    max-width: 52%;
+    top: 7%;
+    left: 6%;
+  }
+}
+
+@media (max-width: 560px) {
+  .about-horizontal-stage,
+  .about-horizontal-track,
+  .about-panel {
+    height: 100dvh;
+  }
+
+  .about-panel {
+    width: 100vw;
+    min-width: 100vw;
+  }
+
+  .about-panel-text {
+    max-width: 78%;
+    top: 10%;
+    left: 8%;
+  }
+
+  .about-panel-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-panel-text p {
+    font-size: 0.9rem;
+  }
+}
+/* -------------- SPIN BUTTON ------------------ */
+
+.spin-btn {
+  position: fixed;
+  left: 45%;
+  top: 72%;
+  z-index: 7;
+  transform: translate(-50%, -50%);
+  padding: 0.75rem 1.2rem;
+  font-family: monospace, serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  background: linear-gradient(
+    to top,
+    rgba(161, 0, 255, 0.35),
+    rgba(0, 0, 0, 0.7)
+  );
+  box-shadow:
+    0 0 10px rgba(161, 0, 255, 0.7),
+    0 0 22px rgba(161, 0, 255, 0.35);
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+
+  cursor: pointer;
+  pointer-events: auto;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.spin-btn:hover,
+.spin-btn:focus-visible {
+  background: rgba(161, 0, 255, 0.28);
+  box-shadow:
+    0 0 14px rgba(180, 70, 255, 0.9),
+    0 0 30px rgba(180, 70, 255, 0.55);
+}
+
+@media (max-width: 560px) {
+  .spin-btn {
+    left: 50%;
+    top: 72%;
+  }
+}
