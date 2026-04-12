@@ -567,83 +567,17 @@ function burstConfettiFromParcel() {
 /* ABOUT PAGE HORIZONTAL IMAGE MOTION */
 /* ================================== */
 
-// window.addEventListener("DOMContentLoaded", () => {
-//   if (!document.body.classList.contains("about-horizontal")) return;
-
-//   const stage = document.querySelector(".about-horizontal-stage");
-//   const track = document.getElementById("aboutHorizontalTrack");
-//   if (!stage || !track) return;
-
-//   let currentX = 0;
-//   let targetX = 0;
-//   let maxScroll = 0;
-//   let ticking = false;
-
-//   function updateBounds() {
-//     const stageWidth = stage.clientWidth;
-//     const trackWidth = track.scrollWidth;
-//     maxScroll = Math.max(0, trackWidth - stageWidth);
-
-//     targetX = Math.max(0, Math.min(targetX, maxScroll));
-//     currentX = Math.max(0, Math.min(currentX, maxScroll));
-//     track.style.transform = `translate3d(${-currentX}px, 0, 0)`;
-//   }
-
-//   function animate() {
-//     currentX += (targetX - currentX) * 0.12;
-
-//     if (Math.abs(targetX - currentX) < 0.2) {
-//       currentX = targetX;
-//     }
-
-//     track.style.transform = `translate3d(${-currentX}px, 0, 0)`;
-
-//     if (Math.abs(targetX - currentX) > 0.2) {
-//       requestAnimationFrame(animate);
-//     } else {
-//       ticking = false;
-//     }
-//   }
-
-//   function startAnimation() {
-//     if (!ticking) {
-//       ticking = true;
-//       requestAnimationFrame(animate);
-//     }
-//   }
-
-//   updateBounds();
-//   window.addEventListener("resize", updateBounds);
-
-//   window.addEventListener(
-//     "wheel",
-//     (event) => {
-//       event.preventDefault();
-//       targetX += event.deltaY;
-//       targetX = Math.max(0, Math.min(targetX, maxScroll));
-//       startAnimation();
-//     },
-//     { passive: false },
-//   );
-// });
-
-/* LATEST VERSION (WITH SPIN BUTTON) */
-
-/* ================================== */
-/* ABOUT PAGE HORIZONTAL IMAGE MOTION */
-/* ================================== */
-
 window.addEventListener("DOMContentLoaded", () => {
   if (!document.body.classList.contains("about-horizontal")) return;
 
-  const stage = document.querySelector(".about-horizontal-stage");
+  const stage = document.querySelector(".about-horizontal-container");
   const track = document.getElementById("aboutHorizontalTrack");
   const spinBtn = document.getElementById("spinBtn");
   if (!stage || !track) return;
 
   /* duplicate panels once for seamless looping */
-  const panels = Array.from(track.children);
-  panels.forEach((panel) => {
+  const originalPanels = Array.from(track.children);
+  originalPanels.forEach((panel) => {
     const clone = panel.cloneNode(true);
     track.appendChild(clone);
   });
@@ -655,7 +589,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
   let isSpinning = false;
   let spinTimeout = null;
-  const spinSpeed = 500; // increase for faster spin
+
+  const spinSpeed = 700; // your fast spin speed
+  const spinDuration = 3000; // how long it spins before snapping
+
+  let currentPanelIndex = 0;
 
   function updateBounds() {
     const trackWidth = track.scrollWidth;
@@ -676,8 +614,49 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function getNearestPanelIndex() {
+    let nearestIndex = 0;
+    let nearestDistance = Infinity;
+
+    originalPanels.forEach((panel, index) => {
+      const distance = Math.abs(panel.offsetLeft - currentX);
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestIndex = index;
+      }
+    });
+
+    return nearestIndex;
+  }
+
+  function getRandomPanelIndexExcludingCurrent() {
+    if (originalPanels.length <= 1) return 0;
+
+    let newIndex;
+    do {
+      newIndex = Math.floor(Math.random() * originalPanels.length);
+    } while (newIndex === currentPanelIndex);
+
+    return newIndex;
+  }
+
+  /* FORWARD-ONLY SNAP */
+  function getSnapXForPanel(index) {
+    const panel = originalPanels[index];
+    const panelX = panel.offsetLeft;
+
+    const minimumForwardTravel = 300; // optional polish
+
+    let snapX = panelX;
+
+    while (snapX <= currentX + minimumForwardTravel) {
+      snapX += loopPoint;
+    }
+
+    return snapX;
+  }
+
   function animate() {
-    /* force fast spin while active */
     if (isSpinning) {
       targetX += spinSpeed;
     }
@@ -720,17 +699,29 @@ window.addEventListener("DOMContentLoaded", () => {
 
   if (spinBtn) {
     spinBtn.addEventListener("click", () => {
+      if (isSpinning) return;
+
       if (spinTimeout) {
         clearTimeout(spinTimeout);
       }
+
+      currentPanelIndex = getNearestPanelIndex();
 
       isSpinning = true;
       startAnimation();
 
       spinTimeout = setTimeout(() => {
         isSpinning = false;
+
+        const nextPanelIndex = getRandomPanelIndexExcludingCurrent();
+        const snapX = getSnapXForPanel(nextPanelIndex);
+
+        targetX = snapX;
+        currentPanelIndex = nextPanelIndex;
+
         spinTimeout = null;
-      }, 1000);
+        startAnimation();
+      }, spinDuration);
     });
   }
 });
