@@ -339,45 +339,45 @@ window.addEventListener("DOMContentLoaded", updateMediaTextReveal);
 /*   PAGE VORTEX NAV TRANSITION   */
 /* ============================== */
 
-function setupPageLinkTransitions() {
-  const links = document.querySelectorAll(".cockpit-nav a");
-  const vortex = document.querySelector(
-    ".center-vortex-container model-viewer",
-  );
+// function setupPageLinkTransitions() {
+//   const links = document.querySelectorAll(".cockpit-nav a");
+//   const vortex = document.querySelector(
+//     ".center-vortex-container model-viewer",
+//   );
 
-  links.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const href = link.getAttribute("href");
+//   links.forEach((link) => {
+//     link.addEventListener("click", (event) => {
+//       const href = link.getAttribute("href");
 
-      if (
-        !href ||
-        href.startsWith("#") ||
-        link.target === "_blank" ||
-        event.metaKey ||
-        event.ctrlKey ||
-        event.shiftKey ||
-        event.altKey
-      ) {
-        return;
-      }
+//       if (
+//         !href ||
+//         href.startsWith("#") ||
+//         link.target === "_blank" ||
+//         event.metaKey ||
+//         event.ctrlKey ||
+//         event.shiftKey ||
+//         event.altKey
+//       ) {
+//         return;
+//       }
 
-      event.preventDefault();
+//       event.preventDefault();
 
-      document.body.classList.add("is-transitioning");
-      document.body.style.overflow = "hidden";
+//       document.body.classList.add("is-transitioning");
+//       document.body.style.overflow = "hidden";
 
-      if (vortex) {
-        vortex.setAttribute("rotation-per-second", "-3000deg");
-      }
+//       if (vortex) {
+//         vortex.setAttribute("rotation-per-second", "-3000deg");
+//       }
 
-      setTimeout(() => {
-        window.location.href = link.href;
-      }, 700);
-    });
-  });
-}
+//       setTimeout(() => {
+//         window.location.href = link.href;
+//       }, 700);
+//     });
+//   });
+// }
 
-window.addEventListener("DOMContentLoaded", setupPageLinkTransitions);
+// window.addEventListener("DOMContentLoaded", setupPageLinkTransitions);
 
 /* ================================ */
 /*   RETURN TO TOP OF PAGE BUTTON   */
@@ -591,7 +591,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let spinTimeout = null;
 
   const spinSpeed = 700; // your fast spin speed
-  const spinDuration = 3000; // how long it spins before snapping
+  const spinDuration = 2500; // how long it spins before snapping
 
   let currentPanelIndex = 0;
 
@@ -724,4 +724,292 @@ window.addEventListener("DOMContentLoaded", () => {
       }, spinDuration);
     });
   }
+});
+
+/* ============================== */
+/*   PAGE VORTEX NAV TRANSITION   */
+/* ============================== */
+
+function setupPageLinkTransitions() {
+  const links = document.querySelectorAll("a[href]");
+  const vortex = document.querySelector(
+    ".center-vortex-container model-viewer",
+  );
+
+  links.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href");
+
+      if (
+        !href ||
+        href.startsWith("#") ||
+        href.startsWith("mailto:") ||
+        href.startsWith("tel:") ||
+        link.target === "_blank" ||
+        link.hasAttribute("download") ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const url = new URL(href, window.location.href);
+
+      if (url.origin !== window.location.origin) {
+        return;
+      }
+
+      event.preventDefault();
+
+      document.body.classList.add("is-transitioning");
+      document.body.style.overflow = "hidden";
+
+      if (vortex) {
+        vortex.setAttribute("rotation-per-second", "-3000deg");
+      }
+
+      setTimeout(() => {
+        window.location.href = url.href;
+      }, 700);
+    });
+  });
+}
+
+window.addEventListener("DOMContentLoaded", setupPageLinkTransitions);
+
+/* ============================ */
+/*   HELP PAGE - PAPER POPUPS   */
+/* ============================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("helpPaperModal");
+  const backdrop = document.getElementById("helpPaperBackdrop");
+  const closeBtn = document.getElementById("helpPaperClose");
+  const titleEl = document.getElementById("helpPaperTitle");
+  const bodyEl = document.getElementById("helpPaperBody");
+  const triggers = document.querySelectorAll(".help-desk-scene .desk-text");
+
+  if (
+    !modal ||
+    !backdrop ||
+    !closeBtn ||
+    !titleEl ||
+    !bodyEl ||
+    !triggers.length
+  ) {
+    return;
+  }
+
+  let lastTrigger = null;
+
+  function openHelpPaperFromSource(sourceId, triggerEl) {
+    const source = document.getElementById(sourceId);
+    if (!source) return;
+
+    const heading = source.querySelector("h1, h2, h3, h4, h5, h6");
+    titleEl.textContent = heading ? heading.textContent : "Help";
+
+    bodyEl.innerHTML = source.innerHTML;
+
+    const duplicateHeading = bodyEl.querySelector("h1, h2, h3, h4, h5, h6");
+    if (duplicateHeading) {
+      duplicateHeading.remove();
+    }
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+    lastTrigger = triggerEl;
+    closeBtn.focus();
+  }
+
+  function closeHelpPaper() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+
+    if (lastTrigger) {
+      lastTrigger.focus();
+    }
+  }
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      const sourceId = trigger.dataset.helpTarget;
+      openHelpPaperFromSource(sourceId, trigger);
+    });
+  });
+
+  closeBtn.addEventListener("click", closeHelpPaper);
+  backdrop.addEventListener("click", closeHelpPaper);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && modal.classList.contains("is-open")) {
+      closeHelpPaper();
+    }
+  });
+});
+
+/* =================================*/
+/*  HELP PAGE - FIREPLACE + EMBERS  */
+/* =================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+  const scene = document.querySelector(".help-desk-scene");
+  const fire = document.getElementById("fireplaceFire");
+  const light = document.querySelector(".fireplace-light");
+  const canvas = document.getElementById("fireplaceEmbers");
+
+  if (!scene || !fire || !light || !canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let embers = [];
+  let rafId = null;
+  let lastTime = 0;
+
+  function resizeCanvas() {
+    const rect = scene.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width = Math.round(rect.width * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+    canvas.style.width = `${rect.width}px`;
+    canvas.style.height = `${rect.height}px`;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function getFireOrigin() {
+    const sceneRect = scene.getBoundingClientRect();
+    const fireRect = fire.getBoundingClientRect();
+
+    return {
+      x: fireRect.left - sceneRect.left + fireRect.width / 2,
+      y: fireRect.top - sceneRect.top + fireRect.height * 0.9,
+      width: fireRect.width,
+      height: fireRect.height,
+    };
+  }
+
+  function rand(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function createEmber() {
+    const origin = getFireOrigin();
+
+    return {
+      x: origin.x + rand(-origin.width * 0.18, origin.width * 0.18),
+      y: origin.y + rand(-4, 4),
+      vx: rand(-0.08, 0.08),
+      vy: rand(-0.8, -0.35),
+      size: rand(1.5, 3.8),
+      alpha: rand(0.45, 0.95),
+      life: rand(45, 95),
+      age: 0,
+      drift: rand(0.2, 1.1),
+      glow: rand(4, 10),
+    };
+  }
+
+  function spawnEmbers() {
+    const origin = getFireOrigin();
+    const count = Math.random() < 0.35 ? 2 : 1;
+
+    for (let i = 0; i < count; i++) {
+      embers.push(createEmber());
+    }
+
+    /* EMBER HEIGHT */
+    embers = embers.filter(
+      (ember) =>
+        ember.age < ember.life && ember.y > origin.y - origin.height * 7.2,
+    );
+  }
+
+  function updateEmbers() {
+    embers.forEach((ember) => {
+      ember.age += 1;
+      ember.x += ember.vx + Math.sin(ember.age * 0.08) * ember.drift * 0.08;
+      ember.y += ember.vy;
+      ember.alpha *= 0.988;
+      ember.size *= 0.996;
+    });
+  }
+
+  function drawEmbers() {
+    const rect = scene.getBoundingClientRect();
+    ctx.clearRect(0, 0, rect.width, rect.height);
+
+    embers.forEach((ember) => {
+      const gradient = ctx.createRadialGradient(
+        ember.x,
+        ember.y,
+        0,
+        ember.x,
+        ember.y,
+        ember.glow,
+      );
+
+      gradient.addColorStop(0, `rgba(255,255,220,${ember.alpha})`);
+      gradient.addColorStop(0.25, `rgba(255,210,110,${ember.alpha * 0.95})`);
+      gradient.addColorStop(0.55, `rgba(255,120,40,${ember.alpha * 0.55})`);
+      gradient.addColorStop(1, "rgba(255,80,20,0)");
+
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(ember.x, ember.y, ember.glow, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = `rgba(255,220,140,${ember.alpha})`;
+      ctx.beginPath();
+      ctx.arc(ember.x, ember.y, ember.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  function updateFireVisual(time) {
+    const t = time * 0.001;
+
+    // VERY tiny distortion (almost imperceptible)
+    const scaleX = 1 + Math.sin(t * 6) * 0.01;
+    const scaleY = 1 + Math.sin(t * 8) * 0.015;
+
+    fire.style.transform = `translate(-50%, 0) scale(${scaleX}, ${scaleY})`;
+
+    // soft light shimmer (no pulsing)
+    const lightOpacity = 0.66 + Math.sin(t * 5) * 0.03;
+    light.style.opacity = lightOpacity;
+  }
+
+  function animate(time) {
+    if (!lastTime) lastTime = time;
+    const delta = time - lastTime;
+    lastTime = time;
+
+    updateFireVisual(time);
+
+    /* EMBER QUANTITY */
+    if (delta > 0) {
+      if (Math.random() < 0.02) {
+        spawnEmbers();
+      }
+      updateEmbers();
+      drawEmbers();
+    }
+
+    rafId = requestAnimationFrame(animate);
+  }
+
+  function startFireplace() {
+    resizeCanvas();
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(animate);
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+  startFireplace();
 });

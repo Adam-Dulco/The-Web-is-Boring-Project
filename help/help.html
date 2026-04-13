@@ -67,6 +67,33 @@
       </nav>
     </header>
 
+    <div class="help-paper-modal" id="helpPaperModal" aria-hidden="true">
+      <div class="help-paper-backdrop" id="helpPaperBackdrop"></div>
+
+      <section
+        class="help-paper-sheet"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="helpPaperTitle"
+      >
+        <div class="help-paper-fold"></div>
+
+        <button
+          class="help-paper-close"
+          id="helpPaperClose"
+          type="button"
+          aria-label="Close help popup"
+        >
+          ×
+        </button>
+
+        <div class="help-paper-content">
+          <h2 id="helpPaperTitle" class="help-paper-title"></h2>
+          <div id="helpPaperBody" class="help-paper-body"></div>
+        </div>
+      </section>
+    </div>
+
     <main class="page-shell">
       <!-- MAIN ENTRANCE DOORS -->
       <section class="door-overlay" id="doorOverlay">
@@ -158,23 +185,148 @@
       <!------------------------------------- CONTENT PAGE ----------------------------->
       <!-- SCROLLABLE CONTENT -->
 
-      <!-- <img
-        src="./help-desk-room-img.png"
-        alt="Grand room with large wooden desk"
-        class="help-desk-room-img"
-      /> -->
+      <!--FOR PLAQUES AGAINST THE DESK-->
+      <div class="help-desk-scene">
+        <picture>
+          <source
+            srcset="./help-desk-img-mobile.png"
+            media="(max-width: 560px)"
+          />
+          <img
+            src="./help-desk-img-new.png"
+            alt="Grand room with large wooden desk"
+            class="help-desk-room-img"
+          />
+        </picture>
 
-      <picture>
-        <source
-          srcset="./help-desk-room-img-mobile.png"
-          media="(max-width: 560px)"
-        />
-        <img
-          src="./help-desk-room-img-2.png"
-          alt="Grand room with large wooden desk"
-          class="help-desk-room-img"
-        />
-      </picture>
+        <div class="fireplace-light"></div>
+        <div class="fireplace-fire" id="fireplaceFire"></div>
+        <canvas class="fireplace-embers" id="fireplaceEmbers"></canvas>
+
+        <button
+          class="desk-text desk-drawer-text-1"
+          type="button"
+          aria-haspopup="dialog"
+          aria-controls="helpPaperModal"
+          data-help-target="help-requesting-items-content"
+        >
+          Requesting items to view
+        </button>
+
+        <button
+          class="desk-text desk-drawer-text-2"
+          type="button"
+          aria-haspopup="dialog"
+          aria-controls="helpPaperModal"
+          data-help-target="help-levels-description-content"
+        >
+          Levels of Description
+        </button>
+      </div>
+
+      <div class="visually-hidden">
+        <section id="help-requesting-items-content">
+          <h3>Requesting items to view</h3>
+
+          <p>
+            To request archive items, please make a note of the full reference
+            code shown in the catalogue entry.
+          </p>
+
+          <p>
+            You should then contact the archive service in advance so that
+            material can be prepared for your visit.
+          </p>
+
+          <p>
+            Some items may require additional notice or may only be produced
+            under supervised conditions.
+          </p>
+        </section>
+
+        <section id="help-levels-description-content">
+          <h3>Levels of Description</h3>
+
+          <p>
+            Our archive catalogues use different levels of description to
+            structure a collection and place records in context. This helps show
+            where records came from, how they relate to one another, and how
+            they were originally organised.
+          </p>
+
+          <p>
+            This forms a hierarchy, where most levels sit beneath a parent level
+            above them.
+          </p>
+
+          <dl>
+            <dt>Collection</dt>
+            <dd>
+              A collection consists of records created, received and used by a
+              particular organisation, family or individual.
+            </dd>
+
+            <dt>Section</dt>
+            <dd>
+              A subdivision of a collection. Sections may reflect broad areas of
+              an institution, such as governance or alumni, or a specific
+              department.
+            </dd>
+
+            <dt>Series</dt>
+            <dd>
+              Records that share content or format, or that were originally kept
+              together and/or have a shared origin.
+            </dd>
+
+            <dt>Sub-series</dt>
+            <dd>
+              Records forming a clearly defined series within a broader series.
+            </dd>
+
+            <dt>Item</dt>
+            <dd>
+              A single unit, such as a file, a volume, a photograph or an
+              individual piece of paper.
+            </dd>
+
+            <dt>Piece</dt>
+            <dd>
+              In some instances, an item may be divided for descriptive purposes
+              into separately numbered pieces.
+            </dd>
+          </dl>
+        </section>
+      </div>
+
+      <div class="help-paper-modal" id="helpPaperModal" aria-hidden="true">
+        <div class="help-paper-backdrop" id="helpPaperBackdrop"></div>
+
+        <section
+          class="help-paper-sheet"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="helpPaperTitle"
+        >
+          <div class="help-paper-fold"></div>
+
+          <button
+            class="help-paper-close"
+            id="helpPaperClose"
+            type="button"
+            aria-label="Close help popup"
+          >
+            ×
+          </button>
+
+          <div class="help-paper-content">
+            <div class="help-paper-inner">
+              <h2 id="helpPaperTitle" class="help-paper-title"></h2>
+              <div id="helpPaperBody" class="help-paper-body"></div>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
     <script src="../script.js"></script>
   </body>

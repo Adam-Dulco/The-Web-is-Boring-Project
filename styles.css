@@ -3095,25 +3095,818 @@ body.is-transitioning .spin-btn {
   pointer-events: none !important;
 }
 
+/* HELP PAGE */
+body.is-transitioning .help-desk-scene,
+body.is-transitioning .help-desk-room-img,
+body.is-transitioning .desk-text {
+  visibility: hidden;
+}
+
 /* --------------------------------------------- */
 
 /* --------------- HELP PAGE - DESKTOP -------------- */
-.help-desk-room-img {
+
+.help-desk-scene {
+  position: relative;
   width: 81vw;
+}
+
+.help-desk-room-img {
+  display: block;
+  width: 100%;
   height: 90.5vh;
   object-fit: cover;
   object-position: center;
 }
 
-/* --------------- HELP PAGE - MOBILE -------------- */
-@media (max-width: 560px) {
-  .help-desk-room-img {
-    width: 100vw;
-    height: 100vh;
-    object-position: left;
+/* DESK TEXT - DESKTOP */
+
+.desk-text {
+  position: absolute;
+  z-index: 3;
+  margin: 0;
+  padding: 6px 16px;
+  font-family: "EB Garamond", serif;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: 0.06em;
+  font-variant: small-caps;
+  width: 130px;
+  color: #2b1d0b;
+
+  background: linear-gradient(
+    145deg,
+    #fff6cc 0%,
+    #f5d97a 15%,
+    #d4af37 35%,
+    #b8962e 55%,
+    #a67c00 75%,
+    #f5d97a 100%
+  );
+
+  border: 1px solid #8c6b1f;
+  border-radius: 3px;
+
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6),
+    0 -1px 1px rgba(0, 0, 0, 0.25);
+
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.35),
+    inset 0 0 6px rgba(255, 255, 255, 0.2),
+    0 2px 6px rgba(0, 0, 0, 0.35);
+
+  transform-origin: center;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.desk-text::before,
+.desk-text::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+
+  background: radial-gradient(circle at 30% 30%, #eee, #777 70%);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.6),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.6),
+    0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.desk-text::before {
+  left: 6px;
+}
+
+.desk-text::after {
+  right: 6px;
+}
+
+/* individually positioned */
+.desk-drawer-text-1 {
+  top: 62%;
+  left: 39%;
+  transform: translate(-50%, -50%) rotate(0deg) skewY(-7.5deg);
+}
+
+.desk-drawer-text-2 {
+  top: 72%;
+  left: 39%;
+  transform: translate(-50%, -50%) rotate(-1deg) skewY(-7.5deg);
+}
+
+/* HOVER STATES */
+.desk-drawer-text-1:hover {
+  transform: translate(-50%, -50%) rotate(-0deg) skewY(-7deg) scale(1.05);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+    0 4px 10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.desk-drawer-text-2:hover {
+  transform: translate(-50%, -50%) rotate(-1deg) skewY(-7.5deg) scale(1.05);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+    0 4px 10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+/*===============================================*/
+/* Desk Text Media Queries to Keep Text in Place */
+/*===============================================*/
+
+@media (max-width: 1280px) {
+  .desk-text {
+    font-size: 0.9rem;
+    width: 120px;
+  }
+
+  .desk-drawer-text-1 {
+    top: 61%;
+    left: 39%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 71%;
+    left: 39%;
   }
 }
 
-/* font-family: Cormorant Garamond
-   font-family: EB Garamond
-   */
+@media (max-width: 1225px) {
+  .desk-text {
+    font-size: 0.8rem;
+    width: 110px;
+  }
+
+  .desk-drawer-text-1 {
+    top: 60.5%;
+    left: 39.2%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 69.5%;
+    left: 39.2%;
+  }
+}
+
+/* 1150px */
+@media (max-width: 1150px) {
+  .desk-text {
+    padding: 6px 10px;
+    letter-spacing: 0em;
+    width: 100px;
+  }
+
+  .desk-drawer-text-1 {
+    top: 60%;
+    left: 39%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 68%;
+    left: 39%;
+  }
+}
+
+/* 1070px */
+@media (max-width: 1070px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 38.5%;
+  }
+}
+
+/* 1020px */
+@media (max-width: 1020px) {
+  .desk-text {
+    line-height: 1;
+  }
+
+  .desk-drawer-text-1 {
+    top: 59.5%;
+    left: 37.8%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 67.2%;
+    left: 37.8%;
+  }
+}
+
+/* 960px */
+@media (max-width: 960px) {
+  .desk-text {
+    padding: 6px 7px;
+  }
+
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 37%;
+  }
+}
+
+/* 890px */
+@media (max-width: 890px) {
+  .desk-text {
+    width: 90px;
+  }
+
+  .desk-drawer-text-1 {
+    left: 36%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 67.3%;
+    left: 36%;
+  }
+}
+
+/* 800px */
+@media (max-width: 800px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 34%;
+  }
+}
+
+/* 710px */
+@media (max-width: 710px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 32.5%;
+  }
+}
+
+/* 650px */
+@media (max-width: 650px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 31%;
+  }
+}
+
+/* 600px */
+@media (max-width: 600px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 29.5%;
+  }
+}
+
+/* --------------- HELP PAGE - MOBILE -------------- */
+/* 560px */
+@media (max-width: 560px) {
+  .help-desk-room-img {
+    width: 100%;
+    height: 100vh;
+    object-position: left;
+    transform: scale(1.4);
+  }
+
+  .desk-text {
+    font-size: 0.9rem;
+    width: 110px;
+    padding: 9px 16px;
+  }
+
+  .desk-drawer-text-1 {
+    top: 50%;
+    left: 34%;
+    transform: translate(-50%, -50%) rotate(-1deg) skewY(-7deg);
+  }
+
+  .desk-drawer-text-2 {
+    top: 59%;
+    left: 34%;
+    transform: translate(-50%, -50%) rotate(-1deg) skewY(-8deg);
+  }
+
+  .desk-drawer-text-1:hover {
+    transform: translate(-50%, -50%) rotate(-1deg) skewY(-7deg) scale(1.05);
+  }
+
+  .desk-drawer-text-2:hover {
+    transform: translate(-50%, -50%) rotate(-1deg) skewY(-8deg) scale(1.05);
+  }
+}
+
+/* 530px */
+@media (max-width: 530px) {
+  .desk-text {
+    font-size: 0.8rem;
+    width: 100px;
+    padding: 8px 8px;
+  }
+
+  .desk-drawer-text-1 {
+    left: 36%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 58%;
+    left: 36%;
+  }
+}
+
+/* 510px */
+@media (max-width: 510px) {
+  .desk-text {
+    padding: 8px 10px;
+  }
+
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 38.5%;
+  }
+}
+
+/* 480px */
+@media (max-width: 480px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 42%;
+  }
+}
+
+/* 460px */
+@media (max-width: 460px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 45%;
+  }
+}
+
+/* 435px */
+@media (max-width: 435px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 48%;
+  }
+}
+
+/* 415px */
+@media (max-width: 415px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 52%;
+  }
+}
+
+/* 395px */
+@media (max-width: 395px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 55%;
+  }
+}
+
+/* 375px */
+@media (max-width: 375px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 59%;
+  }
+}
+
+/* 360px */
+@media (max-width: 360px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 62%;
+  }
+}
+
+/* 345px */
+@media (max-width: 345px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 65%;
+  }
+}
+
+/* 330px */
+@media (max-width: 330px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 69%;
+  }
+}
+
+/* 320px */
+@media (max-width: 320px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 72%;
+  }
+}
+
+/* 305px */
+@media (max-width: 305px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 76%;
+  }
+}
+
+/* --------------- HELP PAGE - DESKTOP -------------- */
+
+/* POP-UP INFORMATION PAGE */
+/* ============================ */
+/* VISUALLY HIDDEN CONTENT      */
+/* ============================ */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  border: 0;
+  white-space: nowrap;
+}
+
+/* ============================ */
+/* HELP PAGE PAPER POPUP        */
+/* ============================ */
+
+.help-paper-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: none;
+}
+
+.help-paper-modal.is-open {
+  display: block;
+}
+
+.help-paper-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.help-paper-sheet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(760px, 78vw);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 3.4rem 2.4rem 2rem 2.4rem;
+
+  transform: translate(-50%, -50%) rotate(-1deg);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(250, 245, 232, 0.98),
+      rgba(232, 220, 191, 0.98)
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(110, 85, 40, 0.03) 0px,
+      rgba(110, 85, 40, 0.03) 1px,
+      transparent 1px,
+      transparent 34px
+    );
+
+  border: 1px solid #b79c67;
+  border-radius: 2px;
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.42),
+    inset 0 0 60px rgba(110, 80, 30, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+
+  color: #2f2418;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.help-paper-sheet::-webkit-scrollbar {
+  display: none;
+}
+
+.help-paper-content::before {
+  border: 1px solid rgba(120, 90, 45, 0.12);
+}
+
+.help-paper-fold {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.help-paper-fold::before,
+.help-paper-fold::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(120, 100, 60, 0.12),
+    transparent
+  );
+}
+
+.help-paper-fold::before {
+  top: 33%;
+}
+
+.help-paper-fold::after {
+  top: 66%;
+}
+
+.help-paper-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  z-index: 3;
+
+  width: 38px;
+  height: 38px;
+  border: 1px solid #8e6f3a;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #f1dfb0, #c79f46);
+  color: #3a2910;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.65),
+    0 2px 6px rgba(0, 0, 0, 0.22);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.help-paper-close:hover,
+.help-paper-close:focus-visible {
+  transform: scale(1.06);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.75),
+    0 4px 10px rgba(0, 0, 0, 0.28);
+}
+
+.help-paper-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  padding: 12px 0;
+}
+
+.help-paper-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 12px;
+  bottom: 0;
+  left: 12px;
+  border: 1px solid rgba(120, 90, 45, 0.16);
+  pointer-events: none;
+}
+
+.help-paper-content::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 28px;
+  width: 1px;
+  background: rgba(150, 40, 40, 0.35);
+  pointer-events: none;
+}
+
+.help-paper-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 32px 32px 32px 48px;
+}
+
+.help-paper-title {
+  margin: 0 0 1rem;
+  padding: 0 3rem 2rem 0;
+  text-align: center;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2rem, 2.5rem, 2.9rem);
+  line-height: 1.1;
+  color: #3b2a16;
+  letter-spacing: 0.02em;
+  margin-left: 8%;
+  width: 90%;
+}
+
+.help-paper-title::after {
+  content: "ARCHIVE HELP";
+  display: block;
+  margin: 10px auto 0;
+  width: fit-content;
+  padding: 2px 8px;
+  border: 1px solid rgba(140, 35, 35, 0.45);
+  color: rgba(140, 35, 35, 0.8);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transform: rotate(-4deg);
+}
+
+.help-paper-body {
+  font-family: "EB Garamond", serif;
+  font-size: clamp(1.08rem, 1.4vw, 1.3rem);
+  line-height: 1.8;
+  color: #2e2419;
+  text-align: left;
+  margin-left: 8%;
+  width: 90%;
+}
+
+.help-paper-body p {
+  margin: 0 0 1rem;
+}
+
+.help-paper-body strong {
+  font-weight: 700;
+  color: #3a2a12;
+}
+
+.help-paper-body dl {
+  margin: 1rem 0 0;
+}
+
+.help-paper-body dt {
+  margin-top: 2rem;
+  font-weight: 700;
+  color: #3a2a12;
+  text-decoration: underline;
+}
+
+.help-paper-body dd {
+  margin: 0.25rem 0 0.75rem 0;
+}
+
+.desk-text {
+  cursor: pointer;
+}
+
+@media (max-width: 560px) {
+  .help-paper-sheet {
+    width: min(92vw, 92vw);
+    max-height: 84vh;
+    padding: 3rem 1rem 1.4rem 1rem;
+  }
+
+  .help-paper-content::before {
+    right: 8px;
+    left: 8px;
+  }
+
+  .help-paper-content::after {
+    left: 18px;
+  }
+
+  .help-paper-inner {
+    max-width: none;
+    padding: 20px 16px 20px 28px;
+  }
+
+  .help-paper-title {
+    padding-right: 2.8rem;
+  }
+}
+
+/* FIREPLACE GLOW - HELP PAGE -ESKTOP */
+
+/* ============================ */
+/* FIREPLACE EFFECT             */
+/* ============================ */
+
+.fireplace-light {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+
+  top: 8%;
+  left: 41%;
+  width: 24%;
+  height: 26%;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 180, 80, 0.16) 0%,
+    rgba(255, 130, 40, 0.09) 35%,
+    transparent 75%
+  );
+
+  filter: blur(22px);
+  mix-blend-mode: screen;
+  opacity: 0.75;
+}
+
+.fireplace-fire {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+
+  top: 16%;
+  left: 61%;
+  width: 11%;
+  height: 17%;
+  transform: translate(-50%, 0);
+
+  filter: blur(1px);
+}
+
+.fireplace-fire::before,
+.fireplace-fire::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.fireplace-fire::before {
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(255, 240, 180, 0.95) 0%,
+    rgba(255, 210, 90, 0.9) 14%,
+    rgba(255, 130, 40, 0.7) 32%,
+    rgba(255, 70, 20, 0.28) 55%,
+    transparent 75%
+  );
+
+  /* 🔥 THIS IS THE KEY PART */
+  mask-image: linear-gradient(
+    to top,
+    transparent 0%,
+    rgba(0, 0, 0, 0.6) 15%,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to top,
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 15%,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 1) 100%
+  );
+
+  mix-blend-mode: screen;
+  opacity: 0.95;
+}
+
+.fireplace-fire::after {
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(255, 255, 220, 0.55) 0%,
+    rgba(255, 210, 120, 0.35) 20%,
+    transparent 60%
+  );
+  filter: blur(10px);
+  opacity: 0.7;
+}
+
+.fireplace-embers {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@media (max-width: 560px) {
+  .fireplace-light {
+    top: 8%;
+    left: 48%;
+    width: 28%;
+    height: 22%;
+  }
+
+  .fireplace-fire {
+    top: 15%;
+    left: 54%;
+    width: 18%;
+    height: 12%;
+  }
+}
