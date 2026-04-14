@@ -1,45 +1,57 @@
-/* ======================= */
-/*   FRONT DOOR CONTROLS   */
-/* ======================= */
+/* =========================================================
+   01. FRONT DOOR / DISCLAIMER / WINDOW TEXT
+   ========================================================= */
 
 const doorOverlay = document.getElementById("doorOverlay");
 const doorOpenBtn = document.getElementById("doorOpenBtn");
 const exitBtn = document.querySelector(".exit-btn");
 
-/* DISCLAIMER */
 const doorDisclaimer = document.getElementById("doorDisclaimer");
 const disclaimerCloseBtn = document.getElementById("disclaimerCloseBtn");
 const disclaimerMiniBtn = document.getElementById("disclaimerMiniBtn");
+const doorWarning = document.getElementById("doorWarning");
+
+const container = document.getElementById("windowText");
 
 let doorState = "closed"; // "closed" | "opening" | "open" | "closing"
 let doorTimer = null;
+let typingTimeout = null;
+let warningTimeout = null;
 
-/* disclaimer accepted state */
 let disclaimerAccepted =
   sessionStorage.getItem("doorDisclaimerCollapsed") === "true";
 
-/* ================ */
-/*   WINDOW TEXT    */
-/* ================ */
-
-const container = document.getElementById("windowText");
 let originalLines = [];
 let lineIndex = 0;
-let typingTimeout = null;
 
 if (container) {
-  originalLines = Array.from(container.querySelectorAll("p")).map(
+  originalLines = Array.from(
+    container.querySelectorAll("p"),
     (p) => p.textContent,
   );
   container.innerHTML = "";
 }
 
-function clearDoorTimer() {
-  if (doorTimer) {
-    clearTimeout(doorTimer);
-    doorTimer = null;
+/* -------------------------
+   01A. Shared Helpers
+   ------------------------- */
+
+function clearTimer(timerId) {
+  if (timerId) {
+    clearTimeout(timerId);
   }
+  return null;
 }
+
+function nextPaint(callback) {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(callback);
+  });
+}
+
+/* -------------------------
+   01B. Window Typing
+   ------------------------- */
 
 function typeLine(text, element, callback) {
   let i = 0;
@@ -47,7 +59,7 @@ function typeLine(text, element, callback) {
   function typeChar() {
     if (i < text.length) {
       element.textContent += text.charAt(i);
-      i++;
+      i += 1;
       typingTimeout = setTimeout(typeChar, 50);
     } else {
       typingTimeout = setTimeout(callback, 400);
@@ -58,21 +70,19 @@ function typeLine(text, element, callback) {
 }
 
 function startTyping() {
-  if (!container) return;
+  if (!container || lineIndex >= originalLines.length) return;
 
-  if (lineIndex < originalLines.length) {
-    const p = document.createElement("p");
-    container.appendChild(p);
+  const p = document.createElement("p");
+  container.appendChild(p);
 
-    typeLine(originalLines[lineIndex], p, () => {
-      lineIndex++;
-      startTyping();
-    });
-  }
+  typeLine(originalLines[lineIndex], p, () => {
+    lineIndex += 1;
+    startTyping();
+  });
 }
 
 function resetTyping() {
-  clearTimeout(typingTimeout);
+  typingTimeout = clearTimer(typingTimeout);
 
   if (container) {
     container.innerHTML = "";
@@ -81,15 +91,15 @@ function resetTyping() {
   lineIndex = 0;
 }
 
-/* ======================= */
-/*   DISCLAIMER CONTROL    */
-/* ======================= */
+/* -------------------------
+   01C. Disclaimer Control
+   ------------------------- */
 
 function updateDisclaimerButtonState() {
   if (!disclaimerMiniBtn) return;
 
   disclaimerMiniBtn.classList.toggle("is-accepted", disclaimerAccepted);
-  disclaimerMiniBtn.classList.toggle("is-not-accepted", !disclaimerAccepted);
+  disclaimerMiniBtn.classList.remove("is-not-accepted");
 
   disclaimerMiniBtn.setAttribute(
     "aria-label",
@@ -97,30 +107,9 @@ function updateDisclaimerButtonState() {
   );
 }
 
-function collapseDisclaimer() {
+function hideDisclaimerCompletely() {
   if (!doorDisclaimer) return;
-
-  doorDisclaimer.classList.add("is-collapsed");
-  doorDisclaimer.classList.remove("is-gone");
-
-  disclaimerAccepted = true;
-
-  if (disclaimerMiniBtn) {
-    disclaimerMiniBtn.setAttribute("aria-expanded", "false");
-    disclaimerMiniBtn.classList.add("is-accepted");
-    disclaimerMiniBtn.classList.remove("is-fading-out");
-  }
-
-  sessionStorage.setItem("doorDisclaimerCollapsed", "true");
-
-  // wait long enough for the fade animation to actually finish
-  setTimeout(() => {
-    hideDisclaimerCompletely();
-
-    if (disclaimerMiniBtn) {
-      disclaimerMiniBtn.classList.remove("is-fading-out");
-    }
-  }, 2500);
+  doorDisclaimer.classList.add("is-gone");
 }
 
 function expandDisclaimer() {
@@ -135,30 +124,51 @@ function expandDisclaimer() {
   updateDisclaimerButtonState();
 }
 
-function hideDisclaimerCompletely() {
+function collapseDisclaimer() {
   if (!doorDisclaimer) return;
-  doorDisclaimer.classList.add("is-gone");
+
+  doorDisclaimer.classList.add("is-collapsed");
+  doorDisclaimer.classList.remove("is-gone");
+
+  disclaimerAccepted = true;
+  sessionStorage.setItem("doorDisclaimerCollapsed", "true");
+
+  if (disclaimerMiniBtn) {
+    disclaimerMiniBtn.setAttribute("aria-expanded", "false");
+    disclaimerMiniBtn.classList.add("is-accepted");
+    disclaimerMiniBtn.classList.remove("is-fading-out");
+  }
+
+  updateDisclaimerButtonState();
+
+  setTimeout(() => {
+    hideDisclaimerCompletely();
+
+    if (disclaimerMiniBtn) {
+      disclaimerMiniBtn.classList.remove("is-fading-out");
+    }
+  }, 2500);
 }
 
-/* ===================== */
-/*   DOOR OPEN WARNING   */
-/* ===================== */
-
-const doorWarning = document.getElementById("doorWarning");
+/* -------------------------
+   01D. Door Warning
+   ------------------------- */
 
 function showDoorWarning() {
   if (!doorWarning) return;
 
   doorWarning.classList.add("is-visible");
+  warningTimeout = clearTimer(warningTimeout);
 
-  setTimeout(() => {
+  warningTimeout = setTimeout(() => {
     doorWarning.classList.remove("is-visible");
+    warningTimeout = null;
   }, 5000);
 }
 
-/* ======================= */
-/*   DOOR STATE CONTROL    */
-/* ======================= */
+/* -------------------------
+   01E. Door State Control
+   ------------------------- */
 
 function showDoorOverlay() {
   if (!doorOverlay) return;
@@ -180,22 +190,15 @@ function setDoorsClosed() {
   doorOverlay.classList.remove("open");
 }
 
-function nextPaint(callback) {
-  requestAnimationFrame(() => {
-    requestAnimationFrame(callback);
-  });
-}
-
 function openDoors() {
   if (!disclaimerAccepted) {
-    showDoorWarning(); // themed warning instead of alert
+    showDoorWarning();
     return;
   }
 
-  if (!doorOverlay) return;
-  if (doorState === "opening" || doorState === "open") return;
+  if (!doorOverlay || doorState === "opening" || doorState === "open") return;
 
-  clearDoorTimer();
+  doorTimer = clearTimer(doorTimer);
   resetTyping();
 
   doorState = "opening";
@@ -217,15 +220,13 @@ function openDoors() {
 }
 
 function closeDoors() {
-  if (!doorOverlay) return;
-  if (doorState === "closing" || doorState === "closed") return;
+  if (!doorOverlay || doorState === "closing" || doorState === "closed") return;
 
-  clearDoorTimer();
+  doorTimer = clearTimer(doorTimer);
   resetTyping();
 
   doorState = "closing";
 
-  // reset door + disclaimer state on exit
   sessionStorage.removeItem("doorsOpened");
   sessionStorage.removeItem("doorDisclaimerCollapsed");
   disclaimerAccepted = false;
@@ -235,7 +236,6 @@ function closeDoors() {
   }
 
   updateDisclaimerButtonState();
-
   showDoorOverlay();
 
   nextPaint(() => {
@@ -244,42 +244,49 @@ function closeDoors() {
     doorTimer = setTimeout(() => {
       doorState = "closed";
       doorTimer = null;
-
       window.location.href = "../index.html";
     }, 1600);
   });
 }
 
-/* INITIAL STATE */
+/* -------------------------
+   01F. Door Initial State
+   ------------------------- */
 
-updateDisclaimerButtonState();
+function initialiseDoors() {
+  updateDisclaimerButtonState();
 
-if (doorOverlay) {
-  if (sessionStorage.getItem("doorsOpened")) {
+  if (!doorOverlay) return;
+
+  const doorsOpened = sessionStorage.getItem("doorsOpened") === "true";
+  const disclaimerCollapsed =
+    sessionStorage.getItem("doorDisclaimerCollapsed") === "true";
+
+  if (doorsOpened) {
     setDoorsOpen();
     hideDoorOverlay();
     hideDisclaimerCompletely();
     doorState = "open";
     startTyping();
+    return;
+  }
+
+  setDoorsClosed();
+  showDoorOverlay();
+  doorState = "closed";
+
+  if (!doorDisclaimer) return;
+
+  if (disclaimerCollapsed) {
+    collapseDisclaimer();
   } else {
-    setDoorsClosed();
-    showDoorOverlay();
-    doorState = "closed";
-
-    if (doorDisclaimer) {
-      const disclaimerCollapsed =
-        sessionStorage.getItem("doorDisclaimerCollapsed") === "true";
-
-      if (disclaimerCollapsed) {
-        collapseDisclaimer();
-      } else {
-        expandDisclaimer();
-      }
-    }
+    expandDisclaimer();
   }
 }
 
-/* BUTTON EVENTS */
+/* -------------------------
+   01G. Door Event Binding
+   ------------------------- */
 
 if (doorOpenBtn) {
   doorOpenBtn.addEventListener("click", openDoors);
@@ -289,8 +296,6 @@ if (exitBtn) {
   exitBtn.addEventListener("click", closeDoors);
 }
 
-/* DISCLAIMER BUTTON EVENTS */
-
 if (disclaimerCloseBtn) {
   disclaimerCloseBtn.addEventListener("click", collapseDisclaimer);
 }
@@ -299,9 +304,11 @@ if (disclaimerMiniBtn) {
   disclaimerMiniBtn.addEventListener("click", expandDisclaimer);
 }
 
-/*====================*/
-/* TANK SOUND EFFECTS */
-/*====================*/
+initialiseDoors();
+
+/* =========================================================
+   02. TANK SOUND EFFECTS
+   ========================================================= */
 
 const tank = document.getElementById("tank");
 const sound = document.getElementById("tankSound");
@@ -311,18 +318,20 @@ let audioUnlocked = false;
 document.addEventListener(
   "click",
   () => {
-    if (!audioUnlocked && sound) {
-      sound
-        .play()
-        .then(() => {
-          sound.pause();
-          sound.currentTime = 0;
-          audioUnlocked = true;
-        })
-        .catch((err) => {
-          console.log("Audio unlock failed:", err);
-        });
+    if (!audioUnlocked || !sound) {
+      if (!sound) return;
     }
+
+    sound
+      .play()
+      .then(() => {
+        sound.pause();
+        sound.currentTime = 0;
+        audioUnlocked = true;
+      })
+      .catch((err) => {
+        console.log("Audio unlock failed:", err);
+      });
   },
   { once: true },
 );
@@ -354,70 +363,13 @@ if (tank && sound) {
   });
 }
 
-/*====================*/
-/* RAIN + LIGHTNING   */
-/*====================*/
+/* =========================================================
+   03. CLOCK
+   ========================================================= */
 
-window.addEventListener("DOMContentLoaded", () => {
-  const rainContainer = document.querySelector(".rain");
-  const imageContainer = document.querySelector(".rain-img-container");
-  const lightning = document.querySelector(".lightning");
-
-  if (rainContainer) {
-    const dropCount = 180;
-
-    for (let i = 0; i < dropCount; i++) {
-      const drop = document.createElement("span");
-      drop.classList.add("rain-drop");
-
-      const size = Math.random();
-      if (size < 0.33) {
-        drop.classList.add("small");
-      } else if (size < 0.66) {
-        drop.classList.add("medium");
-      } else {
-        drop.classList.add("large");
-      }
-
-      drop.style.left = Math.random() * 100 + "%";
-      drop.style.animationDuration = 0.45 + Math.random() * 0.55 + "s";
-      drop.style.animationDelay = -Math.random() * 2 + "s";
-
-      rainContainer.appendChild(drop);
-    }
-  }
-
-  if (!rainContainer || !imageContainer || !lightning) return;
-
-  function triggerLightning() {
-    const isDouble = Math.random() > 0.55;
-
-    lightning.classList.remove("flash", "flash-double");
-    void lightning.offsetWidth;
-
-    imageContainer.classList.add("lightning-active");
-    lightning.classList.add(isDouble ? "flash-double" : "flash");
-
-    setTimeout(
-      () => {
-        imageContainer.classList.remove("lightning-active");
-        lightning.classList.remove("flash", "flash-double");
-      },
-      isDouble ? 450 : 220,
-    );
-
-    const nextStrike = 1500 + Math.random() * 7000;
-    setTimeout(triggerLightning, nextStrike);
-  }
-
-  const firstStrike = 1000 + Math.random() * 1000;
-  setTimeout(triggerLightning, firstStrike);
-});
-
-/* CLOCK */
+const clock = document.getElementById("clock");
 
 function updateClock() {
-  const clock = document.getElementById("clock");
   if (!clock) return;
 
   const now = new Date();
@@ -428,39 +380,39 @@ function updateClock() {
   clock.textContent = `${hours}:${minutes}:${seconds}`;
 }
 
-if (document.getElementById("clock")) {
+if (clock) {
   updateClock();
   setInterval(updateClock, 1000);
 }
 
-/* MEDIA TEXT BOX REVEAL ON SCROLL */
+/* =========================================================
+   04. MEDIA TEXT REVEAL ON SCROLL
+   ========================================================= */
+
+const mediaSection = document.querySelector(".media-room-container");
+const mediaBox1 = document.querySelector(".box-1");
+const mediaBox2 = document.querySelector(".box-2");
+const mediaBox3 = document.querySelector(".box-3");
 
 function updateMediaTextReveal() {
-  const section = document.querySelector(".media-room-container");
-  const box1 = document.querySelector(".box-1");
-  const box2 = document.querySelector(".box-2");
-  const box3 = document.querySelector(".box-3");
+  if (!mediaSection || !mediaBox1 || !mediaBox2 || !mediaBox3) return;
 
-  if (!section || !box1 || !box2 || !box3) return;
-
-  const rect = section.getBoundingClientRect();
+  const rect = mediaSection.getBoundingClientRect();
   const viewportHeight = window.innerHeight;
   const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
-
   const trigger = 0.5;
 
-  box1.classList.toggle("is-visible", progress > trigger);
-  box2.classList.toggle("is-visible", progress > trigger);
-  box3.classList.toggle("is-visible", progress > trigger);
+  mediaBox1.classList.toggle("is-visible", progress > trigger);
+  mediaBox2.classList.toggle("is-visible", progress > trigger);
+  mediaBox3.classList.toggle("is-visible", progress > trigger);
 }
 
-window.addEventListener("scroll", updateMediaTextReveal);
+window.addEventListener("scroll", updateMediaTextReveal, { passive: true });
 window.addEventListener("resize", updateMediaTextReveal);
-window.addEventListener("DOMContentLoaded", updateMediaTextReveal);
 
-/* ================================ */
-/*   RETURN TO TOP OF PAGE BUTTON   */
-/* ================================ */
+/* =========================================================
+   05. RETURN TO TOP BUTTON
+   ========================================================= */
 
 const returnToLandingDestinationButton = document.getElementById(
   "returnToLandingDestinationButton",
@@ -475,9 +427,9 @@ if (returnToLandingDestinationButton) {
   });
 }
 
-/* ========================== */
-/* WHITEBOARD WRITING SYSTEM  */
-/* ========================== */
+/* =========================================================
+   06. WHITEBOARD WRITING SYSTEM
+   ========================================================= */
 
 const whiteboardTextBox = document.getElementById("whiteboardTextBox");
 
@@ -487,7 +439,8 @@ let whiteboardTypingTimeout = null;
 let whiteboardAutoScroll = true;
 
 if (whiteboardTextBox) {
-  whiteboardLines = Array.from(whiteboardTextBox.querySelectorAll("p")).map(
+  whiteboardLines = Array.from(
+    whiteboardTextBox.querySelectorAll("p"),
     (p) => p.textContent,
   );
 
@@ -504,10 +457,7 @@ if (whiteboardTextBox) {
 }
 
 function clearWhiteboardTypingTimeout() {
-  if (whiteboardTypingTimeout) {
-    clearTimeout(whiteboardTypingTimeout);
-    whiteboardTypingTimeout = null;
-  }
+  whiteboardTypingTimeout = clearTimer(whiteboardTypingTimeout);
 }
 
 function whiteboardScrollToBottom(force = false) {
@@ -524,7 +474,7 @@ function typeWhiteboardLine(text, element, callback) {
   function typeChar() {
     if (i < text.length) {
       element.textContent += text.charAt(i);
-      i++;
+      i += 1;
 
       whiteboardScrollToBottom();
 
@@ -541,19 +491,18 @@ function typeWhiteboardLine(text, element, callback) {
 }
 
 function startWhiteboardTyping() {
-  if (!whiteboardTextBox) return;
+  if (!whiteboardTextBox || whiteboardLineIndex >= whiteboardLines.length)
+    return;
 
-  if (whiteboardLineIndex < whiteboardLines.length) {
-    const p = document.createElement("p");
-    whiteboardTextBox.appendChild(p);
+  const p = document.createElement("p");
+  whiteboardTextBox.appendChild(p);
 
-    whiteboardScrollToBottom();
+  whiteboardScrollToBottom();
 
-    typeWhiteboardLine(whiteboardLines[whiteboardLineIndex], p, () => {
-      whiteboardLineIndex++;
-      startWhiteboardTyping();
-    });
-  }
+  typeWhiteboardLine(whiteboardLines[whiteboardLineIndex], p, () => {
+    whiteboardLineIndex += 1;
+    startWhiteboardTyping();
+  });
 }
 
 function resetWhiteboardTyping() {
@@ -568,32 +517,18 @@ function resetWhiteboardTyping() {
   whiteboardAutoScroll = true;
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  startWhiteboardTyping();
-});
-
-/* ======================= */
-/* PARCEL CONFETTI BURST   */
-/* ======================= */
+/* =========================================================
+   07. PARCEL CONFETTI BURST
+   ========================================================= */
 
 const parcelImage = document.querySelector(".parcel-img");
 const donateButton = document.querySelector(".donate");
-
-if (parcelImage) {
-  parcelImage.addEventListener("click", burstConfettiFromParcel);
-}
-
-if (donateButton) {
-  donateButton.addEventListener("click", burstConfettiFromParcel);
-}
+const parcelContainer = document.querySelector(".parcel-container");
 
 function burstConfettiFromParcel() {
-  const container = document.querySelector(".parcel-container");
-  const parcelImage = document.querySelector(".parcel-img");
+  if (!parcelContainer || !parcelImage) return;
 
-  if (!container || !parcelImage) return;
-
-  const containerRect = container.getBoundingClientRect();
+  const containerRect = parcelContainer.getBoundingClientRect();
   const parcelRect = parcelImage.getBoundingClientRect();
 
   const originX = parcelRect.left - containerRect.left + parcelRect.width / 2;
@@ -610,23 +545,24 @@ function burstConfettiFromParcel() {
 
   const totalPieces = 36;
 
-  for (let i = 0; i < totalPieces; i++) {
+  for (let i = 0; i < totalPieces; i += 1) {
     const piece = document.createElement("span");
-    piece.classList.add("confetti-piece");
-
     const angle = Math.random() * Math.PI * 2;
     const distance = 80 + Math.random() * 140;
     const x = Math.cos(angle) * distance;
     const y = Math.sin(angle) * distance + 40;
-    const rotate = `${Math.random() * 720 - 360}deg`;
 
+    piece.className = "confetti-piece";
     piece.style.left = `${originX}px`;
     piece.style.top = `${originY}px`;
     piece.style.backgroundColor =
       colours[Math.floor(Math.random() * colours.length)];
     piece.style.setProperty("--confetti-x", `${x}px`);
     piece.style.setProperty("--confetti-y", `${y}px`);
-    piece.style.setProperty("--confetti-rotate", rotate);
+    piece.style.setProperty(
+      "--confetti-rotate",
+      `${Math.random() * 720 - 360}deg`,
+    );
 
     if (Math.random() > 0.5) {
       piece.style.width = "8px";
@@ -634,49 +570,58 @@ function burstConfettiFromParcel() {
       piece.style.borderRadius = "50%";
     }
 
-    container.appendChild(piece);
+    piece.addEventListener(
+      "animationend",
+      () => {
+        piece.remove();
+      },
+      { once: true },
+    );
 
-    piece.addEventListener("animationend", () => {
-      piece.remove();
-    });
+    parcelContainer.appendChild(piece);
   }
 }
 
-/* ================================== */
-/* ABOUT PAGE HORIZONTAL IMAGE MOTION */
-/* ================================== */
+if (parcelImage) {
+  parcelImage.addEventListener("click", burstConfettiFromParcel);
+}
 
-window.addEventListener("DOMContentLoaded", () => {
+if (donateButton) {
+  donateButton.addEventListener("click", burstConfettiFromParcel);
+}
+
+/* =========================================================
+   08. ABOUT PAGE HORIZONTAL IMAGE MOTION
+   ========================================================= */
+
+function initialiseAboutHorizontal() {
   if (!document.body.classList.contains("about-horizontal")) return;
 
   const stage = document.querySelector(".about-horizontal-container");
   const track = document.getElementById("aboutHorizontalTrack");
   const spinBtn = document.getElementById("spinBtn");
+
   if (!stage || !track) return;
 
   const originalPanels = Array.from(track.children);
-  originalPanels.forEach((panel) => {
-    const clone = panel.cloneNode(true);
-    track.appendChild(clone);
-  });
+  for (const panel of originalPanels) {
+    track.appendChild(panel.cloneNode(true));
+  }
 
   let currentX = 0;
   let targetX = 0;
   let loopPoint = 0;
   let ticking = false;
-
   let isSpinning = false;
   let spinTimeout = null;
+  let currentPanelIndex = 0;
 
   const spinSpeed = 700;
   const spinDuration = 2200;
-
-  let currentPanelIndex = 0;
+  const minimumForwardTravel = 300;
 
   function updateBounds() {
-    const trackWidth = track.scrollWidth;
-    loopPoint = trackWidth / 2;
-
+    loopPoint = track.scrollWidth / 2;
     track.style.transform = `translate3d(${-currentX}px, 0, 0)`;
   }
 
@@ -719,11 +664,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function getSnapXForPanel(index) {
-    const panel = originalPanels[index];
-    const panelX = panel.offsetLeft;
-
-    const minimumForwardTravel = 300;
-
+    const panelX = originalPanels[index].offsetLeft;
     let snapX = panelX;
 
     while (snapX <= currentX + minimumForwardTravel) {
@@ -739,15 +680,13 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     currentX += (targetX - currentX) * 0.12;
-
     wrapLoop();
 
     track.style.transform = `translate3d(${-currentX}px, 0, 0)`;
 
     const stillEasing = Math.abs(targetX - currentX) > 0.2;
-    const stillSpinning = isSpinning;
 
-    if (stillEasing || stillSpinning) {
+    if (stillEasing || isSpinning) {
       requestAnimationFrame(animate);
     } else {
       ticking = false;
@@ -755,10 +694,9 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function startAnimation() {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(animate);
-    }
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(animate);
   }
 
   updateBounds();
@@ -783,7 +721,6 @@ window.addEventListener("DOMContentLoaded", () => {
       }
 
       currentPanelIndex = getNearestPanelIndex();
-
       isSpinning = true;
       startAnimation();
 
@@ -791,27 +728,27 @@ window.addEventListener("DOMContentLoaded", () => {
         isSpinning = false;
 
         const nextPanelIndex = getRandomPanelIndexExcludingCurrent();
-        const snapX = getSnapXForPanel(nextPanelIndex);
-
-        targetX = snapX;
+        targetX = getSnapXForPanel(nextPanelIndex);
         currentPanelIndex = nextPanelIndex;
-
         spinTimeout = null;
+
         startAnimation();
       }, spinDuration);
     });
   }
-});
+}
 
-/* ============================== */
-/*   PAGE VORTEX NAV TRANSITION   */
-/* ============================== */
+/* =========================================================
+   09. PAGE VORTEX NAV TRANSITION
+   ========================================================= */
 
 function setupPageLinkTransitions() {
   const links = document.querySelectorAll("a[href]");
   const vortex = document.querySelector(
     ".center-vortex-container model-viewer",
   );
+
+  if (!links.length) return;
 
   links.forEach((link) => {
     link.addEventListener("click", (event) => {
@@ -854,13 +791,11 @@ function setupPageLinkTransitions() {
   });
 }
 
-window.addEventListener("DOMContentLoaded", setupPageLinkTransitions);
+/* =========================================================
+   10. HELP PAGE PAPER POPUPS
+   ========================================================= */
 
-/* ============================ */
-/*   HELP PAGE - PAPER POPUPS   */
-/* ============================ */
-
-document.addEventListener("DOMContentLoaded", () => {
+function initialiseHelpPaperPopups() {
   const modal = document.getElementById("helpPaperModal");
   const backdrop = document.getElementById("helpPaperBackdrop");
   const closeBtn = document.getElementById("helpPaperClose");
@@ -887,7 +822,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const heading = source.querySelector("h1, h2, h3, h4, h5, h6");
     titleEl.textContent = heading ? heading.textContent : "Help";
-
     bodyEl.innerHTML = source.innerHTML;
 
     const duplicateHeading = bodyEl.querySelector("h1, h2, h3, h4, h5, h6");
@@ -915,8 +849,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   triggers.forEach((trigger) => {
     trigger.addEventListener("click", () => {
-      const sourceId = trigger.dataset.helpTarget;
-      openHelpPaperFromSource(sourceId, trigger);
+      openHelpPaperFromSource(trigger.dataset.helpTarget, trigger);
     });
   });
 
@@ -928,13 +861,13 @@ document.addEventListener("DOMContentLoaded", () => {
       closeHelpPaper();
     }
   });
-});
+}
 
-/* =================================*/
-/*  HELP PAGE - FIREPLACE + EMBERS  */
-/* =================================*/
+/* =========================================================
+   11. HELP PAGE FIREPLACE + EMBERS
+   ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+function initialiseFireplace() {
   const scene = document.querySelector(".help-desk-scene");
   const fire = document.getElementById("fireplaceFire");
   const light = document.querySelector(".fireplace-light");
@@ -996,7 +929,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const origin = getFireOrigin();
     const count = Math.random() < 0.35 ? 2 : 1;
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < count; i += 1) {
       embers.push(createEmber());
     }
 
@@ -1049,13 +982,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateFireVisual(time) {
     const t = time * 0.001;
-
     const scaleX = 1 + Math.sin(t * 6) * 0.01;
     const scaleY = 1 + Math.sin(t * 8) * 0.015;
+    const lightOpacity = 0.66 + Math.sin(t * 5) * 0.03;
 
     fire.style.transform = `translate(-50%, 0) scale(${scaleX}, ${scaleY})`;
-
-    const lightOpacity = 0.66 + Math.sin(t * 5) * 0.03;
     light.style.opacity = lightOpacity;
   }
 
@@ -1079,10 +1010,90 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function startFireplace() {
     resizeCanvas();
-    if (rafId) cancelAnimationFrame(rafId);
+
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+    }
+
     rafId = requestAnimationFrame(animate);
   }
 
   window.addEventListener("resize", resizeCanvas);
   startFireplace();
+}
+
+/* =========================================================
+   12. RAIN + LIGHTNING
+   ========================================================= */
+
+function initialiseRainAndLightning() {
+  const rainContainer = document.querySelector(".rain");
+  const imageContainer = document.querySelector(".rain-img-container");
+  const lightning = document.querySelector(".lightning");
+
+  if (rainContainer) {
+    const dropCount = 180;
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < dropCount; i += 1) {
+      const drop = document.createElement("span");
+      const size = Math.random();
+
+      drop.classList.add("rain-drop");
+
+      if (size < 0.33) {
+        drop.classList.add("small");
+      } else if (size < 0.66) {
+        drop.classList.add("medium");
+      } else {
+        drop.classList.add("large");
+      }
+
+      drop.style.left = `${Math.random() * 100}%`;
+      drop.style.animationDuration = `${0.45 + Math.random() * 0.55}s`;
+      drop.style.animationDelay = `${-Math.random() * 2}s`;
+
+      fragment.appendChild(drop);
+    }
+
+    rainContainer.appendChild(fragment);
+  }
+
+  if (!rainContainer || !imageContainer || !lightning) return;
+
+  function triggerLightning() {
+    const isDouble = Math.random() > 0.55;
+
+    lightning.classList.remove("flash", "flash-double");
+    void lightning.offsetWidth;
+
+    imageContainer.classList.add("lightning-active");
+    lightning.classList.add(isDouble ? "flash-double" : "flash");
+
+    setTimeout(
+      () => {
+        imageContainer.classList.remove("lightning-active");
+        lightning.classList.remove("flash", "flash-double");
+      },
+      isDouble ? 450 : 220,
+    );
+
+    setTimeout(triggerLightning, 1500 + Math.random() * 3000);
+  }
+
+  setTimeout(triggerLightning, 1000 + Math.random() * 1000);
+}
+
+/* =========================================================
+   13. DOM READY INITIALISERS
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateMediaTextReveal();
+  startWhiteboardTyping();
+  initialiseRainAndLightning();
+  initialiseAboutHorizontal();
+  setupPageLinkTransitions();
+  initialiseHelpPaperPopups();
+  initialiseFireplace();
 });
