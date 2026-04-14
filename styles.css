@@ -1,6 +1,6 @@
-/* ================ */
-/* BASE / RESET     */
-/* ================ */
+/* =========================================================
+   01. BASE / RESET
+   ========================================================= */
 
 * {
   box-sizing: border-box;
@@ -25,14 +25,31 @@ video {
   max-width: 100%;
 }
 
-/* ------------ COCKPIT LOCKING FEATURES TO ALLOW SCROLLING OF NON-HOME PAGES -------------- */
+h2 {
+  font-size: 3rem;
+  text-align: center;
+  line-height: 1.5;
+}
 
-/* enables scrolling on the page. */
+.heading-top-spacer {
+  padding-top: 60px;
+}
+
+/* =========================================================
+   02. PAGE SHELL / SCROLLABLE LAYOUT
+   ========================================================= */
+
+.page-shell {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
 body.scrollable {
   overflow-y: auto;
 }
 
-/* Locks the cockpit to the UI */
 body.scrollable .overlay-cockpit,
 body.scrollable .cockpit-nav,
 body.scrollable .video-panel,
@@ -42,37 +59,65 @@ body.scrollable .door-overlay {
   position: fixed;
 }
 
-/*  removes the 100vh height cap which prevented the page from scrolling */
 body.scrollable .page-shell {
   height: auto;
   overflow: visible;
 }
 
-/* ensures the tank fills the first screen before scroll content begins */
 body.scrollable .tank-hero-section {
   height: 100vh;
 }
 
-.heading-top-spacer {
-  padding-top: 60px;
-}
-
-.page-shell {
-  position: relative;
-  width: 100%;
+body.scrollable .center-vortex-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
   height: 100vh;
+  margin: 0;
   overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
 }
 
-h2 {
-  font-size: 3rem;
-  text-align: center;
-  line-height: 1.5;
+/* =========================================================
+   03. SHARED MEDIA / IMAGE HELPERS
+   ========================================================= */
+
+.edge-hill-rain-img,
+.cinema-seating-img,
+.donating-page-img,
+.help-desk-room-img,
+.about-panel img,
+.william-bradshaw-img,
+.william-bradshaw-img-2 {
+  display: block;
 }
 
-/* ========================= */
-/*    ARCHIVE TABLE SYSTEM   */
-/* ========================= */
+.window-interface,
+.william-bradshaw-img,
+.william-bradshaw-img-2 {
+  width: 100%;
+  height: auto;
+}
+
+/* =========================================================
+   04. GLOBAL INTERACTIVE ELEMENTS
+   ========================================================= */
+
+.door-open-btn,
+.exit-btn,
+.return-to-landing-destination-btn,
+.spin-btn,
+.disclaimer-close-btn,
+.donate,
+.nav-btn,
+.desk-text {
+  cursor: pointer;
+}
+
+/* =========================================================
+   05. ARCHIVE TABLE SYSTEM
+   ========================================================= */
 
 .archive-table {
   width: 60%;
@@ -110,9 +155,13 @@ h2 {
   text-decoration: underline;
 }
 
-/* ========================= */
-/* PAPER THEME               */
-/* ========================= */
+/* =========================================================
+   06. ARCHIVE TABLE THEMES
+   ========================================================= */
+
+/* -------------------------
+   06A. Paper Theme
+   ------------------------- */
 
 .archive-table--paper {
   background: linear-gradient(180deg, #f6f1e7, #e8dcc4);
@@ -145,9 +194,9 @@ h2 {
   color: #2f2416;
 }
 
-/* ========================= */
-/* SCI-FI THEME              */
-/* ========================= */
+/* -------------------------
+   06B. Sci-Fi Theme
+   ------------------------- */
 
 .archive-table--scifi {
   background: linear-gradient(
@@ -190,9 +239,9 @@ h2 {
   color: #8affcf;
 }
 
-/* ========================= */
-/* MEDICAL THEME             */
-/* ========================= */
+/* -------------------------
+   06C. Medical Theme
+   ------------------------- */
 
 .archive-table--medical {
   background: linear-gradient(180deg, #f4f8fb, #e6eef5);
@@ -203,7 +252,6 @@ h2 {
   color: #1f2d3a;
 }
 
-/* headers */
 .archive-table--medical th {
   color: #2c4e68;
   background: rgba(120, 170, 210, 0.08);
@@ -214,19 +262,16 @@ h2 {
   font-size: 1.25rem;
 }
 
-/* values */
 .archive-table--medical td {
   border-bottom: 1px solid rgba(120, 160, 190, 0.2);
   color: #2a3b47;
   font-family: "Happy Monkey", system-ui;
 }
 
-/* alternating rows */
 .archive-table--medical tr:nth-child(even) {
   background: rgba(120, 170, 210, 0.04);
 }
 
-/* links */
 .archive-table--medical a {
   color: #2b7da8;
   text-decoration: underline;
@@ -242,9 +287,9 @@ h2 {
   color: #3aa6d0;
 }
 
-/* ================ */
-/*   CINEMA THEME   */
-/* ================ */
+/* -------------------------
+   06D. Cinema Theme
+   ------------------------- */
 
 .archive-table--cinema {
   background:
@@ -299,11 +344,14 @@ h2 {
   color: #ff4d4d;
 }
 
-/* ================= */
-/* TV & RADIO THEME  */
-/* ================= */
+/* -------------------------
+   06E. TV & Radio Theme
+   ------------------------- */
 
 .archive-table--tv-radio {
+  position: relative;
+  border-radius: 6px;
+  z-index: 0;
   background:
     linear-gradient(180deg, #1b1f2a 0%, #0f1218 100%),
     radial-gradient(
@@ -366,9 +414,48 @@ h2 {
   color: #ffbf47;
 }
 
-/* ========================= */
-/*     NEON BORDER SYSTEM    */
-/* ========================= */
+/* =========================================================
+   07. TV & RADIO DISCO BORDER
+   ========================================================= */
+
+.archive-table--tv-radio::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 8px;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    #ff004c,
+    #ff9900,
+    #ffee00,
+    #00ffcc,
+    #0066ff,
+    #cc00ff,
+    #ff004c
+  );
+  background-size: 300% 300%;
+  animation: disco-border 6s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 10px;
+}
+
+@keyframes disco-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+/* =========================================================
+   08. NEON BORDER SYSTEM
+   ========================================================= */
 
 .neon-border {
   position: relative;
@@ -376,31 +463,24 @@ h2 {
   width: 100%;
   height: 10px;
   z-index: 3;
-
-  /* Default = pink (baseline) */
   --neon-color-1: #ffffff;
   --neon-color-2: #ff00ff;
   --neon-color-3: #6a00ff;
-
-  /* glow strength (can be overridden per theme) */
   --neon-glow-1: 10px;
   --neon-glow-2: 20px;
   --neon-glow-3: 40px;
   --neon-glow-4: 80px;
 }
 
-/* Main neon line */
 .neon-border::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 0; /* overridden by modifiers */
-
+  top: 0;
   width: 100%;
   height: 10px;
   pointer-events: none;
   z-index: 2;
-
   background: linear-gradient(
     90deg,
     var(--neon-color-1),
@@ -408,22 +488,16 @@ h2 {
     var(--neon-color-3),
     var(--neon-color-1)
   );
-
   background-size: 200% 100%;
   animation:
     neonFlow 3s linear infinite,
     neonPulse 2.5s ease-in-out infinite;
-
   box-shadow:
     0 0 var(--neon-glow-1) var(--neon-color-1),
     0 0 var(--neon-glow-2) var(--neon-color-2),
     0 0 var(--neon-glow-3) var(--neon-color-2),
     0 0 var(--neon-glow-4) var(--neon-color-3);
 }
-
-/* ========================= */
-/* POSITION MODIFIERS */
-/* ========================= */
 
 .neon-top::before {
   top: 0;
@@ -435,11 +509,10 @@ h2 {
   bottom: 0;
 }
 
-/* ========================= */
-/* COLOUR THEMES */
-/* ========================= */
+/* =========================================================
+   09. NEON COLOUR THEMES
+   ========================================================= */
 
-/* 🟣 PINK (default but reusable explicitly) */
 .neon-pink {
   --neon-color-1: #ffffff;
   --neon-color-2: #ff00ff;
@@ -452,37 +525,33 @@ h2 {
   --neon-color-3: #3a0066;
 }
 
-/* 🟢 SCI-FI GREEN (plasma style) */
 .neon-green {
   --neon-color-1: #e8fff6;
   --neon-color-2: #00ffa6;
   --neon-color-3: #003b2f;
 }
 
-/* 🔵 SYSTEM BLUE */
 .neon-blue {
   --neon-color-1: #e6faff;
   --neon-color-2: #00cfff;
   --neon-color-3: #003a66;
 }
 
-/* 🔴 WARNING RED */
 .neon-red {
   --neon-color-1: #ffeaea;
   --neon-color-2: #ff2a2a;
   --neon-color-3: #660000;
 }
 
-/* 🟡 AMBER (UI warning tone) */
 .neon-amber {
   --neon-color-1: #fff6e0;
   --neon-color-2: #ffb300;
   --neon-color-3: #663d00;
 }
 
-/* ========================= */
-/* ANIMATIONS */
-/* ========================= */
+/* =========================================================
+   10. SHARED ANIMATIONS
+   ========================================================= */
 
 @keyframes neonFlow {
   from {
@@ -503,9 +572,15 @@ h2 {
   }
 }
 
-/* ================================ */
-/*   RETURN TO TOP OF PAGE BUTTON   */
-/* ================================ */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   11. RETURN TO LANDING DESTINATION BUTTON
+   ========================================================= */
 
 .return-to-landing-destination-container {
   text-align: center;
@@ -522,26 +597,18 @@ h2 {
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-
   color: #00ff9c;
-
   border: 1px solid #00ff9c;
   border-radius: 6px;
-
   background: linear-gradient(
     to bottom,
     rgba(0, 255, 156, 0.25),
     rgba(0, 0, 0, 0.8)
   );
-
   box-shadow:
     0 0 10px rgba(0, 255, 156, 0.7),
     0 0 20px rgba(0, 255, 156, 0.3);
-
   text-shadow: 0 0 6px #00ff9c;
-
-  cursor: pointer;
-
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
@@ -551,9 +618,7 @@ h2 {
 .return-to-landing-destination-btn:hover,
 .return-to-landing-destination-btn:focus-visible {
   transform: translateY(-3px) scale(1.05);
-
   background: rgba(2, 50, 32, 0.15);
-
   box-shadow:
     0 0 12px rgba(0, 255, 156, 0.8),
     0 0 25px rgba(0, 255, 156, 1),
@@ -561,16 +626,14 @@ h2 {
 }
 
 .return-arrow {
-  font-size: 1.5rem; /* increase as needed */
+  font-size: 1.5rem;
   display: inline-block;
   margin-left: 6px;
 }
 
-/* -------------------------- ENTRANCE SCREEN --------------------------- */
-
-/* ================ */
-/* FRONT DOORS      */
-/* ================ */
+/* =========================================================
+   12. ENTRANCE SCREEN / DOOR SYSTEM
+   ========================================================= */
 
 .door-overlay {
   position: absolute;
@@ -602,7 +665,6 @@ h2 {
   display: block;
   width: 100%;
   height: 100%;
-
   pointer-events: none;
 }
 
@@ -623,14 +685,20 @@ h2 {
   transform: translateX(100%);
   transition-delay: 0.15s;
 }
-/* Door closing speeed */
+
 .door-overlay:not(.open) .door-picture {
   transition: transform 1.6s ease-in;
 }
 
-/* ===================== */
-/*   DOORS OPEN BUTTON   */
-/* ===================== */
+.door-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* -------------------------
+   12A. Door Open Button
+   ------------------------- */
 
 .door-open-btn {
   position: absolute;
@@ -639,23 +707,14 @@ h2 {
   z-index: 11;
   transform: translate(-50%, -50%);
   pointer-events: auto;
-
-  /* size */
   width: 7rem;
   height: 5rem;
-
-  /* triangle shape */
-  /* clip-path: polygon(50% 0%, 0% 100%, 100% 100%); */
-
-  /* neon purple styling */
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.8),
     rgba(84, 84, 84, 0.9)
   );
-
   border: 2px solid rgba(58, 12, 81, 0.6);
-
   color: #ffffff;
   font-family: monospace, serif;
   font-size: 1.5rem;
@@ -665,17 +724,13 @@ h2 {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-
-  /* neon glow */
   box-shadow:
     0 0 10px #3a0c51,
     0 0 20px #3a0c51,
     0 0 40px rgba(245, 222, 251, 0.6);
-
   text-shadow:
     0 0 5px #ffffff,
     0 0 10px #3a0c51;
-
   transition:
     transform 0.2s ease 0s,
     box-shadow 0.2s ease 0s,
@@ -685,15 +740,12 @@ h2 {
 .door-open-btn:hover,
 .door-open-btn:focus-visible {
   transform: translate(-50%, -50%) scale(1.08);
-  cursor: pointer;
-
   box-shadow:
     0 0 12px #ac69e1,
     0 0 25px #ac69e1,
     0 0 50px rgba(249, 0, 249, 0.6);
 }
 
-/* When doors finish closing, THEN show AFTER delay */
 .door-overlay:not(.open) .door-open-btn {
   opacity: 1;
   pointer-events: auto;
@@ -709,17 +761,9 @@ h2 {
   pointer-events: none;
 }
 
-.door-overlay.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* --------------------------- COCKPIT DESIGN -------------------------- */
-
-/* ================ */
-/* COCKPIT OVERLAY  */
-/* ================ */
+/* =========================================================
+   13. COCKPIT OVERLAY / CORE UI
+   ========================================================= */
 
 .overlay-cockpit {
   position: absolute;
@@ -731,9 +775,9 @@ h2 {
   pointer-events: none;
 }
 
-/* ================ */
-/* WINDOW PANEL     */
-/* ================ */
+/* -------------------------
+   13A. Window Panel
+   ------------------------- */
 
 .window-panel-container {
   position: absolute;
@@ -742,11 +786,6 @@ h2 {
   transform: translate(-50%, -50%);
   z-index: 5;
   width: clamp(180px, 50vw, 800px);
-}
-
-.window-interface {
-  width: 100%;
-  height: auto;
 }
 
 .window-text {
@@ -761,12 +800,11 @@ h2 {
   overflow-wrap: break-word;
   text-shadow: 0 0 6px #00ff9c;
   overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
 }
 
-/* Hide inner scrollbar */
 .window-text::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none;
 }
 
 .window-text p {
@@ -784,30 +822,21 @@ h2 {
   animation: blink 0.8s step-end infinite;
 }
 
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-/* ================ */
-/* VIDEO PANEL      */
-/* ================ */
+/* -------------------------
+   13B. Video Panel
+   ------------------------- */
 
 .video-panel {
   position: absolute;
   right: 6.3%;
   top: 14.5%;
   z-index: 6;
-
   width: 8.5%;
   height: 19%;
   aspect-ratio: 1 / 1;
-
   transform: perspective(900px) rotateX(12deg) rotateY(-53deg);
   transform-origin: center;
   overflow: hidden;
-
   background: linear-gradient(
     to top,
     rgba(0, 255, 156, 0.14),
@@ -823,25 +852,24 @@ h2 {
   border-radius: 4px;
 }
 
-/* ============= */
-/*     LOGO      */
-/* ============= */
+/* -------------------------
+   13C. Logo
+   ------------------------- */
+
 .edge-hill-logo {
   position: absolute;
   right: 6.5%;
   top: 45%;
   z-index: 6;
-
   width: 8.5%;
   height: auto;
-
   transform: perspective(900px) rotateY(-55deg);
   transform-origin: center;
 }
 
-/* ================== */
-/*     EXIT BUTTON    */
-/* ================== */
+/* -------------------------
+   13D. Exit Button
+   ------------------------- */
 
 .exit-btn {
   position: absolute;
@@ -850,19 +878,15 @@ h2 {
   z-index: 6;
   width: 12%;
   min-height: 7%;
-
   transform: perspective(500px) rotate(50deg) rotateX(8deg) rotateY(-65deg);
   transform-origin: center;
-
   padding: 7px 10px;
-
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   font-size: clamp(0.56rem, 1.5rem, 1.5rem);
   line-height: 1.1;
   color: #ffffff;
-
   border: 1px solid #ffffff;
   border-radius: 8px;
   background: linear-gradient(
@@ -872,7 +896,6 @@ h2 {
   );
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
   text-shadow: 0 0 6px #ffffff;
-
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
@@ -883,12 +906,11 @@ h2 {
 .exit-btn:focus-visible {
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 18px rgba(255, 255, 255, 0.9);
-  cursor: pointer;
 }
 
-/* ======================= */
-/* BOTTOM NAVIGATION PANEL */
-/* ======================= */
+/* -------------------------
+   13E. Cockpit Navigation
+   ------------------------- */
 
 .cockpit-nav {
   position: absolute;
@@ -898,7 +920,7 @@ h2 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 6px;
-  width: clamp(320px, 76vw, 90%); /* 🔥 min | preferred | max */
+  width: clamp(320px, 76vw, 90%);
   max-width: 1220px;
   padding: 0 8px;
   height: 21%;
@@ -928,7 +950,6 @@ h2 {
   );
   box-shadow: 0 0 10px rgba(0, 255, 156, 0.7);
   text-shadow: 0 0 6px #00ff9c;
-
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
@@ -939,8 +960,6 @@ h2 {
 .nav-btn:focus-visible {
   transform: translateY(-3px) scale(1.01);
   background: rgba(0, 255, 156, 0.15);
-  cursor: pointer;
-
   box-shadow:
     0 0 10px rgba(0, 255, 156, 0.6),
     0 0 20px rgba(0, 255, 156, 0.9),
@@ -966,11 +985,9 @@ h2 {
   font-size: 1rem;
 }
 
-/* -------------------------------- HOME PAGE ----------------------------*/
-
-/* ================ */
-/* 3D VORTEX MODEL  */
-/* ================ */
+/* =========================================================
+   14. HOME PAGE
+   ========================================================= */
 
 .center-vortex-container {
   position: relative;
@@ -992,12 +1009,9 @@ h2 {
   margin-left: 10%;
 }
 
-/* -------------------------------- TANK PAGE ----------------------------*/
-
-/* #tank {
-  width: 69%;
-  height: 77%;
-} */
+/* =========================================================
+   15. TANK PAGE
+   ========================================================= */
 
 .tank-hero-section {
   margin-top: 60px;
@@ -1011,39 +1025,27 @@ h2 {
   z-index: 2;
 }
 
-/* MODEL */
 .tank_model {
   position: absolute;
   top: 30%;
-  /* left: 0; */
-  /* width: 76.3%; */
   width: 60%;
   height: 77%;
-
-  /* start off right, full size */
   transform: translate(70vw, -50%);
   animation: driveInFromRight 10s ease-out forwards;
   pointer-events: none;
   z-index: 3;
 }
 
-/* ANIMATION */
 @keyframes driveInFromRight {
   0% {
     transform: translate(70vw, -50%);
   }
-
   100% {
     transform: translate(15vw, -50%);
   }
 }
 
-/*REMOVES HORIZONTAL LINE ABOVE TANK */
-
-model-viewer::part(default-progress-bar) {
-  display: none;
-}
-
+model-viewer::part(default-progress-bar),
 model-viewer::part(default-ar-button) {
   display: none;
 }
@@ -1055,11 +1057,9 @@ model-viewer::part(default-ar-button) {
   width: 80%;
   height: 100%;
   object-fit: cover;
-  display: block;
   z-index: 1;
 }
 
-/* MAIN TEXT SECTION OF TANK PAGE */
 .bradshaw-information-section {
   background: linear-gradient(180deg, #bfc5ac, #7b806a);
 }
@@ -1095,9 +1095,9 @@ model-viewer::part(default-ar-button) {
   font-size: 2rem;
 }
 
-/* ========================= */
-/* BRADSHAW ARCHIVE TABLE    */
-/* ========================= */
+/* -------------------------
+   15A. Bradshaw Archive Table
+   ------------------------- */
 
 .bradshaws-archive-table {
   width: 60%;
@@ -1154,13 +1154,15 @@ model-viewer::part(default-ar-button) {
   border-bottom-style: solid;
 }
 
-/* DOG TAG */
+/* -------------------------
+   15B. Bradshaw Decorative Elements
+   ------------------------- */
+
 .dog-tag {
   display: inline-block;
   position: relative;
   max-width: 100%;
-  padding: 0.8rem 1.2rem;
-  padding-left: 1.5rem;
+  padding: 0.8rem 1.2rem 0.8rem 1.5rem;
   padding-right: 1.5rem;
   border-radius: 999px;
   border: 2px solid #7f866d;
@@ -1199,7 +1201,6 @@ model-viewer::part(default-ar-button) {
   right: 9px;
 }
 
-/* STAMP */
 .stamp {
   display: inline-block;
   margin-top: 0.9rem;
@@ -1231,6 +1232,7 @@ model-viewer::part(default-ar-button) {
 .william-bradshaw-caption {
   grid-column: 2;
   grid-row: 1;
+  font-size: 1rem;
 }
 
 .william-bradshaw-img-2 {
@@ -1239,27 +1241,16 @@ model-viewer::part(default-ar-button) {
   transform: rotate(1deg);
 }
 
-.william-bradshaw-caption {
-  font-size: 1rem;
-}
-
-.william-bradshaw-img,
-.william-bradshaw-img-2 {
-  width: 100%;
-  height: auto;
-  display: block;
-  box-sizing: border-box;
-}
-
 .bradshaw-paragraph-line-break {
   border: none;
   height: 2px;
   background-color: #4f5346;
 }
 
-/* ---------------------- EDGE HILL PREDECESSORS PAGE ----------------*/
+/* =========================================================
+   16. EDGE HILL PREDECESSORS PAGE
+   ========================================================= */
 
-/* EDGE HILL UNIVERSITY HERO SECTION IMAGE */
 .rain-img-container {
   position: relative;
   width: 80%;
@@ -1270,15 +1261,13 @@ model-viewer::part(default-ar-button) {
 }
 
 .edge-hill-rain-img {
-  display: block;
   width: 100%;
-  height: 100%; /* ✅ must be 100% */
-  object-fit: cover; /* now it works properly */
+  height: 100%;
+  object-fit: cover;
   position: relative;
   z-index: 1;
 }
 
-/* Rain Container - holds all the drops */
 .rain {
   position: absolute;
   inset: 0;
@@ -1311,18 +1300,6 @@ model-viewer::part(default-ar-button) {
   opacity: 0.3;
 }
 
-/* .rain-drop.medium {
-  width: 2px;
-  height: 70px;
-  opacity: 0.5;
-} */
-
-/* .rain-drop.large {
-  width: 3px;
-  height: 100px;
-  opacity: 0.65;
-} */
-
 @keyframes rain-fall {
   from {
     transform: translate3d(0, -120px, 0) rotate(12deg);
@@ -1332,13 +1309,11 @@ model-viewer::part(default-ar-button) {
   }
 }
 
-/* LIGHTNING EFFECT */
-
 .lightning {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 4;
+  z-index: 1;
   opacity: 0;
   background:
     radial-gradient(
@@ -1353,7 +1328,6 @@ model-viewer::part(default-ar-button) {
       rgba(255, 255, 255, 0.04)
     );
   mix-blend-mode: screen;
-  z-index: 1;
 }
 
 .lightning.flash {
@@ -1363,7 +1337,7 @@ model-viewer::part(default-ar-button) {
 .lightning.flash-double {
   animation: lightning-flash-double 0.45s ease-out;
 }
-/* Alter lightning brightness */
+
 .rain-img-container.lightning-active .edge-hill-rain-img {
   filter: brightness(1.22) contrast(1.08);
 }
@@ -1410,7 +1384,6 @@ model-viewer::part(default-ar-button) {
   }
 }
 
-/* MAIN TEXT SECTION OF PREDECESSORS PAGE */
 .predecessors-information-section {
   background: linear-gradient(180deg, #e3e0f0, #b7b3c9);
 }
@@ -1464,7 +1437,10 @@ model-viewer::part(default-ar-button) {
   padding-bottom: 30px;
 }
 
-/* ----------------- MAIN TEXT SECTION OF CHLOE FISHER PAGE ----------------------- */
+/* =========================================================
+   17. CHLOE FISHER PAGE
+   ========================================================= */
+
 .chloe-fisher-information-section {
   background: linear-gradient(180deg, #d1eeff, #72e3ff);
 }
@@ -1493,7 +1469,7 @@ model-viewer::part(default-ar-button) {
 }
 
 .chloe-fisher-caption {
-  display: block; /* moves it above the paragraph text */
+  display: block;
   font-weight: bold;
   margin-bottom: 30px;
 }
@@ -1518,8 +1494,6 @@ model-viewer::part(default-ar-button) {
 .chloe-fisher-list li:not(:last-child) {
   margin-bottom: 10px;
 }
-
-/* ---------------- CHLOE FISHER MIDWIFERY PAGE ------------------ */
 
 .midwife-room-container {
   position: relative;
@@ -1547,21 +1521,22 @@ model-viewer::part(default-ar-button) {
   z-index: 2;
 }
 
-/* ---------------- CHRISTOPHER ROBY MOVIE ARCHIVE PAGE ------------------ */
+/* =========================================================
+   18. CHRISTOPHER ROBY PAGE
+   ========================================================= */
 
 .cinema-scene {
   position: relative;
   width: 80%;
   margin-left: 6%;
   margin-top: 6px;
-  height: 100vh; /* ✅ full viewport height */
-  overflow: hidden; /* ✅ prevents overflow gaps */
+  height: 100vh;
+  overflow: hidden;
 }
 
 .cinema-seating-img {
   width: 100%;
   height: 100%;
-  display: block;
   object-fit: cover;
   position: relative;
   z-index: 2;
@@ -1570,9 +1545,9 @@ model-viewer::part(default-ar-button) {
 .black-and-white-movie-container {
   position: absolute;
   top: 15%;
-  left: 50%; /* ✅ center anchor */
-  transform: translateX(-50%); /* ✅ perfect centering */
-  width: 60%; /* ✅ control width here */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
   height: 48%;
   z-index: 1;
   overflow: hidden;
@@ -1610,7 +1585,9 @@ model-viewer::part(default-ar-button) {
   padding-bottom: 75px;
 }
 
-/* ------------ TV & RADIO PRESS PACKS PAGE ------------- */
+/* =========================================================
+   19. TV & RADIO PRESS PACKS PAGE
+   ========================================================= */
 
 .media-room-container {
   position: relative;
@@ -1640,12 +1617,9 @@ model-viewer::part(default-ar-button) {
   width: 100%;
   height: 100vh;
   object-fit: cover;
-
-  z-index: 3; /* MUST be above */
-
+  z-index: 3;
   opacity: 1;
-  animation: modernRoomFade 4s ease-in-out forwards;
-  animation-delay: 0.5s; /* wait 5 seconds BEFORE fading */
+  animation: glitchOut 3s steps(2, end) 0.5s forwards;
 }
 
 .media-room {
@@ -1657,20 +1631,6 @@ model-viewer::part(default-ar-button) {
   height: 100vh;
   object-fit: cover;
   z-index: 2;
-}
-
-/* GLITCH EFFECT */
-.modern-day-media-room {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  z-index: 3;
-
-  animation: glitchOut 3s steps(2, end) 0.5s forwards;
 }
 
 @keyframes glitchOut {
@@ -1728,7 +1688,6 @@ model-viewer::part(default-ar-button) {
   margin: 0;
 }
 
-/* "TV & Radio" text */
 .box-1 {
   top: 53.5%;
   left: 41.5%;
@@ -1739,7 +1698,6 @@ model-viewer::part(default-ar-button) {
     visibility 0s linear 0s;
 }
 
-/* "Press" text */
 .box-2 {
   top: 52%;
   left: 47.7%;
@@ -1747,7 +1705,6 @@ model-viewer::part(default-ar-button) {
   rotate: -13deg;
 }
 
-/* "Packs" text */
 .box-3 {
   top: 50%;
   left: 53%;
@@ -1783,150 +1740,6 @@ model-viewer::part(default-ar-button) {
   text-shadow:
     0 0 4px rgba(152, 152, 152, 0.7),
     0 0 10px rgba(65, 64, 63, 0.35);
-  /* transform: skew(-1deg) rotate(-1.5deg); */
-}
-
-/*==============================================*/
-/* TV & RADIO - CLOCK POSITIONING MEDIA QUERIES */
-/*==============================================*/
-
-@media (max-width: 1300px) {
-  .clock {
-    top: 6%;
-    left: 65.5%;
-  }
-}
-
-@media (max-width: 1225px) {
-  .clock {
-    left: 66.5%;
-  }
-}
-
-@media (max-width: 1150px) {
-  .clock {
-    left: 67.5%;
-  }
-}
-
-@media (max-width: 1085px) {
-  .clock {
-    left: 69.5%;
-    rotate: (3deg);
-  }
-}
-
-@media (max-width: 995px) {
-  .clock {
-    left: 71.5%;
-  }
-}
-
-@media (max-width: 890px) {
-  .clock {
-    left: 73.5%;
-  }
-}
-
-@media (max-width: 805px) {
-  .clock {
-    left: 74.5%;
-  }
-}
-
-@media (max-width: 765px) {
-  .clock {
-    top: 6.5%;
-    left: 77.5%;
-    font-size: 1.25rem;
-    rotate: -2deg;
-  }
-}
-
-@media (max-width: 705px) {
-  .clock {
-    left: 79.5%;
-  }
-}
-
-@media (max-width: 650px) {
-  .clock {
-    left: 80.5%;
-  }
-}
-
-@media (max-width: 630px) {
-  .clock {
-    top: 7%;
-    left: 82.5%;
-    font-size: 1rem;
-    rotate: -2.25deg;
-  }
-}
-
-@media (max-width: 590px) {
-  .clock {
-    font-size: 0.8rem;
-    left: 85%;
-    rotate: -1.75deg;
-  }
-}
-
-@media (max-width: 480px) {
-  .clock {
-    display: none;
-  }
-}
-
-/* ========================= */
-/* DISCO BORDER (OUTSET)     */
-/* ========================= */
-
-.archive-table--tv-radio {
-  position: relative;
-  border-radius: 6px;
-  z-index: 0;
-}
-
-/* outer animated border */
-.archive-table--tv-radio::before {
-  content: "";
-  position: absolute;
-  inset: -8px; /* pushes border OUTSIDE */
-  border-radius: 8px;
-  z-index: -1;
-
-  background: linear-gradient(
-    90deg,
-    #ff004c,
-    #ff9900,
-    #ffee00,
-    #00ffcc,
-    #0066ff,
-    #cc00ff,
-    #ff004c
-  );
-  background-size: 300% 300%;
-  animation: disco-border 6s linear infinite;
-
-  /* cut out the middle so it's ONLY a border */
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-
-  padding: 10px; /* border thickness */
-}
-
-/* animation */
-@keyframes disco-border {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 300% 50%;
-  }
 }
 
 .tv-and-radio-information-section {
@@ -1950,7 +1763,9 @@ model-viewer::part(default-ar-button) {
   line-height: 1.5;
 }
 
-/* ------------- DONATING PAGE -----------------*/
+/* =========================================================
+   20. DONATING PAGE
+   ========================================================= */
 
 .donating-container {
   position: relative;
@@ -1963,7 +1778,6 @@ model-viewer::part(default-ar-button) {
 }
 
 .donating-page-img {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1973,7 +1787,7 @@ model-viewer::part(default-ar-button) {
 .donating-heading {
   position: absolute;
   width: 83%;
-  top: 10%; /* adjust vertical position */
+  top: 10%;
   left: 48.5%;
   transform: translate(-50%, -50%);
   font-family: "Permanent Marker", "Comic Sans MS", cursive;
@@ -1985,10 +1799,6 @@ model-viewer::part(default-ar-button) {
   font-size: clamp(1.5rem, 2.25rem, 3rem);
   letter-spacing: 0.08em;
 }
-
-/* ======================= */
-/* WHITEBOARD WRITING AREA */
-/* ======================= */
 
 .whiteboard-text-box {
   position: absolute;
@@ -2005,27 +1815,13 @@ model-viewer::part(default-ar-button) {
   white-space: normal;
   overflow-wrap: break-word;
   word-break: break-word;
-}
-
-/* ---------- HIDE WHITEBOARD INNER SCROLLBAR ------------- */
-.whiteboard-text-box {
-  overflow-y: auto;
-
-  /* Firefox */
   scrollbar-width: none;
-
-  /* IE/old Edge */
   -ms-overflow-style: none;
 }
 
-/* Chrome, Safari, Edge */
 .whiteboard-text-box::-webkit-scrollbar {
   display: none;
 }
-
-/* ============== */
-/*   PARCEL BOX   */
-/* ============== */
 
 .parcel-container {
   position: absolute;
@@ -2041,7 +1837,6 @@ model-viewer::part(default-ar-button) {
   transform: translate(-50%, -60%);
   z-index: 2;
   width: 170px;
-  display: block;
 }
 
 .donate {
@@ -2054,15 +1849,10 @@ model-viewer::part(default-ar-button) {
   width: 170px;
   background: none;
   border: none;
-  cursor: pointer;
   font-family: "Rock Salt", cursive;
   font-size: 1.5rem;
   color: #1f1f1f;
 }
-
-/* ======================= */
-/* PARCEL CONFETTI BURST   */
-/* ======================= */
 
 .confetti-piece {
   position: absolute;
@@ -2081,7 +1871,6 @@ model-viewer::part(default-ar-button) {
     transform: translate(0, 0) rotate(0deg) scale(1);
     opacity: 1;
   }
-
   100% {
     transform: translate(var(--confetti-x), var(--confetti-y))
       rotate(var(--confetti-rotate)) scale(0.7);
@@ -2089,13 +1878,10 @@ model-viewer::part(default-ar-button) {
   }
 }
 
-/*---------------------ABOUT PAGE - DESKTOP --------------------------*/
+/* =========================================================
+   21. ABOUT PAGE
+   ========================================================= */
 
-/* ============================ */
-/* ABOUT PAGE HORIZONTAL IMAGES */
-/* ============================ */
-
-/* ABOUT PAGE - BACKGROUND COLOUR */
 .about-horizontal {
   background: #000;
   background: linear-gradient(
@@ -2148,7 +1934,6 @@ model-viewer::part(default-ar-button) {
   min-width: 80vw;
   height: 100vh;
   overflow: hidden;
-
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -2171,8 +1956,6 @@ model-viewer::part(default-ar-button) {
     rgba(0, 0, 0, 0.2) 94%,
     transparent 100%
   );
-
-  /* Optimises browser consistency */
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
@@ -2184,7 +1967,6 @@ model-viewer::part(default-ar-button) {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  display: block;
 }
 
 .about-panel-text {
@@ -2213,8 +1995,6 @@ model-viewer::part(default-ar-button) {
   line-height: 1.5;
 }
 
-/* --------- DETAILS ON "OPENING TIMES" SLIDE - ABOUT PAGE --------- */
-
 .about-page-archive-contact-details {
   padding-top: 10px;
 }
@@ -2235,8 +2015,6 @@ model-viewer::part(default-ar-button) {
   text-decoration: underline;
 }
 
-/* -------------- TIME WARP BUTTON ------------------ */
-
 .spin-btn {
   position: fixed;
   left: 45%;
@@ -2248,7 +2026,6 @@ model-viewer::part(default-ar-button) {
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-
   color: #ffffff;
   border: 1px solid #ffffff;
   border-radius: 8px;
@@ -2261,10 +2038,7 @@ model-viewer::part(default-ar-button) {
     0 0 10px rgba(161, 0, 255, 0.7),
     0 0 22px rgba(161, 0, 255, 0.35);
   text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
-
-  cursor: pointer;
   pointer-events: auto;
-
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
@@ -2279,776 +2053,47 @@ model-viewer::part(default-ar-button) {
     0 0 30px rgba(180, 70, 255, 0.55);
 }
 
-/* ---------------- END OF DESKTOP SIZING ELEMENTS ----------------- */
-
-/* ============= */
-/* TABLET SIZING */
-/* ============= */
-
-@media (max-width: 840px) {
-  h2 {
-    font-size: 2rem;
-  }
-
-  /* ------------- COCKPIT MODEL ---------------- */
-
-  .window-panel-container {
-    width: 28%;
-    top: 42%;
-    left: 45%;
-    transform: translate(-50%, -50%);
-
-    overflow: hidden; /* 🔥 contains text inside */
-    position: absolute;
-  }
-
-  .window-text {
-    position: absolute;
-    top: 10%;
-    left: 12%;
-    width: 64%;
-    line-height: 1.2;
-    font-size: clamp(0.62rem, 3vw, 0.9rem);
-
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-
-    max-height: 70%;
-    overflow-y: auto;
-  }
-
-  .cockpit-nav {
-    gap: 5px;
-    left: 44%;
-    bottom: 15px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-    z-index: 6;
-
-    /* width: clamp(320px, 80vw, 90%); */
-    height: 140px;
-  }
-
-  .nav-btn {
-    min-height: 30px;
-    padding: 4px 6px;
-    /* font-size: clamp(0.42rem, 1.55vw, 0.7rem); */
-    font-size: 1.2rem;
-    line-height: 1.05;
-  }
-
-  .smaller-nav-font {
-    font-size: 0.8rem;
-  }
-
-  .exit-btn {
-    position: absolute;
-    right: 7.5%;
-    top: 79.5%;
-    min-width: 12%;
-    min-height: 4%;
-    transform: perspective(300px) rotate(45deg) rotateY(-60deg);
-  }
-
-  /* ---------- TANK PAGE & PREDECESSORS TABLE - TABLET ------------ */
-
-  .centered-content-paragraph {
-    text-align: left;
-  }
-
-  .bradshaws-archive-table .bradshaw-label {
-    width: 38%;
-    font-size: 0.8rem;
-  }
-
-  .bradshaws-archive-table .bradshaw-value {
-    width: 62%;
-    font-size: 0.9rem;
-  }
-
-  .dog-tag {
-    font-size: 0.5rem;
-    padding: 0.72rem 1rem 0.72rem 1.35rem;
-  }
-
-  /* ====================================== */
-  /*      ARCHIVE TABLE SYSTEM - TABLET     */
-  /* ====================================== */
-
-  @media (max-width: 840px) {
-    .archive-table {
-      width: 60%;
-      margin: 2.5rem 24% 3rem 16%;
-      padding: 20px;
-    }
-
-    .archive-table table {
-      table-layout: auto;
-    }
-
-    .archive-table th {
-      width: 42%;
-      font-size: 0.95rem;
-      overflow-wrap: break-word;
-      word-break: break-word;
-    }
-
-    .archive-table td {
-      width: 58%;
-      font-size: 0.94rem;
-      line-height: 1.55;
-      overflow-wrap: break-word;
-      word-break: break-word;
-    }
-  }
-
-  /* ---------- DONATING PAGE - TABLET -------------- */
-
-  .donating-heading {
-    top: 11%; /* adjust vertical position */
-    font-size: 1.5rem;
-    letter-spacing: 0.08em;
-  }
-
-  .whiteboard-text-box {
-    position: absolute;
-    top: 20%;
-    left: 7.5%;
-    width: 85%;
-    height: 32%;
-  }
-
-  /*---------------------ABOUT PAGE - TABLET --------------------------*/
-
-  .about-panel {
-    width: 88vw;
-    min-width: 88vw;
-  }
-
-  .about-panel-text {
-    max-width: 52%;
-    top: 7%;
-    left: 6%;
-  }
-
-  .about-panel-text h2 {
-    font-size: clamp(1.5rem, 1.5rem, 1.5rem);
-  }
-
-  .about-panel-text p {
-    margin: 0;
-    font-size: clamp(0.95rem, 1rem, 1rem);
-  }
-}
-
-/*--------------------- END OF TABLET SIZING --------------------------*/
-
-/* ============= */
-/* MOBILE SIZING */
-/* ============= */
-
-@media (max-width: 560px) {
-  /* ----- HOME PAGE - MOBILE ----- */
-
-  .vortex-model {
-    width: 80%;
-    height: 79%;
-    margin: 0 17% 0 12%;
-  }
-
-  .window-panel-container {
-    width: 45%;
-    top: 42%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    overflow: hidden; /*contains text inside */
-    position: absolute;
-  }
-
-  .window-text {
-    font-size: 3.5vw;
-  }
-
-  .cockpit-nav {
-    grid-template-columns: repeat(3, 1fr);
-    width: min(100vw, 84%);
-    min-height: 25%;
-    gap: 5px;
-    left: 49%;
-    bottom: -5px;
-    /* width: clamp(320px, 80vw, 90%); */
-  }
-
-  .nav-btn {
-    min-height: 28px;
-    padding: 4px 6px;
-  }
-
-  .nav-btn[data-short] {
-    font-size: 0;
-  }
-
-  .nav-btn::after {
-    content: attr(data-short);
-    font-size: 0.8rem;
-  }
-
-  .video-panel {
-    display: none;
-  }
-
-  .edge-hill-logo {
-    right: 47%;
-    top: 3%;
-    z-index: 5;
-    width: 25px;
-    height: auto;
-    transform: translate(-0%, -57%);
-    transform-origin: center;
-  }
-
-  .exit-btn {
-    position: absolute;
-    font-size: 1rem;
-    left: 88%;
-    top: 79%;
-    min-width: 17%;
-    min-height: 4%;
-    transform: perspective(200px) rotate(45deg) rotateY(-60deg) skewX(15deg);
-  }
-
-  /* --- TANK PAGE - MOBILE --- */
-
-  .centered-content {
-    width: 60%;
-    margin-left: 20%;
-    margin-right: 20%;
-  }
-
-  .ww2-background-img {
-    width: 100%;
-  }
-
-  .tank_model {
-    position: absolute;
-    top: 32%;
-    width: 70%;
-  }
-
-  /* TANK ANIMATION */
-  @keyframes driveInFromRight {
-    0% {
-      transform: translate(70vw, -50%);
-    }
-
-    100% {
-      transform: translate(15vw, -50%);
-    }
-  }
-
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  .bradshaws-archive-table {
-    margin: 2rem 20% 3rem 20%;
-    display: block;
-    border-spacing: 0;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-  }
-
-  .bradshaws-archive-table tbody {
-    display: block;
-  }
-
-  .bradshaws-archive-table tr {
-    display: block;
-    margin-bottom: 1rem;
-    border: 1px solid rgba(115, 191, 0, 0.28);
-    background: linear-gradient(
-      180deg,
-      rgba(18, 28, 12, 0.92),
-      rgba(10, 16, 8, 0.9)
-    );
-    box-shadow:
-      0 0 10px rgba(115, 191, 0, 0.08),
-      inset 0 0 14px rgba(115, 191, 0, 0.04);
-  }
-
-  .bradshaws-archive-table tr:not(:last-child) td {
-    border-bottom: none;
-  }
-
-  .bradshaws-archive-table td {
-    display: block;
-    width: 100%;
-    padding: 0.95rem;
-  }
-
-  .bradshaws-archive-table .bradshaw-label {
-    background: rgba(115, 191, 0, 0.08);
-    border-bottom: 1px dashed rgba(115, 191, 0, 0.2);
-  }
-
-  .bradshaws-archive-table .bradshaw-value {
-    font-size: 0.9rem;
-    line-height: 1.65;
-  }
-
-  .dog-tag {
-    display: block;
-    width: 100%;
-    font-size: 0.68rem;
-    text-align: center;
-  }
-
-  .stamp {
-    font-size: 0.68rem;
-  }
-
-  .bradshaws-archive-table .bradshaw-label {
-    width: 100%;
-  }
-
-  .bradshaw-paragraph {
-    font-size: 1.25rem;
-  }
-
-  .william-bradshaw-info-and-img {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 15px;
-  }
-
-  .william-bradshaw-caption,
-  .william-bradshaw-img,
-  .william-bradshaw-img-2 {
-    grid-column: 1;
-  }
-
-  .william-bradshaw-caption {
-    grid-row: 1;
-    text-align: center;
-  }
-
-  .william-bradshaw-img {
-    grid-row: 2;
-  }
-
-  .william-bradshaw-img-2 {
-    grid-row: 3;
-  }
-
-  /* CHLOE FISHER - MOBILE PAGE */
-  .midwife-room-container {
-    margin-top: 10px;
-  }
-
-  .midwife-room-img {
-    width: 80%;
-  }
-
-  .midwife-scan-video {
-    top: 38%;
-    left: 13%;
-    width: 40%;
-    height: 30%;
-  }
-
-  /* =================================== */
-  /*    ARCHIVE TABLE SYSTEM - MOBILE    */
-  /* =================================== */
-
-  .archive-table {
-    width: 60%;
-    margin: 2rem 20% 3rem 20%;
-    padding: 0;
-    display: block;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-  }
-
-  .archive-table table {
-    display: block;
-    width: 100%;
-    border-spacing: 0;
-  }
-
-  .archive-table tbody {
-    display: block;
-  }
-
-  .archive-table tr {
-    display: block;
-    margin-bottom: 1rem;
-  }
-
-  .archive-table th,
-  .archive-table td {
-    display: block;
-    width: 100%;
-    padding: 0.95rem;
-  }
-
-  .archive-table th {
-    text-align: center;
-  }
-
-  .archive-table td {
-    border-bottom: none;
-    font-size: 0.9rem;
-    line-height: 1.65;
-  }
-
-  /* mobile paper cards */
-  .archive-table--paper tr {
-    border: 1px solid rgba(120, 100, 60, 0.28);
-    background: linear-gradient(180deg, #f6f1e7, #e8dcc4);
-    box-shadow:
-      0 0 10px rgba(120, 90, 40, 0.08),
-      inset 0 0 14px rgba(120, 90, 40, 0.04);
-  }
-
-  .archive-table--paper tr:nth-child(even) {
-    background: linear-gradient(180deg, #f6f1e7, #e8dcc4);
-  }
-
-  .archive-table--paper th {
-    border-bottom: 1px dashed rgba(120, 100, 60, 0.25);
-  }
-
-  /* mobile sci-fi cards */
-  .archive-table--scifi tr {
-    border: 1px solid rgba(0, 255, 156, 0.28);
-    background: linear-gradient(
-      180deg,
-      rgba(10, 20, 24, 0.95),
-      rgba(5, 10, 14, 0.94)
-    );
-    box-shadow:
-      0 0 10px rgba(0, 255, 156, 0.08),
-      inset 0 0 14px rgba(0, 255, 156, 0.04);
-  }
-
-  .archive-table--scifi tr:nth-child(even) {
-    background: linear-gradient(
-      180deg,
-      rgba(10, 20, 24, 0.95),
-      rgba(5, 10, 14, 0.94)
-    );
-  }
-
-  .archive-table--scifi th {
-    border-bottom: 1px dashed rgba(0, 255, 156, 0.22);
-    background: rgba(0, 255, 156, 0.06);
-  }
-
-  /* mobile medical cards */
-  .archive-table--medical tr {
-    border: 1px solid rgba(120, 160, 190, 0.3);
-    background: linear-gradient(180deg, #f4f8fb, #e6eef5);
-    box-shadow:
-      0 0 10px rgba(120, 160, 190, 0.08),
-      inset 0 0 14px rgba(120, 160, 190, 0.05);
-    overflow: hidden;
-  }
-
-  .archive-table--medical tr:nth-child(even) {
-    background: linear-gradient(180deg, #f4f8fb, #e6eef5);
-  }
-
-  .archive-table--medical th {
-    background: rgba(120, 170, 210, 0.1);
-    border-bottom: 1px dashed rgba(120, 160, 190, 0.25);
-  }
-
-  /* CHRISTOPHER ROBY PAGE - MOBILE */
-  .cinema-scene {
-    width: 100vw;
-    margin-left: 0;
-    margin-top: -50px;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .cinema-seating-img {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    display: block;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .black-and-white-movie-container {
-    position: absolute;
-    top: 25%;
-    left: 50%; /* ✅ center anchor */
-    transform: translateX(-50%); /* ✅ perfect centering */
-    width: 60%; /* ✅ control width here */
-    height: 48%;
-    z-index: 1;
-    overflow: hidden;
-  }
-
-  .black-and-white-movie {
-    width: 100%;
-    height: 50%;
-    object-fit: cover;
-  }
-
-  /* mobile tv & radio cards */
-  .archive-table--tv-radio tr {
-    border: 1px solid rgba(255, 190, 80, 0.28);
-    background:
-      linear-gradient(180deg, #1b1f2a 0%, #0f1218 100%),
-      radial-gradient(
-        circle at top left,
-        rgba(255, 180, 60, 0.08),
-        transparent 40%
-      ),
-      repeating-linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.015) 0,
-        rgba(255, 255, 255, 0.015) 2px,
-        transparent 2px,
-        transparent 10px
-      );
-    box-shadow:
-      0 0 10px rgba(255, 180, 60, 0.08),
-      inset 0 0 14px rgba(255, 210, 120, 0.04);
-    overflow: hidden;
-    margin-bottom: 0;
-  }
-
-  .archive-table--tv-radio tr:nth-child(even) {
-    background:
-      linear-gradient(180deg, #1b1f2a 0%, #0f1218 100%),
-      radial-gradient(
-        circle at top left,
-        rgba(255, 180, 60, 0.08),
-        transparent 40%
-      ),
-      repeating-linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.015) 0,
-        rgba(255, 255, 255, 0.015) 2px,
-        transparent 2px,
-        transparent 10px
-      );
-  }
-
-  .archive-table--tv-radio th {
-    color: #ffd36a;
-    background: linear-gradient(
-      90deg,
-      rgba(255, 190, 80, 0.14),
-      rgba(255, 190, 80, 0.04)
-    );
-    border-bottom: 1px dashed rgba(255, 190, 80, 0.22);
-  }
-
-  .archive-table--tv-radio td {
-    color: #f8f3ea;
-  }
-
-  /* PREDECESSORS MOBILE PAGE */
-
-  .predecessors-heading {
-    font-size: 2rem;
-  }
-
-  .principles-img-container {
-    display: block;
-  }
-
-  .principles-img-container p {
-    height: 10px;
-  }
-
-  .principles-img-container img {
-    padding-bottom: 40px;
-  }
-
-  .durning-road-img-caption {
-    padding-top: 15px;
-    margin-bottom: 5px;
-  }
-
-  .edge-hill-ormskirk-img-container {
-    padding-bottom: 20px;
-  }
-
-  /* TV & RADIO PRESS PACKS - MOBILE PAGE */
-
-  .media-room-container {
-    width: 80%;
-  }
-
-  /* RETURN TO LANDING DESTINATION BUTTON - MOBILE */
-
-  .return-to-landing-destination-container {
-    margin-right: 0%;
-  }
-
-  /* -------------- DONATING PAGE - MOBILE ------------- */
-
-  .donating-container {
-    width: 90%;
-    margin-left: 5.5%;
-  }
-
-  .donating-heading {
-    font-size: 1rem;
-    top: 12%;
-    left: 50%;
-  }
-
-  .whiteboard-text-box {
-    top: 18%;
-    left: 20.6%;
-    width: 59%;
-    height: 28%;
-    font-size: 0.8rem;
-  }
-
-  .parcel-img {
-    position: absolute;
-    top: 51%;
-    left: 70%;
-    transform: translate(-50%, -60%);
-    width: 110px;
-  }
-
-  .donate {
-    top: 52.3%;
-    left: 66.5%;
-    rotate: 6deg;
-    transform: translate(-50%, -60%);
-    width: 150px;
-    font-size: 1rem;
-    color: #1f1f1f;
-  }
-
-  /*---------------------ABOUT PAGE - MOBILE --------------------------*/
-
-  .about-horizontal-container,
-  .about-horizontal-track,
-  .about-panel {
-    height: 100dvh;
-  }
-
-  .about-panel {
-    width: 100vw;
-    min-width: 100vw;
-  }
-
-  .about-panel-text {
-    max-width: 78%;
-    top: 10%;
-    left: 11%;
-  }
-
-  .about-panel-text h2 {
-    font-size: 1.5rem;
-  }
-
-  .about-panel-text p {
-    font-size: 1rem;
-  }
-
-  /* TIME WARP BUTTON - MOBILE */
-  .spin-btn {
-    left: 50%;
-    top: 72%;
-  }
-}
-
-/* ------------------ END OF MOBILE SIZING ----------------------*/
-
-/* ============================ */
-/*   VORTEX TRANSITION SYSTEM   */
-/* ============================ */
+/* =========================================================
+   22. VORTEX TRANSITION SYSTEM
+   ========================================================= */
 
 body.home-page .center-vortex-container,
 body.is-transitioning .center-vortex-container {
   visibility: visible;
 }
 
-/* scrollable subpages: keep vortex fixed in place */
-body.scrollable .center-vortex-container {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Home Page */
-
-/* transition state */
-
 body.is-transitioning .window-panel-container,
 body.is-transitioning .video-panel,
-body.is-transitioning .door-overlay {
-  visibility: hidden;
-}
-
-/* TANK PAGE*/
+body.is-transitioning .door-overlay,
 body.is-transitioning .center-tank-container,
 body.is-transitioning .ww2-background-img,
-body.is-transitioning #tank {
-  visibility: hidden;
-}
-
-/* CHLOE FISHER PAGE */
-body.is-transitioning .neon-border,
+body.is-transitioning #tank,
 body.is-transitioning .midwife-room-container,
 body.is-transitioning .midwife-room-img,
-body.is-transitioning .midwife-scan-video {
-  visibility: hidden;
-}
-
-/* EDGE HILL PREDECESSORS PAGE */
+body.is-transitioning .midwife-scan-video,
 body.is-transitioning .rain-img-container,
 body.is-transitioning .edge-hill-rain-img,
 body.is-transitioning .rain,
-body.is-transitioning .lightning {
-  visibility: hidden;
-}
-
-/* CHRISTOPHER ROBY PAGE */
+body.is-transitioning .lightning,
 body.is-transitioning .cinema-scene,
 body.is-transitioning .cinema-seating-img-container,
 body.is-transitioning .cinema-seating-img,
 body.is-transitioning .black-and-white-movie-container,
-body.is-transitioning .black-and-white-movie {
+body.is-transitioning .black-and-white-movie,
+body.is-transitioning .donating-container,
+body.is-transitioning .donating-page-img,
+body.is-transitioning .donating-heading,
+body.is-transitioning .whiteboard-text-box,
+body.is-transitioning .help-desk-scene,
+body.is-transitioning .help-desk-room-img,
+body.is-transitioning .desk-text {
   visibility: hidden;
 }
 
-/* TV & RADIO PRESS PACKS PAGE */
-body.is-transitioning .media-room-container,
-body.is-transitioning .media-text-layer,
-body.is-transitioning .media-text-box,
-body.is-transitioning .media-room,
-body.is-transitioning .clock {
-  visibility: hidden;
-}
-
-/* VORTEX SPEEED DURATION */
 body.is-transitioning .vortex-model {
   animation: vortexTransitionZoom 2s ease forwards;
 }
 
-/* HIDES NEON BORDER DURING PAGE TRANSITION */
 body.is-transitioning .neon-border,
 body.is-transitioning .neon-border::before {
   display: none;
@@ -3063,7 +2108,6 @@ body.is-transitioning .neon-border::before {
   }
 }
 
-/* TV & RADIO PAGE: force-hide during vortex transition */
 body.is-transitioning .media-room-container,
 body.is-transitioning .media-text-layer,
 body.is-transitioning .media-text-box,
@@ -3072,21 +2116,7 @@ body.is-transitioning .modern-day-media-room,
 body.is-transitioning .media-room,
 body.is-transitioning .clock,
 body.is-transitioning .neon-border,
-body.is-transitioning .tv-and-radio-information-section {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-/* DONATING PAGE */
-body.is-transitioning .donating-container,
-body.is-transitioning .donating-page-img,
-body.is-transitioning .donating-heading,
-body.is-transitioning .whiteboard-text-box {
-  visibility: hidden;
-}
-
-/* ABOUT PAGE */
+body.is-transitioning .tv-and-radio-information-section,
 body.is-transitioning .about-horizontal-container,
 body.is-transitioning .about-horizontal-track,
 body.is-transitioning .about-panel,
@@ -3098,16 +2128,9 @@ body.is-transitioning .spin-btn {
   pointer-events: none !important;
 }
 
-/* HELP PAGE */
-body.is-transitioning .help-desk-scene,
-body.is-transitioning .help-desk-room-img,
-body.is-transitioning .desk-text {
-  visibility: hidden;
-}
-
-/* --------------------------------------------- */
-
-/* --------------- HELP PAGE - DESKTOP -------------- */
+/* =========================================================
+   23. HELP PAGE
+   ========================================================= */
 
 .help-desk-scene {
   position: relative;
@@ -3115,14 +2138,15 @@ body.is-transitioning .desk-text {
 }
 
 .help-desk-room-img {
-  display: block;
   width: 100%;
   height: 90.5vh;
   object-fit: cover;
   object-position: center;
 }
 
-/* DESK TEXT - DESKTOP */
+/* -------------------------
+   23A. Desk Text
+   ------------------------- */
 
 .desk-text {
   position: absolute;
@@ -3137,7 +2161,6 @@ body.is-transitioning .desk-text {
   font-variant: small-caps;
   width: 130px;
   color: #2b1d0b;
-
   background: linear-gradient(
     145deg,
     #fff6cc 0%,
@@ -3147,20 +2170,16 @@ body.is-transitioning .desk-text {
     #a67c00 75%,
     #f5d97a 100%
   );
-
   border: 1px solid #8c6b1f;
   border-radius: 3px;
-
   text-shadow:
     0 1px 0 rgba(255, 255, 255, 0.6),
     0 -1px 1px rgba(0, 0, 0, 0.25);
-
   box-shadow:
     inset 0 1px 2px rgba(255, 255, 255, 0.8),
     inset 0 -2px 4px rgba(0, 0, 0, 0.35),
     inset 0 0 6px rgba(255, 255, 255, 0.2),
     0 2px 6px rgba(0, 0, 0, 0.35);
-
   transform-origin: center;
   transition:
     transform 0.2s ease,
@@ -3176,7 +2195,6 @@ body.is-transitioning .desk-text {
   height: 6px;
   transform: translateY(-50%);
   border-radius: 50%;
-
   background: radial-gradient(circle at 30% 30%, #eee, #777 70%);
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, 0.6),
@@ -3192,7 +2210,6 @@ body.is-transitioning .desk-text {
   right: 6px;
 }
 
-/* individually positioned */
 .desk-drawer-text-1 {
   top: 62%;
   left: 39%;
@@ -3205,14 +2222,12 @@ body.is-transitioning .desk-text {
   transform: translate(-50%, -50%) rotate(-1deg) skewY(-7.5deg);
 }
 
-/* HOVER STATES */
 .desk-drawer-text-1:hover {
   transform: translate(-50%, -50%) rotate(-0deg) skewY(-7deg) scale(1.05);
   box-shadow:
     inset 0 1px 2px rgba(255, 255, 255, 0.8),
     inset 0 -2px 4px rgba(0, 0, 0, 0.3),
     0 4px 10px rgba(0, 0, 0, 0.4);
-  cursor: pointer;
 }
 
 .desk-drawer-text-2:hover {
@@ -3221,312 +2236,11 @@ body.is-transitioning .desk-text {
     inset 0 1px 2px rgba(255, 255, 255, 0.8),
     inset 0 -2px 4px rgba(0, 0, 0, 0.3),
     0 4px 10px rgba(0, 0, 0, 0.4);
-  cursor: pointer;
 }
 
-/*===============================================*/
-/* Desk Text Media Queries to Keep Text in Place */
-/*===============================================*/
-
-@media (max-width: 1280px) {
-  .desk-text {
-    font-size: 0.9rem;
-    width: 120px;
-  }
-
-  .desk-drawer-text-1 {
-    top: 61%;
-    left: 39%;
-  }
-
-  .desk-drawer-text-2 {
-    top: 71%;
-    left: 39%;
-  }
-}
-
-@media (max-width: 1225px) {
-  .desk-text {
-    font-size: 0.8rem;
-    width: 110px;
-  }
-
-  .desk-drawer-text-1 {
-    top: 60.5%;
-    left: 39.2%;
-  }
-
-  .desk-drawer-text-2 {
-    top: 69.5%;
-    left: 39.2%;
-  }
-}
-
-/* 1150px */
-@media (max-width: 1150px) {
-  .desk-text {
-    padding: 6px 10px;
-    letter-spacing: 0em;
-    width: 100px;
-  }
-
-  .desk-drawer-text-1 {
-    top: 60%;
-    left: 39%;
-  }
-
-  .desk-drawer-text-2 {
-    top: 68%;
-    left: 39%;
-  }
-}
-
-/* 1070px */
-@media (max-width: 1070px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 38.5%;
-  }
-}
-
-/* 1020px */
-@media (max-width: 1020px) {
-  .desk-text {
-    line-height: 1;
-  }
-
-  .desk-drawer-text-1 {
-    top: 59.5%;
-    left: 37.8%;
-  }
-
-  .desk-drawer-text-2 {
-    top: 67.2%;
-    left: 37.8%;
-  }
-}
-
-/* 960px */
-@media (max-width: 960px) {
-  .desk-text {
-    padding: 6px 7px;
-  }
-
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 37%;
-  }
-}
-
-/* 890px */
-@media (max-width: 890px) {
-  .desk-text {
-    width: 90px;
-  }
-
-  .desk-drawer-text-1 {
-    left: 36%;
-  }
-
-  .desk-drawer-text-2 {
-    top: 67.3%;
-    left: 36%;
-  }
-}
-
-/* 800px */
-@media (max-width: 800px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 34%;
-  }
-}
-
-/* 710px */
-@media (max-width: 710px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 32.5%;
-  }
-}
-
-/* 650px */
-@media (max-width: 650px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 31%;
-  }
-}
-
-/* 600px */
-@media (max-width: 600px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 29.5%;
-  }
-}
-
-/* --------------- HELP PAGE - MOBILE -------------- */
-/* 560px */
-@media (max-width: 560px) {
-  .help-desk-room-img {
-    width: 100%;
-    height: 100vh;
-    object-position: left;
-    transform: scale(1.4);
-  }
-
-  .desk-text {
-    font-size: 0.9rem;
-    width: 110px;
-    padding: 9px 16px;
-  }
-
-  .desk-drawer-text-1 {
-    top: 50%;
-    left: 34%;
-    transform: translate(-50%, -50%) rotate(-1deg) skewY(-7deg);
-  }
-
-  .desk-drawer-text-2 {
-    top: 59%;
-    left: 34%;
-    transform: translate(-50%, -50%) rotate(-1deg) skewY(-8deg);
-  }
-
-  .desk-drawer-text-1:hover {
-    transform: translate(-50%, -50%) rotate(-1deg) skewY(-7deg) scale(1.05);
-  }
-
-  .desk-drawer-text-2:hover {
-    transform: translate(-50%, -50%) rotate(-1deg) skewY(-8deg) scale(1.05);
-  }
-}
-
-/* 530px */
-@media (max-width: 530px) {
-  .desk-text {
-    font-size: 0.8rem;
-    width: 100px;
-    padding: 8px 8px;
-  }
-
-  .desk-drawer-text-1 {
-    left: 36%;
-  }
-
-  .desk-drawer-text-2 {
-    top: 58%;
-    left: 36%;
-  }
-}
-
-/* 510px */
-@media (max-width: 510px) {
-  .desk-text {
-    padding: 8px 10px;
-  }
-
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 38.5%;
-  }
-}
-
-/* 480px */
-@media (max-width: 480px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 42%;
-  }
-}
-
-/* 460px */
-@media (max-width: 460px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 45%;
-  }
-}
-
-/* 435px */
-@media (max-width: 435px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 48%;
-  }
-}
-
-/* 415px */
-@media (max-width: 415px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 52%;
-  }
-}
-
-/* 395px */
-@media (max-width: 395px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 55%;
-  }
-}
-
-/* 375px */
-@media (max-width: 375px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 59%;
-  }
-}
-
-/* 360px */
-@media (max-width: 360px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 62%;
-  }
-}
-
-/* 345px */
-@media (max-width: 345px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 65%;
-  }
-}
-
-/* 330px */
-@media (max-width: 330px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 69%;
-  }
-}
-
-/* 320px */
-@media (max-width: 320px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 72%;
-  }
-}
-
-/* 305px */
-@media (max-width: 305px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 76%;
-  }
-}
-
-/* --------------- HELP PAGE - DESKTOP -------------- */
-
-/* POP-UP INFORMATION PAGE */
-/* ============================ */
-/* VISUALLY HIDDEN CONTENT      */
-/* ============================ */
+/* -------------------------
+   23B. Hidden Content Utility
+   ------------------------- */
 
 .visually-hidden {
   position: absolute;
@@ -3541,9 +2255,9 @@ body.is-transitioning .desk-text {
   white-space: nowrap;
 }
 
-/* ============================ */
-/* HELP PAGE PAPER POPUP        */
-/* ============================ */
+/* -------------------------
+   23C. Help Paper Popup
+   ------------------------- */
 
 .help-paper-modal {
   position: fixed;
@@ -3571,9 +2285,7 @@ body.is-transitioning .desk-text {
   max-height: 80vh;
   overflow-y: auto;
   padding: 3.4rem 2.4rem 2rem 2.4rem;
-
   transform: translate(-50%, -50%) rotate(-1deg);
-
   background:
     linear-gradient(
       180deg,
@@ -3587,27 +2299,19 @@ body.is-transitioning .desk-text {
       transparent 1px,
       transparent 34px
     );
-
   border: 1px solid #b79c67;
   border-radius: 2px;
-
   box-shadow:
     0 18px 45px rgba(0, 0, 0, 0.42),
     inset 0 0 60px rgba(110, 80, 30, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.45);
-
   color: #2f2418;
-
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
 .help-paper-sheet::-webkit-scrollbar {
   display: none;
-}
-
-.help-paper-content::before {
-  border: 1px solid rgba(120, 90, 45, 0.12);
 }
 
 .help-paper-fold {
@@ -3644,7 +2348,6 @@ body.is-transitioning .desk-text {
   top: 12px;
   right: 14px;
   z-index: 3;
-
   width: 38px;
   height: 38px;
   border: 1px solid #8e6f3a;
@@ -3653,12 +2356,9 @@ body.is-transitioning .desk-text {
   color: #3a2910;
   font-size: 1.3rem;
   line-height: 1;
-  cursor: pointer;
-
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, 0.65),
     0 2px 6px rgba(0, 0, 0, 0.22);
-
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -3770,59 +2470,24 @@ body.is-transitioning .desk-text {
   margin: 0.25rem 0 0.75rem 0;
 }
 
-.desk-text {
-  cursor: pointer;
-}
-
-@media (max-width: 560px) {
-  .help-paper-sheet {
-    width: min(92vw, 92vw);
-    max-height: 84vh;
-    padding: 3rem 1rem 1.4rem 1rem;
-  }
-
-  .help-paper-content::before {
-    right: 8px;
-    left: 8px;
-  }
-
-  .help-paper-content::after {
-    left: 18px;
-  }
-
-  .help-paper-inner {
-    max-width: none;
-    padding: 20px 16px 20px 28px;
-  }
-
-  .help-paper-title {
-    padding-right: 2.8rem;
-  }
-}
-
-/* FIREPLACE GLOW - HELP PAGE -ESKTOP */
-
-/* ============================ */
-/* FIREPLACE EFFECT             */
-/* ============================ */
+/* -------------------------
+   23D. Fireplace Effects
+   ------------------------- */
 
 .fireplace-light {
   position: absolute;
   z-index: 1;
   pointer-events: none;
-
   top: 8%;
   left: 41%;
   width: 24%;
   height: 26%;
-
   background: radial-gradient(
     ellipse at center,
     rgba(255, 180, 80, 0.16) 0%,
     rgba(255, 130, 40, 0.09) 35%,
     transparent 75%
   );
-
   filter: blur(22px);
   mix-blend-mode: screen;
   opacity: 0.75;
@@ -3832,13 +2497,11 @@ body.is-transitioning .desk-text {
   position: absolute;
   z-index: 2;
   pointer-events: none;
-
   top: 16%;
   left: 61%;
   width: 11%;
   height: 17%;
   transform: translate(-50%, 0);
-
   filter: blur(1px);
 }
 
@@ -3859,8 +2522,6 @@ body.is-transitioning .desk-text {
     rgba(255, 70, 20, 0.28) 55%,
     transparent 75%
   );
-
-  /* 🔥 THIS IS THE KEY PART */
   mask-image: linear-gradient(
     to top,
     transparent 0%,
@@ -3875,7 +2536,6 @@ body.is-transitioning .desk-text {
     rgba(0, 0, 0, 1) 40%,
     rgba(0, 0, 0, 1) 100%
   );
-
   mix-blend-mode: screen;
   opacity: 0.95;
 }
@@ -3898,25 +2558,9 @@ body.is-transitioning .desk-text {
   pointer-events: none;
 }
 
-@media (max-width: 560px) {
-  .fireplace-light {
-    top: 8%;
-    left: 48%;
-    width: 28%;
-    height: 22%;
-  }
-
-  .fireplace-fire {
-    top: 15%;
-    left: 54%;
-    width: 18%;
-    height: 12%;
-  }
-}
-
-/* ============================ */
-/* DOOR DISCLAIMER SYSTEM       */
-/* ============================ */
+/* =========================================================
+   24. DISCLAIMER / ACCESS SYSTEM
+   ========================================================= */
 
 .door-disclaimer {
   position: absolute;
@@ -3927,10 +2571,6 @@ body.is-transitioning .desk-text {
   width: min(640px, 82vw);
   pointer-events: auto;
 }
-
-/* ===================== */
-/* FULL PANEL (VISIBLE)  */
-/* ===================== */
 
 .door-disclaimer-panel {
   background: linear-gradient(
@@ -3946,7 +2586,6 @@ body.is-transitioning .desk-text {
     0 0 14px rgba(255, 70, 70, 0.28),
     0 0 36px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(4px);
-
   opacity: 1;
   visibility: visible;
   transform: scale(1);
@@ -3979,17 +2618,11 @@ body.is-transitioning .desk-text {
   margin-top: 1rem;
 }
 
-/* ===================== */
-/* MAIN ACCEPT BUTTON    */
-/* ===================== */
-
 .disclaimer-close-btn {
   font-family: monospace, serif;
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  cursor: pointer;
-
   border: 1px solid rgba(255, 150, 150, 0.85);
   border-radius: 8px;
   background: linear-gradient(
@@ -3999,11 +2632,9 @@ body.is-transitioning .desk-text {
   );
   color: #fff;
   padding: 0.7rem 1rem;
-
   box-shadow:
     0 0 8px rgba(255, 100, 100, 0.28),
     inset 0 0 8px rgba(255, 255, 255, 0.04);
-
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -4017,19 +2648,13 @@ body.is-transitioning .desk-text {
     0 0 24px rgba(255, 80, 80, 0.2);
 }
 
-/* =========================*/
-/* "ACCCESS GRANTED" BUTTON */
-/* =========================*/
-
 .disclaimer-mini-btn {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.7);
-
   width: clamp(220px, 15vw, 420px);
   padding: 0.65rem 1rem;
-
   font-family: monospace, serif;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -4037,7 +2662,6 @@ body.is-transitioning .desk-text {
   border-radius: 4px;
   border: 2px solid transparent;
   color: #fff;
-  cursor: pointer;
   opacity: 0;
   visibility: hidden;
   transition:
@@ -4050,10 +2674,6 @@ body.is-transitioning .desk-text {
     color 0.35s ease;
 }
 
-/* ========================= */
-/* DISCLAIMER ACCEPTED STATE */
-/* ========================= */
-
 .disclaimer-mini-btn.is-accepted {
   border-color: rgba(120, 255, 150, 0.85);
   color: #eaffef;
@@ -4065,10 +2685,6 @@ body.is-transitioning .desk-text {
   );
   box-shadow: 0 0 12px rgba(80, 255, 120, 0.35);
 }
-
-/* ===================== */
-/* COLLAPSED STATE       */
-/* ===================== */
 
 .door-disclaimer.is-collapsed .door-disclaimer-panel {
   opacity: 0;
@@ -4090,10 +2706,6 @@ body.is-transitioning .desk-text {
     visibility 0s linear 0s;
 }
 
-/* ========================= */
-/* DISCLAIMER - FULLY HIDDEN  /
-/* ========================= */
-
 .door-disclaimer.is-gone {
   opacity: 0;
   visibility: hidden;
@@ -4102,30 +2714,6 @@ body.is-transitioning .desk-text {
     opacity 0.25s ease,
     visibility 0s linear 0.25s;
 }
-
-/* ===================== */
-/* MOBILE                */
-/* ===================== */
-
-@media (max-width: 560px) {
-  .door-disclaimer {
-    top: 1%;
-    width: 92vw;
-  }
-
-  .door-disclaimer-panel {
-    padding: 1rem 0.9rem;
-  }
-
-  .disclaimer-mini-btn {
-    width: 80vw;
-    font-size: 0.75rem;
-  }
-}
-
-/* ============================ */
-/* DOOR WARNING MESSAGE         */
-/* ============================ */
 
 .door-warning {
   position: absolute;
@@ -4144,12 +2732,11 @@ body.is-transitioning .desk-text {
   opacity: 1;
 }
 
-/* warning box */
 .door-warning-box {
   width: 60%;
-  max-width: 720px; /* prevents it getting too wide on big screens */
-  min-width: 260px; /* prevents it getting too tiny on mobile */
-  margin: 0 auto; /* extra safety centering */
+  max-width: 720px;
+  min-width: 260px;
+  margin: 0 auto;
   background: linear-gradient(
     180deg,
     rgba(15, 0, 0, 0.95),
@@ -4158,16 +2745,13 @@ body.is-transitioning .desk-text {
   border: 1px solid rgba(255, 90, 90, 0.8);
   border-radius: 8px;
   padding: 1rem 1.4rem;
-
   color: #ffdede;
   font-family: monospace;
   text-align: center;
   letter-spacing: 0.05em;
-
   box-shadow:
     0 0 14px rgba(255, 60, 60, 0.35),
     0 0 40px rgba(0, 0, 0, 0.6);
-
   transform: scale(0.9);
   transition: transform 0.25s ease;
 }
@@ -4176,10 +2760,1006 @@ body.is-transitioning .desk-text {
   transform: scale(1);
 }
 
-/* EXTRA COCKPIT NAV CONTROL */
+/* =========================================================
+   25. TABLET RESPONSIVE (MAX-WIDTH: 840PX)
+   ========================================================= */
+
+@media (max-width: 840px) {
+  h2 {
+    font-size: 2rem;
+  }
+
+  .window-panel-container {
+    width: 28%;
+    top: 42%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    position: absolute;
+  }
+
+  .window-text {
+    position: absolute;
+    top: 10%;
+    left: 12%;
+    width: 64%;
+    line-height: 1.2;
+    font-size: clamp(0.62rem, 3vw, 0.9rem);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-height: 70%;
+    overflow-y: auto;
+  }
+
+  .cockpit-nav {
+    gap: 5px;
+    left: 44%;
+    bottom: 15px;
+    height: 140px;
+  }
+
+  .nav-btn {
+    min-height: 30px;
+    padding: 4px 6px;
+    font-size: 1.2rem;
+    line-height: 1.05;
+  }
+
+  .smaller-nav-font {
+    font-size: 0.8rem;
+  }
+
+  .exit-btn {
+    right: 7.5%;
+    top: 79.5%;
+    min-width: 12%;
+    min-height: 4%;
+    transform: perspective(300px) rotate(45deg) rotateY(-60deg);
+  }
+
+  .centered-content-paragraph {
+    text-align: left;
+  }
+
+  .bradshaws-archive-table .bradshaw-label {
+    width: 38%;
+    font-size: 0.8rem;
+  }
+
+  .bradshaws-archive-table .bradshaw-value {
+    width: 62%;
+    font-size: 0.9rem;
+  }
+
+  .dog-tag {
+    font-size: 0.5rem;
+    padding: 0.72rem 1rem 0.72rem 1.35rem;
+  }
+
+  .archive-table {
+    width: 60%;
+    margin: 2.5rem 24% 3rem 16%;
+    padding: 20px;
+  }
+
+  .archive-table table {
+    table-layout: auto;
+  }
+
+  .archive-table th {
+    width: 42%;
+    font-size: 0.95rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .archive-table td {
+    width: 58%;
+    font-size: 0.94rem;
+    line-height: 1.55;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .donating-heading {
+    top: 11%;
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+  }
+
+  .whiteboard-text-box {
+    top: 20%;
+    left: 7.5%;
+    width: 85%;
+    height: 32%;
+  }
+
+  .about-panel {
+    width: 88vw;
+    min-width: 88vw;
+  }
+
+  .about-panel-text {
+    max-width: 52%;
+    top: 7%;
+    left: 6%;
+  }
+
+  .about-panel-text h2 {
+    font-size: clamp(1.5rem, 1.5rem, 1.5rem);
+  }
+
+  .about-panel-text p {
+    font-size: clamp(0.95rem, 1rem, 1rem);
+  }
+}
+
+/* =========================================================
+   26. MOBILE RESPONSIVE (MAX-WIDTH: 560PX)
+   ========================================================= */
+
+@media (max-width: 560px) {
+  .vortex-model {
+    width: 80%;
+    height: 79%;
+    margin: 0 17% 0 12%;
+  }
+
+  .window-panel-container {
+    width: 45%;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+  }
+
+  .window-text {
+    font-size: 3.5vw;
+  }
+
+  .cockpit-nav {
+    width: min(100vw, 84%);
+    min-height: 25%;
+    gap: 5px;
+    left: 49%;
+    bottom: -5px;
+  }
+
+  .nav-btn {
+    min-height: 28px;
+    padding: 4px 6px;
+  }
+
+  .nav-btn[data-short] {
+    font-size: 0;
+  }
+
+  .nav-btn::after {
+    content: attr(data-short);
+    font-size: 0.8rem;
+  }
+
+  .video-panel {
+    display: none;
+  }
+
+  .edge-hill-logo {
+    right: 47%;
+    top: 3%;
+    z-index: 5;
+    width: 25px;
+    height: auto;
+    transform: translate(-0%, -57%);
+    transform-origin: center;
+  }
+
+  .exit-btn {
+    font-size: 1rem;
+    left: 88%;
+    top: 79%;
+    min-width: 17%;
+    min-height: 4%;
+    transform: perspective(200px) rotate(45deg) rotateY(-60deg) skewX(15deg);
+  }
+
+  .centered-content {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+
+  .ww2-background-img {
+    width: 100%;
+  }
+
+  .tank_model {
+    top: 32%;
+    width: 70%;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .bradshaws-archive-table {
+    margin: 2rem 20% 3rem 20%;
+    display: block;
+    border-spacing: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .bradshaws-archive-table tbody {
+    display: block;
+  }
+
+  .bradshaws-archive-table tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(115, 191, 0, 0.28);
+    background: linear-gradient(
+      180deg,
+      rgba(18, 28, 12, 0.92),
+      rgba(10, 16, 8, 0.9)
+    );
+    box-shadow:
+      0 0 10px rgba(115, 191, 0, 0.08),
+      inset 0 0 14px rgba(115, 191, 0, 0.04);
+  }
+
+  .bradshaws-archive-table tr:not(:last-child) td {
+    border-bottom: none;
+  }
+
+  .bradshaws-archive-table td,
+  .bradshaws-archive-table .bradshaw-label {
+    display: block;
+    width: 100%;
+  }
+
+  .bradshaws-archive-table td {
+    padding: 0.95rem;
+  }
+
+  .bradshaws-archive-table .bradshaw-label {
+    background: rgba(115, 191, 0, 0.08);
+    border-bottom: 1px dashed rgba(115, 191, 0, 0.2);
+  }
+
+  .bradshaws-archive-table .bradshaw-value {
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+
+  .dog-tag {
+    display: block;
+    width: 100%;
+    font-size: 0.68rem;
+    text-align: center;
+  }
+
+  .stamp {
+    font-size: 0.68rem;
+  }
+
+  .bradshaw-paragraph {
+    font-size: 1.25rem;
+  }
+
+  .william-bradshaw-info-and-img {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 15px;
+  }
+
+  .william-bradshaw-caption,
+  .william-bradshaw-img,
+  .william-bradshaw-img-2 {
+    grid-column: 1;
+  }
+
+  .william-bradshaw-caption {
+    grid-row: 1;
+    text-align: center;
+  }
+
+  .william-bradshaw-img {
+    grid-row: 2;
+  }
+
+  .william-bradshaw-img-2 {
+    grid-row: 3;
+  }
+
+  .midwife-room-container {
+    margin-top: 10px;
+  }
+
+  .midwife-room-img {
+    width: 80%;
+  }
+
+  .midwife-scan-video {
+    top: 38%;
+    left: 13%;
+    width: 40%;
+    height: 30%;
+  }
+
+  .archive-table {
+    width: 60%;
+    margin: 2rem 20% 3rem 20%;
+    padding: 0;
+    display: block;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .archive-table table,
+  .archive-table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .archive-table table {
+    border-spacing: 0;
+  }
+
+  .archive-table tr {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .archive-table th,
+  .archive-table td {
+    display: block;
+    width: 100%;
+    padding: 0.95rem;
+  }
+
+  .archive-table th {
+    text-align: center;
+  }
+
+  .archive-table td {
+    border-bottom: none;
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+
+  .archive-table--paper tr,
+  .archive-table--paper tr:nth-child(even) {
+    background: linear-gradient(180deg, #f6f1e7, #e8dcc4);
+  }
+
+  .archive-table--paper tr {
+    border: 1px solid rgba(120, 100, 60, 0.28);
+    box-shadow:
+      0 0 10px rgba(120, 90, 40, 0.08),
+      inset 0 0 14px rgba(120, 90, 40, 0.04);
+  }
+
+  .archive-table--paper th {
+    border-bottom: 1px dashed rgba(120, 100, 60, 0.25);
+  }
+
+  .archive-table--scifi tr,
+  .archive-table--scifi tr:nth-child(even) {
+    background: linear-gradient(
+      180deg,
+      rgba(10, 20, 24, 0.95),
+      rgba(5, 10, 14, 0.94)
+    );
+  }
+
+  .archive-table--scifi tr {
+    border: 1px solid rgba(0, 255, 156, 0.28);
+    box-shadow:
+      0 0 10px rgba(0, 255, 156, 0.08),
+      inset 0 0 14px rgba(0, 255, 156, 0.04);
+  }
+
+  .archive-table--scifi th {
+    border-bottom: 1px dashed rgba(0, 255, 156, 0.22);
+    background: rgba(0, 255, 156, 0.06);
+  }
+
+  .archive-table--medical tr,
+  .archive-table--medical tr:nth-child(even) {
+    background: linear-gradient(180deg, #f4f8fb, #e6eef5);
+  }
+
+  .archive-table--medical tr {
+    border: 1px solid rgba(120, 160, 190, 0.3);
+    box-shadow:
+      0 0 10px rgba(120, 160, 190, 0.08),
+      inset 0 0 14px rgba(120, 160, 190, 0.05);
+    overflow: hidden;
+  }
+
+  .archive-table--medical th {
+    background: rgba(120, 170, 210, 0.1);
+    border-bottom: 1px dashed rgba(120, 160, 190, 0.25);
+  }
+
+  .archive-table--tv-radio tr,
+  .archive-table--tv-radio tr:nth-child(even) {
+    background:
+      linear-gradient(180deg, #1b1f2a 0%, #0f1218 100%),
+      radial-gradient(
+        circle at top left,
+        rgba(255, 180, 60, 0.08),
+        transparent 40%
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.015) 0,
+        rgba(255, 255, 255, 0.015) 2px,
+        transparent 2px,
+        transparent 10px
+      );
+  }
+
+  .archive-table--tv-radio tr {
+    border: 1px solid rgba(255, 190, 80, 0.28);
+    box-shadow:
+      0 0 10px rgba(255, 180, 60, 0.08),
+      inset 0 0 14px rgba(255, 210, 120, 0.04);
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+
+  .archive-table--tv-radio th {
+    color: #ffd36a;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 190, 80, 0.14),
+      rgba(255, 190, 80, 0.04)
+    );
+    border-bottom: 1px dashed rgba(255, 190, 80, 0.22);
+  }
+
+  .archive-table--tv-radio td {
+    color: #f8f3ea;
+  }
+
+  .cinema-scene {
+    width: 100vw;
+    margin-left: 0;
+    margin-top: -50px;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .cinema-seating-img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .black-and-white-movie-container {
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 48%;
+  }
+
+  .black-and-white-movie {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+  }
+
+  .predecessors-heading {
+    font-size: 2rem;
+  }
+
+  .principles-img-container {
+    display: block;
+  }
+
+  .principles-img-container p {
+    height: 10px;
+  }
+
+  .principles-img-container img {
+    padding-bottom: 40px;
+  }
+
+  .durning-road-img-caption {
+    padding-top: 15px;
+    margin-bottom: 5px;
+  }
+
+  .edge-hill-ormskirk-img-container {
+    padding-bottom: 20px;
+  }
+
+  .media-room-container {
+    width: 80%;
+  }
+
+  .return-to-landing-destination-container {
+    margin-right: 0%;
+  }
+
+  .donating-container {
+    width: 90%;
+    margin-left: 5.5%;
+  }
+
+  .donating-heading {
+    font-size: 1rem;
+    top: 12%;
+    left: 50%;
+  }
+
+  .whiteboard-text-box {
+    top: 18%;
+    left: 20.6%;
+    width: 59%;
+    height: 28%;
+    font-size: 0.8rem;
+  }
+
+  .parcel-img {
+    top: 51%;
+    left: 70%;
+    transform: translate(-50%, -60%);
+    width: 110px;
+  }
+
+  .donate {
+    top: 52.3%;
+    left: 66.5%;
+    rotate: 6deg;
+    transform: translate(-50%, -60%);
+    width: 150px;
+    font-size: 1rem;
+    color: #1f1f1f;
+  }
+
+  .about-horizontal-container,
+  .about-horizontal-track,
+  .about-panel {
+    height: 100dvh;
+  }
+
+  .about-panel {
+    width: 100vw;
+    min-width: 100vw;
+  }
+
+  .about-panel-text {
+    max-width: 78%;
+    top: 10%;
+    left: 11%;
+  }
+
+  .about-panel-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-panel-text p {
+    font-size: 1rem;
+  }
+
+  .spin-btn {
+    left: 50%;
+    top: 72%;
+  }
+
+  .help-desk-room-img {
+    width: 100%;
+    height: 100vh;
+    object-position: left;
+    transform: scale(1.4);
+  }
+
+  .desk-text {
+    font-size: 0.9rem;
+    width: 110px;
+    padding: 9px 16px;
+  }
+
+  .desk-drawer-text-1 {
+    top: 50%;
+    left: 34%;
+    transform: translate(-50%, -50%) rotate(-1deg) skewY(-7deg);
+  }
+
+  .desk-drawer-text-2 {
+    top: 59%;
+    left: 34%;
+    transform: translate(-50%, -50%) rotate(-1deg) skewY(-8deg);
+  }
+
+  .desk-drawer-text-1:hover {
+    transform: translate(-50%, -50%) rotate(-1deg) skewY(-7deg) scale(1.05);
+  }
+
+  .desk-drawer-text-2:hover {
+    transform: translate(-50%, -50%) rotate(-1deg) skewY(-8deg) scale(1.05);
+  }
+
+  .help-paper-sheet {
+    width: min(92vw, 92vw);
+    max-height: 84vh;
+    padding: 3rem 1rem 1.4rem 1rem;
+  }
+
+  .help-paper-content::before {
+    right: 8px;
+    left: 8px;
+  }
+
+  .help-paper-content::after {
+    left: 18px;
+  }
+
+  .help-paper-inner {
+    max-width: none;
+    padding: 20px 16px 20px 28px;
+  }
+
+  .help-paper-title {
+    padding-right: 2.8rem;
+  }
+
+  .fireplace-light {
+    top: 8%;
+    left: 48%;
+    width: 28%;
+    height: 22%;
+  }
+
+  .fireplace-fire {
+    top: 15%;
+    left: 54%;
+    width: 18%;
+    height: 12%;
+  }
+
+  .door-disclaimer {
+    top: 1%;
+    width: 92vw;
+  }
+
+  .door-disclaimer-panel {
+    padding: 1rem 0.9rem;
+  }
+
+  .disclaimer-mini-btn {
+    width: 80vw;
+    font-size: 0.75rem;
+  }
+}
+
+/* =========================================================
+   27. NARROW WIDTH ADJUSTMENTS
+   ========================================================= */
+
+@media (max-width: 1300px) {
+  .clock {
+    top: 6%;
+    left: 65.5%;
+  }
+}
+
+@media (max-width: 1280px) {
+  .desk-text {
+    font-size: 0.9rem;
+    width: 120px;
+  }
+
+  .desk-drawer-text-1 {
+    top: 61%;
+    left: 39%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 71%;
+    left: 39%;
+  }
+}
+
+@media (max-width: 1225px) {
+  .clock {
+    left: 66.5%;
+  }
+
+  .desk-text {
+    font-size: 0.8rem;
+    width: 110px;
+  }
+
+  .desk-drawer-text-1 {
+    top: 60.5%;
+    left: 39.2%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 69.5%;
+    left: 39.2%;
+  }
+}
+
+@media (max-width: 1150px) {
+  .clock {
+    left: 67.5%;
+  }
+
+  .desk-text {
+    padding: 6px 10px;
+    letter-spacing: 0em;
+    width: 100px;
+  }
+
+  .desk-drawer-text-1 {
+    top: 60%;
+    left: 39%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 68%;
+    left: 39%;
+  }
+}
+
+@media (max-width: 1085px) {
+  .clock {
+    left: 69.5%;
+    rotate: (3deg);
+  }
+}
+
+@media (max-width: 1070px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 38.5%;
+  }
+}
+
+@media (max-width: 1020px) {
+  .desk-text {
+    line-height: 1;
+  }
+
+  .desk-drawer-text-1 {
+    top: 59.5%;
+    left: 37.8%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 67.2%;
+    left: 37.8%;
+  }
+}
+
+@media (max-width: 995px) {
+  .clock {
+    left: 71.5%;
+  }
+}
+
+@media (max-width: 960px) {
+  .desk-text {
+    padding: 6px 7px;
+  }
+
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 37%;
+  }
+}
+
+@media (max-width: 890px) {
+  .clock {
+    left: 73.5%;
+  }
+
+  .desk-text {
+    width: 90px;
+  }
+
+  .desk-drawer-text-1 {
+    left: 36%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 67.3%;
+    left: 36%;
+  }
+}
+
+@media (max-width: 805px) {
+  .clock {
+    left: 74.5%;
+  }
+}
+
+@media (max-width: 800px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 34%;
+  }
+}
+
+@media (max-width: 765px) {
+  .clock {
+    top: 6.5%;
+    left: 77.5%;
+    font-size: 1.25rem;
+    rotate: -2deg;
+  }
+}
+
+@media (max-width: 710px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 32.5%;
+  }
+}
+
+@media (max-width: 705px) {
+  .clock {
+    left: 79.5%;
+  }
+}
+
+@media (max-width: 650px) {
+  .clock {
+    left: 80.5%;
+  }
+
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 31%;
+  }
+}
+
+@media (max-width: 630px) {
+  .clock {
+    top: 7%;
+    left: 82.5%;
+    font-size: 1rem;
+    rotate: -2.25deg;
+  }
+}
+
+@media (max-width: 600px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 29.5%;
+  }
+}
+
+@media (max-width: 590px) {
+  .clock {
+    font-size: 0.8rem;
+    left: 85%;
+    rotate: -1.75deg;
+  }
+}
+
+@media (max-width: 530px) {
+  .desk-text {
+    font-size: 0.8rem;
+    width: 100px;
+    padding: 8px 8px;
+  }
+
+  .desk-drawer-text-1 {
+    left: 36%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 58%;
+    left: 36%;
+  }
+}
+
+@media (max-width: 510px) {
+  .desk-text {
+    padding: 8px 10px;
+  }
+
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 38.5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .clock {
+    display: none;
+  }
+
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 42%;
+  }
+}
+
+@media (max-width: 460px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 45%;
+  }
+}
+
+@media (max-width: 435px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 48%;
+  }
+}
+
+@media (max-width: 415px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 52%;
+  }
+}
+
+@media (max-width: 395px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 55%;
+  }
+}
+
+@media (max-width: 375px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 59%;
+  }
+}
+
+@media (max-width: 360px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 62%;
+  }
+}
+
 @media (max-width: 350px) {
   .cockpit-nav {
     width: 300px;
     left: 50%;
+  }
+}
+
+@media (max-width: 345px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 65%;
+  }
+}
+
+@media (max-width: 330px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 69%;
+  }
+}
+
+@media (max-width: 320px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 72%;
+  }
+}
+
+@media (max-width: 305px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 76%;
   }
 }
