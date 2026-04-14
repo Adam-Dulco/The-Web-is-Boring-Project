@@ -16,47 +16,43 @@
     <!-- NAVIGATION PANEL -->
     <header>
       <nav class="cockpit-nav">
-        <a href="./donating/donating.html" class="nav-btn larger-nav-font"
-          >Donating</a
-        >
-        <a href="./about/about.html" class="nav-btn larger-nav-font">About</a>
-        <a href="./help/help.html" class="nav-btn larger-nav-font">Help</a>
+        <a href="./donating/donating.html" class="nav-btn">Donating</a>
+        <a href="./about/about.html" class="nav-btn">About</a>
+        <a href="./help/help.html" class="nav-btn">Help</a>
 
         <a
           href="./tv-radio-press-packs/tv-radio-press-packs.html"
-          class="nav-btn"
-          data-short="Radio Press Packs"
-          >TV &amp; Radio Press Packs (1994 - 2002)</a
+          class="nav-btn smaller-nav-font"
+          >TV &amp; Radio Press Packs</a
         >
-        <a href="./index.html" class="nav-btn larger-nav-font"> 🌪️ Home </a>
+        <a href="./index.html" class="nav-btn"> 🌪️ Home </a>
         <a
           href="./christopher-roby-archive/christopher-roby-archive.html"
-          class="nav-btn"
+          class="nav-btn smaller-nav-font"
           data-short="Christopher Roby Film Archives"
         >
-          The Christopher Roby Archive of Film Texts (1919 - 2004)
+          Christopher Roby Film Archive
         </a>
 
         <a
           href="./william-charles-bradshaw-collection/bradshaw-collection.html"
-          class="nav-btn"
-          data-short="The Bradshaw's Collection"
+          class="nav-btn smaller-nav-font"
         >
-          The William &amp; Charles Bradshaw Collection (1914 - 1945)
+          The Bradshaw's Collection
         </a>
         <a
           href="./chloe-fisher-archive/chloe-fisher-archive.html"
-          class="nav-btn"
-          data-short="Chloe Fisher Midwifery Collection"
+          class="nav-btn smaller-nav-font"
+          data-short="Chloe Fisher Collection"
         >
-          The Chloe Fisher Midwifery Collection &amp; Archive (1932 - 2004)
+          The Chloe Fisher Midwifery Collection
         </a>
         <a
           href="./edge-hill-predecessors/edge-hill-and-predecessors.html"
-          class="nav-btn"
+          class="nav-btn smaller-nav-font"
           data-short="Edge Hill Predecessors"
         >
-          Edge Hill University &amp; Predecessors (1880 - 2019)
+          Edge Hill University &amp; Predecessors
         </a>
       </nav>
     </header>
@@ -64,6 +60,49 @@
     <main class="page-shell">
       <!-- MAIN ENTRANCE DOORS -->
       <section class="door-overlay" id="doorOverlay">
+        <!-- DISCLAIMER -->
+        <article
+          class="door-disclaimer"
+          id="doorDisclaimer"
+          aria-labelledby="doorDisclaimerTitle"
+          aria-describedby="doorDisclaimerBody"
+        >
+          <aside class="door-disclaimer-panel">
+            <h2 id="doorDisclaimerTitle">Important Notice</h2>
+
+            <div id="doorDisclaimerBody" class="door-disclaimer-copy">
+              <p>
+                This website contains flashing imagery, animated effects, and
+                rapidly changing visual elements.
+              </p>
+              <p>
+                These may affect visitors with photosensitive epilepsy or other
+                light sensitivity conditions.
+              </p>
+              <p>Please proceed with caution.</p>
+            </div>
+
+            <div class="door-disclaimer-actions">
+              <button
+                type="button"
+                class="disclaimer-close-btn"
+                id="disclaimerCloseBtn"
+              >
+                I have read this & Accept entrance
+              </button>
+            </div>
+          </aside>
+
+          <button
+            type="button"
+            class="disclaimer-mini-btn"
+            id="disclaimerMiniBtn"
+            aria-expanded="false"
+          >
+            Access Granted
+          </button>
+        </article>
+
         <picture class="door-picture door-left-wrap">
           <source
             srcset="./front-doors/left-door-mobile.png"
@@ -87,7 +126,22 @@
             alt="Right door"
           />
         </picture>
+
         <button class="door-open-btn" id="doorOpenBtn">Enter</button>
+
+        <div
+          class="door-warning"
+          id="doorWarning"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <div class="door-warning-box" role="alert">
+            <p>
+              ⚠️ <br />Please read and accept the disclaimer before entering the
+              Edge Hill time machine
+            </p>
+          </div>
+        </div>
       </section>
 
       <!-- CENTER VORTEX-->

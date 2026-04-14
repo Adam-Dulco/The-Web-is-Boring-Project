@@ -6,8 +6,17 @@ const doorOverlay = document.getElementById("doorOverlay");
 const doorOpenBtn = document.getElementById("doorOpenBtn");
 const exitBtn = document.querySelector(".exit-btn");
 
+/* DISCLAIMER */
+const doorDisclaimer = document.getElementById("doorDisclaimer");
+const disclaimerCloseBtn = document.getElementById("disclaimerCloseBtn");
+const disclaimerMiniBtn = document.getElementById("disclaimerMiniBtn");
+
 let doorState = "closed"; // "closed" | "opening" | "open" | "closing"
 let doorTimer = null;
+
+/* disclaimer accepted state */
+let disclaimerAccepted =
+  sessionStorage.getItem("doorDisclaimerCollapsed") === "true";
 
 /* ================ */
 /*   WINDOW TEXT    */
@@ -39,7 +48,7 @@ function typeLine(text, element, callback) {
     if (i < text.length) {
       element.textContent += text.charAt(i);
       i++;
-      typingTimeout = setTimeout(typeChar, 40);
+      typingTimeout = setTimeout(typeChar, 50);
     } else {
       typingTimeout = setTimeout(callback, 400);
     }
@@ -73,6 +82,71 @@ function resetTyping() {
 }
 
 /* ======================= */
+/*   DISCLAIMER CONTROL    */
+/* ======================= */
+
+function updateDisclaimerButtonState() {
+  if (!disclaimerMiniBtn) return;
+
+  disclaimerMiniBtn.classList.toggle("is-accepted", disclaimerAccepted);
+  disclaimerMiniBtn.classList.toggle("is-not-accepted", !disclaimerAccepted);
+
+  disclaimerMiniBtn.setAttribute(
+    "aria-label",
+    disclaimerAccepted ? "Disclaimer accepted" : "Disclaimer not yet accepted",
+  );
+}
+
+function collapseDisclaimer() {
+  if (!doorDisclaimer) return;
+
+  doorDisclaimer.classList.add("is-collapsed");
+  doorDisclaimer.classList.remove("is-gone");
+
+  disclaimerAccepted = true;
+  updateDisclaimerButtonState();
+
+  if (disclaimerMiniBtn) {
+    disclaimerMiniBtn.setAttribute("aria-expanded", "false");
+  }
+
+  sessionStorage.setItem("doorDisclaimerCollapsed", "true");
+}
+
+function expandDisclaimer() {
+  if (!doorDisclaimer) return;
+
+  doorDisclaimer.classList.remove("is-collapsed", "is-gone");
+
+  if (disclaimerMiniBtn) {
+    disclaimerMiniBtn.setAttribute("aria-expanded", "true");
+  }
+
+  updateDisclaimerButtonState();
+}
+
+function hideDisclaimerCompletely() {
+  if (!doorDisclaimer) return;
+  doorDisclaimer.classList.add("is-gone");
+}
+
+/* ===================== */
+/*   DOOR OPEN WARNING   */
+/* ===================== */
+
+const doorWarning = document.getElementById("doorWarning");
+
+function showDoorWarning() {
+  if (!doorWarning) return;
+
+  doorWarning.classList.add("is-visible");
+
+  setTimeout(() => {
+    doorWarning.classList.remove("is-visible");
+  }, 5000);
+}
+
+/* ======================= */
 /*   DOOR STATE CONTROL    */
 /* ======================= */
 
@@ -103,6 +177,11 @@ function nextPaint(callback) {
 }
 
 function openDoors() {
+  if (!disclaimerAccepted) {
+    showDoorWarning(); // themed warning instead of alert
+    return;
+  }
+
   if (!doorOverlay) return;
   if (doorState === "opening" || doorState === "open") return;
 
@@ -115,6 +194,7 @@ function openDoors() {
   showDoorOverlay();
 
   nextPaint(() => {
+    hideDisclaimerCompletely();
     setDoorsOpen();
 
     doorTimer = setTimeout(() => {
@@ -145,7 +225,6 @@ function closeDoors() {
       doorState = "closed";
       doorTimer = null;
 
-      /* Re-open on homepage each time doors close on exit */
       window.location.href = "../index.html";
     }, 1600);
   });
@@ -153,16 +232,30 @@ function closeDoors() {
 
 /* INITIAL STATE */
 
+updateDisclaimerButtonState();
+
 if (doorOverlay) {
   if (sessionStorage.getItem("doorsOpened")) {
     setDoorsOpen();
     hideDoorOverlay();
+    hideDisclaimerCompletely();
     doorState = "open";
     startTyping();
   } else {
     setDoorsClosed();
     showDoorOverlay();
     doorState = "closed";
+
+    if (doorDisclaimer) {
+      const disclaimerCollapsed =
+        sessionStorage.getItem("doorDisclaimerCollapsed") === "true";
+
+      if (disclaimerCollapsed) {
+        collapseDisclaimer();
+      } else {
+        expandDisclaimer();
+      }
+    }
   }
 }
 
@@ -174,6 +267,16 @@ if (doorOpenBtn) {
 
 if (exitBtn) {
   exitBtn.addEventListener("click", closeDoors);
+}
+
+/* DISCLAIMER BUTTON EVENTS */
+
+if (disclaimerCloseBtn) {
+  disclaimerCloseBtn.addEventListener("click", collapseDisclaimer);
+}
+
+if (disclaimerMiniBtn) {
+  disclaimerMiniBtn.addEventListener("click", expandDisclaimer);
 }
 
 /*====================*/
@@ -335,50 +438,6 @@ window.addEventListener("scroll", updateMediaTextReveal);
 window.addEventListener("resize", updateMediaTextReveal);
 window.addEventListener("DOMContentLoaded", updateMediaTextReveal);
 
-/* ============================== */
-/*   PAGE VORTEX NAV TRANSITION   */
-/* ============================== */
-
-// function setupPageLinkTransitions() {
-//   const links = document.querySelectorAll(".cockpit-nav a");
-//   const vortex = document.querySelector(
-//     ".center-vortex-container model-viewer",
-//   );
-
-//   links.forEach((link) => {
-//     link.addEventListener("click", (event) => {
-//       const href = link.getAttribute("href");
-
-//       if (
-//         !href ||
-//         href.startsWith("#") ||
-//         link.target === "_blank" ||
-//         event.metaKey ||
-//         event.ctrlKey ||
-//         event.shiftKey ||
-//         event.altKey
-//       ) {
-//         return;
-//       }
-
-//       event.preventDefault();
-
-//       document.body.classList.add("is-transitioning");
-//       document.body.style.overflow = "hidden";
-
-//       if (vortex) {
-//         vortex.setAttribute("rotation-per-second", "-3000deg");
-//       }
-
-//       setTimeout(() => {
-//         window.location.href = link.href;
-//       }, 700);
-//     });
-//   });
-// }
-
-// window.addEventListener("DOMContentLoaded", setupPageLinkTransitions);
-
 /* ================================ */
 /*   RETURN TO TOP OF PAGE BUTTON   */
 /* ================================ */
@@ -450,7 +509,7 @@ function typeWhiteboardLine(text, element, callback) {
       whiteboardScrollToBottom();
 
       const char = text.charAt(i - 1);
-      const nextDelay = [".", ",", "!", "?", ":"].includes(char) ? 110 : 45;
+      const nextDelay = [".", ",", "!", "?", ":"].includes(char) ? 100 : 35;
 
       whiteboardTypingTimeout = setTimeout(typeChar, nextDelay);
     } else {
@@ -575,7 +634,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const spinBtn = document.getElementById("spinBtn");
   if (!stage || !track) return;
 
-  /* duplicate panels once for seamless looping */
   const originalPanels = Array.from(track.children);
   originalPanels.forEach((panel) => {
     const clone = panel.cloneNode(true);
@@ -590,8 +648,8 @@ window.addEventListener("DOMContentLoaded", () => {
   let isSpinning = false;
   let spinTimeout = null;
 
-  const spinSpeed = 700; // your fast spin speed
-  const spinDuration = 2500; // how long it spins before snapping
+  const spinSpeed = 700;
+  const spinDuration = 2500;
 
   let currentPanelIndex = 0;
 
@@ -640,12 +698,11 @@ window.addEventListener("DOMContentLoaded", () => {
     return newIndex;
   }
 
-  /* FORWARD-ONLY SNAP */
   function getSnapXForPanel(index) {
     const panel = originalPanels[index];
     const panelX = panel.offsetLeft;
 
-    const minimumForwardTravel = 300; // optional polish
+    const minimumForwardTravel = 300;
 
     let snapX = panelX;
 
@@ -923,7 +980,6 @@ document.addEventListener("DOMContentLoaded", () => {
       embers.push(createEmber());
     }
 
-    /* EMBER HEIGHT */
     embers = embers.filter(
       (ember) =>
         ember.age < ember.life && ember.y > origin.y - origin.height * 7.2,
@@ -974,13 +1030,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateFireVisual(time) {
     const t = time * 0.001;
 
-    // VERY tiny distortion (almost imperceptible)
     const scaleX = 1 + Math.sin(t * 6) * 0.01;
     const scaleY = 1 + Math.sin(t * 8) * 0.015;
 
     fire.style.transform = `translate(-50%, 0) scale(${scaleX}, ${scaleY})`;
 
-    // soft light shimmer (no pulsing)
     const lightOpacity = 0.66 + Math.sin(t * 5) * 0.03;
     light.style.opacity = lightOpacity;
   }
@@ -992,7 +1046,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateFireVisual(time);
 
-    /* EMBER QUANTITY */
     if (delta > 0) {
       if (Math.random() < 0.02) {
         spawnEmbers();
