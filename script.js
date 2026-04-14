@@ -104,13 +104,23 @@ function collapseDisclaimer() {
   doorDisclaimer.classList.remove("is-gone");
 
   disclaimerAccepted = true;
-  updateDisclaimerButtonState();
 
   if (disclaimerMiniBtn) {
     disclaimerMiniBtn.setAttribute("aria-expanded", "false");
+    disclaimerMiniBtn.classList.add("is-accepted");
+    disclaimerMiniBtn.classList.remove("is-fading-out");
   }
 
   sessionStorage.setItem("doorDisclaimerCollapsed", "true");
+
+  // wait long enough for the fade animation to actually finish
+  setTimeout(() => {
+    hideDisclaimerCompletely();
+
+    if (disclaimerMiniBtn) {
+      disclaimerMiniBtn.classList.remove("is-fading-out");
+    }
+  }, 2500);
 }
 
 function expandDisclaimer() {
@@ -214,7 +224,17 @@ function closeDoors() {
   resetTyping();
 
   doorState = "closing";
+
+  // reset door + disclaimer state on exit
   sessionStorage.removeItem("doorsOpened");
+  sessionStorage.removeItem("doorDisclaimerCollapsed");
+  disclaimerAccepted = false;
+
+  if (disclaimerMiniBtn) {
+    disclaimerMiniBtn.classList.remove("is-accepted");
+  }
+
+  updateDisclaimerButtonState();
 
   showDoorOverlay();
 
@@ -649,7 +669,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let spinTimeout = null;
 
   const spinSpeed = 700;
-  const spinDuration = 2500;
+  const spinDuration = 2200;
 
   let currentPanelIndex = 0;
 

@@ -14,49 +14,46 @@
 
   <body class="scrollable about-horizontal neon-purple">
     <!-- NAVIGATION PANEL -->
+
     <header>
       <nav class="cockpit-nav">
-        <a href="../donating/donating.html" class="nav-btn larger-nav-font"
-          >Donating</a
-        >
-        <a href="./about.html" class="nav-btn larger-nav-font">About</a>
-        <a href="../help/help.html" class="nav-btn larger-nav-font">Help</a>
+        <a href="../donating/donating.html" class="nav-btn">Donating</a>
+        <a href="./about.html" class="nav-btn">About</a>
+        <a href="../help/help.html" class="nav-btn">Help</a>
 
         <a
           href="../tv-radio-press-packs/tv-radio-press-packs.html"
-          class="nav-btn"
-          data-short="Radio Press Packs"
-          >TV &amp; Radio Press Packs (1994 - 2002)</a
+          class="nav-btn smaller-nav-font"
+          >TV &amp; Radio Press Packs</a
         >
-        <a href="../index.html" class="nav-btn larger-nav-font"> 🌪️ Home </a>
+        <a href="../index.html" class="nav-btn"> 🌪️ Home </a>
         <a
           href="../christopher-roby-archive/christopher-roby-archive.html"
-          class="nav-btn"
+          class="nav-btn smaller-nav-font"
           data-short="Christopher Roby Film Archives"
         >
-          The Christopher Roby Archive of Film Texts (1919 - 2004)
+          Christopher Roby Film Archive
         </a>
 
         <a
           href="../william-charles-bradshaw-collection/bradshaw-collection.html"
-          class="nav-btn"
-          data-short="The Bradshaw's Collection"
+          class="nav-btn smaller-nav-font"
         >
-          The William &amp; Charles Bradshaw Collection (1914 - 1945)
+          The Bradshaw's Collection
         </a>
         <a
           href="../chloe-fisher-archive/chloe-fisher-archive.html"
-          class="nav-btn"
-          data-short="Chloe Fisher Midwifery Collection"
+          class="nav-btn smaller-nav-font"
+          data-short="Chloe Fisher Collection"
         >
-          The Chloe Fisher Midwifery Collection &amp; Archive (1932 - 2004)
+          The Chloe Fisher Midwifery Collection
         </a>
         <a
           href="../edge-hill-predecessors/edge-hill-and-predecessors.html"
-          class="nav-btn"
+          class="nav-btn smaller-nav-font"
           data-short="Edge Hill Predecessors"
         >
-          Edge Hill University &amp; Predecessors (1880 - 2019)
+          Edge Hill University &amp; Predecessors
         </a>
       </nav>
     </header>
@@ -64,29 +61,88 @@
     <main class="page-shell">
       <!-- MAIN ENTRANCE DOORS -->
       <section class="door-overlay" id="doorOverlay">
+        <!-- DISCLAIMER -->
+        <article
+          class="door-disclaimer"
+          id="doorDisclaimer"
+          aria-labelledby="doorDisclaimerTitle"
+          aria-describedby="doorDisclaimerBody"
+        >
+          <aside class="door-disclaimer-panel">
+            <h2 id="doorDisclaimerTitle">Important Notice</h2>
+
+            <div id="doorDisclaimerBody" class="door-disclaimer-copy">
+              <p>
+                This website contains flashing imagery, animated effects, and
+                rapidly changing visual elements.
+              </p>
+              <p>
+                These may affect visitors with photosensitive epilepsy or other
+                light sensitivity conditions.
+              </p>
+              <p>Please proceed with caution.</p>
+            </div>
+
+            <div class="door-disclaimer-actions">
+              <button
+                type="button"
+                class="disclaimer-close-btn"
+                id="disclaimerCloseBtn"
+              >
+                I have read this & Accept entrance
+              </button>
+            </div>
+          </aside>
+
+          <button
+            type="button"
+            class="disclaimer-mini-btn"
+            id="disclaimerMiniBtn"
+            aria-expanded="false"
+          >
+            Access Granted
+          </button>
+        </article>
+
         <picture class="door-picture door-left-wrap">
           <source
-            srcset="../front-doors/left-door-mobile.png"
+            srcset="../front-doors/left-door-mobile.webp"
             media="(max-width: 560px)"
           />
           <img
-            src="../front-doors/left-door.png"
+            src="../front-doors/left-door.webp"
             class="door-panel door-left"
             alt="Left door"
           />
         </picture>
+
         <picture class="door-picture door-right-wrap">
           <source
-            srcset="../front-doors/right-door-mobile.png"
+            srcset="../front-doors/right-door-mobile.webp"
             media="(max-width: 560px)"
           />
           <img
-            src="../front-doors/right-door.png"
+            src="../front-doors/right-door.webp"
             class="door-panel door-right"
             alt="Right door"
           />
         </picture>
+
         <button class="door-open-btn" id="doorOpenBtn">Enter</button>
+
+        <aside
+          class="door-warning"
+          id="doorWarning"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <div class="door-warning-box" role="alert">
+            <p>
+              ⚠️ <br />Please read and accept the disclaimer before entering the
+              Edge Hill time machine
+            </p>
+          </div>
+        </aside>
       </section>
 
       <!-- CENTER VORTEX -->
@@ -108,14 +164,14 @@
         </model-viewer>
       </aside>
 
-      <!-- COCKPIT OVERLAY -->
+      <!-------------------- COCKPIT OVERLAY ---------------------->
       <picture>
         <source
-          srcset="../cockpit-interface-components/mobile-interface.png"
+          srcset="../cockpit-interface-components/mobile-interface.webp"
           media="(max-width: 560px)"
         />
         <img
-          src="../cockpit-interface-components/desktop-interface.png"
+          src="../cockpit-interface-components/desktop-interface.webp"
           class="overlay-cockpit"
           alt=""
         />
@@ -132,7 +188,7 @@
           preload="metadata"
         >
           <source
-            src="../video-clips/14846843_640_360_30fps.mp4"
+            src="../video-clips/system-online-video.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
@@ -141,13 +197,15 @@
 
       <!-- LOGO -->
       <img
-        src="../cockpit-interface-components/edge-hill-logo.png"
+        src="../cockpit-interface-components/edge-hill-logo.webp"
         alt="Edge Hill University Logo"
         class="edge-hill-logo"
       />
 
       <!-- EXIT BUTTON -->
       <button class="exit-btn">Exit</button>
+
+      <!----------------------- ABOUT PAGE CONTENT BEGINS HERE ----------------------->
 
       <!-- TIME WARP BUTTON -->
       <button class="spin-btn" id="spinBtn">Time Warp</button>
@@ -157,8 +215,8 @@
         <div class="about-horizontal-track" id="aboutHorizontalTrack">
           <article class="about-panel">
             <img
-              src="./ehu-campus-enhanced.jpg"
-              alt="Edge Hill University campus view 1"
+              src="./ehu-campus-1.webp"
+              alt="Edge Hill University old main building front"
             />
             <div class="about-panel-text">
               <h2>About Us</h2>
@@ -171,24 +229,24 @@
 
           <article class="about-panel">
             <img
-              src="./20260330_150039.JPG"
+              src="./ehu-campus-2.webp"
               alt="Edge Hill University campus view 2"
             />
-            <div class="about-panel-text">
+            <aside class="about-panel-text">
               <h2>Collections</h2>
               <p>
                 We also hold, and are actively seeking, collections that support
                 the teaching, learning and research interests of the university.
               </p>
-            </div>
+            </aside>
           </article>
 
           <article class="about-panel">
             <img
-              src="./ehu-campus-art-room-1885.jpg"
-              alt="Edge Hill University campus view 3"
+              src="./ehu-campus-3.webp"
+              alt="Edge Hill University art room image from 1885"
             />
-            <div class="about-panel-text">
+            <aside class="about-panel-text">
               <h2>History</h2>
               <p>
                 Founded in 1885 as the first non-denominational teacher training
@@ -197,29 +255,29 @@
                 male students in 1959), eventually becoming the modern
                 university it is today.
               </p>
-            </div>
+            </aside>
           </article>
 
           <article class="about-panel">
             <img
-              src="./ehu-campus-4-enhanced.jpg"
-              alt="Edge Hill University campus view 4"
+              src="./ehu-campus-4.webp"
+              alt="Edge Hill University Catalyst building"
             />
-            <div class="about-panel-text">
+            <aside class="about-panel-text">
               <h2>Access</h2>
               <p>
                 The archive repository is based within the Catalyst building on
                 our beautiful campus in Ormskirk, Lancashire.
               </p>
-            </div>
+            </aside>
           </article>
 
           <article class="about-panel">
             <img
-              src="./ehu-campus-from-above.jpg"
-              alt="Edge Hill University campus view 5"
+              src="./ehu-campus-5.webp"
+              alt="Edge Hill University campus view from above"
             />
-            <div class="about-panel-text">
+            <aside class="about-panel-text">
               <h2>Opening Times</h2>
               <p>
                 The archive manages enquiries and makes material available for
@@ -238,15 +296,15 @@
                   >
                 </p>
               </div>
-            </div>
+            </aside>
           </article>
 
           <article class="about-panel">
             <img
-              src="./ehu-library-1885.jpg"
-              alt="Edge Hill University campus view 4"
+              src="./ehu-campus-6.webp"
+              alt="Edge Hill University library, 1885"
             />
-            <div class="about-panel-text">
+            <aside class="about-panel-text">
               <h2>Archive Catalogue</h2>
               <p>
                 This Epexio archive catalogue is a work in progress. New items
@@ -254,15 +312,15 @@
                 catalogue reflects only a small portion of our complete
                 holdings.
               </p>
-            </div>
+            </aside>
           </article>
 
           <article class="about-panel">
             <img
-              src="./ehu-campus-beach.jpg"
-              alt="Edge Hill University campus view 4"
+              src="./ehu-campus-7.webp"
+              alt="Edge Hill University campus beach and waterfront"
             />
-            <div class="about-panel-text">
+            <aside class="about-panel-text">
               <h2>Contact Us</h2>
               <p>
                 Please don’t hesitate to
@@ -275,7 +333,7 @@
                 catalogue or if you wish to offer to donate something you think
                 we might not already have and be interested in.
               </p>
-            </div>
+            </aside>
           </article>
         </div>
       </section>

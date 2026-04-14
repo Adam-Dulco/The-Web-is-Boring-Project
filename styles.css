@@ -531,7 +531,7 @@ h2 {
   background: linear-gradient(
     to bottom,
     rgba(0, 255, 156, 0.25),
-    rgba(0, 0, 0, 0.6)
+    rgba(0, 0, 0, 0.8)
   );
 
   box-shadow:
@@ -2255,7 +2255,7 @@ model-viewer::part(default-ar-button) {
   background: linear-gradient(
     to top,
     rgba(161, 0, 255, 0.35),
-    rgba(0, 0, 0, 0.7)
+    rgba(0, 0, 0, 0.8)
   );
   box-shadow:
     0 0 10px rgba(161, 0, 255, 0.7),
@@ -2644,7 +2644,6 @@ model-viewer::part(default-ar-button) {
   }
 
   /* CHLOE FISHER - MOBILE PAGE */
-
   .midwife-room-container {
     margin-top: 10px;
   }
@@ -2861,14 +2860,14 @@ model-viewer::part(default-ar-button) {
   /* PREDECESSORS MOBILE PAGE */
 
   .predecessors-heading {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .principles-img-container {
     display: block;
   }
 
-  .principles-img-containerr p {
+  .principles-img-container p {
     height: 10px;
   }
 
@@ -4018,9 +4017,9 @@ body.is-transitioning .desk-text {
     0 0 24px rgba(255, 80, 80, 0.2);
 }
 
-/* ===================== */
-/* MINI "SEAL" BUTTON    */
-/* ===================== */
+/* =========================*/
+/* "ACCCESS GRANTED" BUTTON */
+/* =========================*/
 
 .disclaimer-mini-btn {
   position: absolute;
@@ -4035,33 +4034,20 @@ body.is-transitioning .desk-text {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   text-align: center;
-
-  border: 2px solid rgba(255, 120, 120, 0.85);
   border-radius: 4px;
-
-  /* seal strip look */
-  background: repeating-linear-gradient(
-    -25deg,
-    rgba(180, 20, 20, 0.95) 0px,
-    rgba(180, 20, 20, 0.95) 12px,
-    rgba(110, 0, 0, 0.95) 12px,
-    rgba(110, 0, 0, 0.95) 24px
-  );
-
+  border: 2px solid transparent;
   color: #fff;
-  box-shadow:
-    0 0 14px rgba(255, 50, 50, 0.35),
-    0 0 40px rgba(0, 0, 0, 0.5);
-
   cursor: pointer;
-
   opacity: 0;
   visibility: hidden;
-
   transition:
     opacity 0.35s ease,
     transform 0.35s ease,
-    visibility 0s linear 0.35s;
+    visibility 0s linear 0.35s,
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease;
 }
 
 /* ========================= */
@@ -4077,7 +4063,6 @@ body.is-transitioning .desk-text {
     rgba(10, 45, 20, 0.92),
     rgba(0, 90, 40, 0.9)
   );
-
   box-shadow: 0 0 12px rgba(80, 255, 120, 0.35);
 }
 
@@ -4105,9 +4090,9 @@ body.is-transitioning .desk-text {
     visibility 0s linear 0s;
 }
 
-/* ===================== */
-/* FULLY HIDDEN          */
-/* ===================== */
+/* ========================= */
+/* DISCLAIMER - FULLY HIDDEN  /
+/* ========================= */
 
 .door-disclaimer.is-gone {
   opacity: 0;
@@ -4164,7 +4149,6 @@ body.is-transitioning .desk-text {
   width: 60%;
   max-width: 720px; /* prevents it getting too wide on big screens */
   min-width: 260px; /* prevents it getting too tiny on mobile */
-
   margin: 0 auto; /* extra safety centering */
   background: linear-gradient(
     180deg,

@@ -22,47 +22,43 @@
     <!-- NAVIGATION PANEL -->
     <header>
       <nav class="cockpit-nav">
-        <a href="../donating/donating.html" class="nav-btn larger-nav-font"
-          >Donating</a
-        >
-        <a href="../about/about.html" class="nav-btn larger-nav-font">About</a>
-        <a href="./help.html" class="nav-btn larger-nav-font">Help</a>
+        <a href="../donating/donating.html" class="nav-btn">Donating</a>
+        <a href="../about/about.html" class="nav-btn">About</a>
+        <a href="./help.html" class="nav-btn">Help</a>
 
         <a
           href="../tv-radio-press-packs/tv-radio-press-packs.html"
-          class="nav-btn"
-          data-short="Radio Press Packs"
-          >TV &amp; Radio Press Packs (1994 - 2002)</a
+          class="nav-btn smaller-nav-font"
+          >TV &amp; Radio Press Packs</a
         >
-        <a href="../index.html" class="nav-btn larger-nav-font"> 🌪️ Home </a>
+        <a href="../index.html" class="nav-btn"> 🌪️ Home </a>
         <a
           href="../christopher-roby-archive/christopher-roby-archive.html"
-          class="nav-btn"
+          class="nav-btn smaller-nav-font"
           data-short="Christopher Roby Film Archives"
         >
-          The Christopher Roby Archive of Film Texts (1919 - 2004)
+          Christopher Roby Film Archive
         </a>
 
         <a
           href="../william-charles-bradshaw-collection/bradshaw-collection.html"
-          class="nav-btn"
-          data-short="The Bradshaw's Collection"
+          class="nav-btn smaller-nav-font"
         >
-          The William &amp; Charles Bradshaw Collection (1914 - 1945)
+          The Bradshaw's Collection
         </a>
         <a
           href="../chloe-fisher-archive/chloe-fisher-archive.html"
-          class="nav-btn"
-          data-short="Chloe Fisher Midwifery Collection"
+          class="nav-btn smaller-nav-font"
+          data-short="Chloe Fisher Collection"
         >
-          The Chloe Fisher Midwifery Collection &amp; Archive (1932 - 2004)
+          The Chloe Fisher Midwifery Collection
         </a>
         <a
           href="../edge-hill-predecessors/edge-hill-and-predecessors.html"
-          class="nav-btn"
+          class="nav-btn smaller-nav-font"
           data-short="Edge Hill Predecessors"
         >
-          Edge Hill University &amp; Predecessors (1880 - 2019)
+          Edge Hill University &amp; Predecessors
         </a>
       </nav>
     </header>
@@ -97,29 +93,88 @@
     <main class="page-shell">
       <!-- MAIN ENTRANCE DOORS -->
       <section class="door-overlay" id="doorOverlay">
+        <!-- DISCLAIMER -->
+        <article
+          class="door-disclaimer"
+          id="doorDisclaimer"
+          aria-labelledby="doorDisclaimerTitle"
+          aria-describedby="doorDisclaimerBody"
+        >
+          <aside class="door-disclaimer-panel">
+            <h2 id="doorDisclaimerTitle">Important Notice</h2>
+
+            <div id="doorDisclaimerBody" class="door-disclaimer-copy">
+              <p>
+                This website contains flashing imagery, animated effects, and
+                rapidly changing visual elements.
+              </p>
+              <p>
+                These may affect visitors with photosensitive epilepsy or other
+                light sensitivity conditions.
+              </p>
+              <p>Please proceed with caution.</p>
+            </div>
+
+            <div class="door-disclaimer-actions">
+              <button
+                type="button"
+                class="disclaimer-close-btn"
+                id="disclaimerCloseBtn"
+              >
+                I have read this & Accept entrance
+              </button>
+            </div>
+          </aside>
+
+          <button
+            type="button"
+            class="disclaimer-mini-btn"
+            id="disclaimerMiniBtn"
+            aria-expanded="false"
+          >
+            Access Granted
+          </button>
+        </article>
+
         <picture class="door-picture door-left-wrap">
           <source
-            srcset="../front-doors/left-door-mobile.png"
+            srcset="../front-doors/left-door-mobile.webp"
             media="(max-width: 560px)"
           />
           <img
-            src="../front-doors/left-door.png"
+            src="../front-doors/left-door.webp"
             class="door-panel door-left"
             alt="Left door"
           />
         </picture>
+
         <picture class="door-picture door-right-wrap">
           <source
-            srcset="../front-doors/right-door-mobile.png"
+            srcset="../front-doors/right-door-mobile.webp"
             media="(max-width: 560px)"
           />
           <img
-            src="../front-doors/right-door.png"
+            src="../front-doors/right-door.webp"
             class="door-panel door-right"
             alt="Right door"
           />
         </picture>
+
         <button class="door-open-btn" id="doorOpenBtn">Enter</button>
+
+        <aside
+          class="door-warning"
+          id="doorWarning"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <div class="door-warning-box" role="alert">
+            <p>
+              ⚠️ <br />Please read and accept the disclaimer before entering the
+              Edge Hill time machine
+            </p>
+          </div>
+        </aside>
       </section>
 
       <!-- CENTER VORTEX -->
@@ -141,14 +196,14 @@
         </model-viewer>
       </aside>
 
-      <!-- COCKPIT OVERLAY -->
+      <!-------------------- COCKPIT OVERLAY ---------------------->
       <picture>
         <source
-          srcset="../cockpit-interface-components/mobile-interface.png"
+          srcset="../cockpit-interface-components/mobile-interface.webp"
           media="(max-width: 560px)"
         />
         <img
-          src="../cockpit-interface-components/desktop-interface.png"
+          src="../cockpit-interface-components/desktop-interface.webp"
           class="overlay-cockpit"
           alt=""
         />
@@ -165,7 +220,7 @@
           preload="metadata"
         >
           <source
-            src="../video-clips/14846843_640_360_30fps.mp4"
+            src="../video-clips/system-online-video.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
@@ -174,7 +229,7 @@
 
       <!-- LOGO -->
       <img
-        src="../cockpit-interface-components/edge-hill-logo.png"
+        src="../cockpit-interface-components/edge-hill-logo.webp"
         alt="Edge Hill University Logo"
         class="edge-hill-logo"
       />
@@ -182,18 +237,17 @@
       <!-- EXIT BUTTON -->
       <button class="exit-btn">Exit</button>
 
-      <!------------------------------------- CONTENT PAGE ----------------------------->
-      <!-- SCROLLABLE CONTENT -->
+      <!----------------------- HELP PAGE CONTENT BEGINS HERE --------------------------->
 
       <!--FOR PLAQUES AGAINST THE DESK-->
-      <div class="help-desk-scene">
+      <section class="help-desk-scene">
         <picture>
           <source
-            srcset="./help-desk-img-mobile.png"
+            srcset="./help-desk-img-mobile.webp"
             media="(max-width: 560px)"
           />
           <img
-            src="./help-desk-img-new.png"
+            src="./help-desk-img-desktop.webp"
             alt="Grand room with large wooden desk"
             class="help-desk-room-img"
           />
@@ -222,10 +276,10 @@
         >
           Levels of Description
         </button>
-      </div>
+      </section>
 
-      <div class="visually-hidden">
-        <section id="help-requesting-items-content">
+      <section class="visually-hidden">
+        <article id="help-requesting-items-content">
           <h3>Requesting items to view</h3>
 
           <p>
@@ -242,9 +296,9 @@
             Some items may require additional notice or may only be produced
             under supervised conditions.
           </p>
-        </section>
+        </article>
 
-        <section id="help-levels-description-content">
+        <article id="help-levels-description-content">
           <h3>Levels of Description</h3>
 
           <p>
@@ -296,13 +350,13 @@
               into separately numbered pieces.
             </dd>
           </dl>
-        </section>
-      </div>
+        </article>
+      </section>
 
-      <div class="help-paper-modal" id="helpPaperModal" aria-hidden="true">
+      <section class="help-paper-modal" id="helpPaperModal" aria-hidden="true">
         <div class="help-paper-backdrop" id="helpPaperBackdrop"></div>
 
-        <section
+        <aside
           class="help-paper-sheet"
           role="dialog"
           aria-modal="true"
@@ -325,8 +379,8 @@
               <div id="helpPaperBody" class="help-paper-body"></div>
             </div>
           </div>
-        </section>
-      </div>
+        </aside>
+      </section>
     </main>
     <script src="../script.js"></script>
   </body>
