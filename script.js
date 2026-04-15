@@ -244,7 +244,13 @@ function closeDoors() {
     doorTimer = setTimeout(() => {
       doorState = "closed";
       doorTimer = null;
-      window.location.href = "../index.html";
+
+      const isHomePage =
+        window.location.pathname.endsWith("/index.html") ||
+        window.location.pathname === "/" ||
+        window.location.pathname.endsWith("/");
+
+      window.location.href = isHomePage ? "./index.html" : "../index.html";
     }, 1600);
   });
 }

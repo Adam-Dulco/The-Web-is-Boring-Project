@@ -2362,6 +2362,7 @@ body.is-transitioning .spin-btn {
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .help-paper-close:hover,
@@ -2754,14 +2755,153 @@ body.is-transitioning .spin-btn {
     0 0 40px rgba(0, 0, 0, 0.6);
   transform: scale(0.9);
   transition: transform 0.25s ease;
+  line-height: 1.5;
 }
 
 .door-warning.is-visible .door-warning-box {
   transform: scale(1);
 }
 
+/* ==================================================
+   25. RESPONSIVE WIDTH ADJUSTMENTS BETWEEN DESKTOP 
+   AND TABLET SIZES (1300PX - 860PX) 
+   ================================================== */
+
+@media (max-width: 1300px) {
+  .clock {
+    top: 6%;
+    left: 65.5%;
+  }
+}
+
+@media (max-width: 1280px) {
+  .desk-text {
+    font-size: 0.9rem;
+    width: 120px;
+  }
+
+  .desk-drawer-text-1 {
+    top: 61%;
+    left: 39%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 71%;
+    left: 39%;
+  }
+}
+
+@media (max-width: 1225px) {
+  .clock {
+    left: 66.5%;
+  }
+
+  .desk-text {
+    font-size: 0.8rem;
+    width: 110px;
+  }
+
+  .desk-drawer-text-1 {
+    top: 60.5%;
+    left: 39.2%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 69.5%;
+    left: 39.2%;
+  }
+}
+
+@media (max-width: 1150px) {
+  .clock {
+    left: 67.5%;
+  }
+
+  .desk-text {
+    padding: 6px 10px;
+    letter-spacing: 0em;
+    width: 100px;
+  }
+
+  .desk-drawer-text-1 {
+    top: 60%;
+    left: 39%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 68%;
+    left: 39%;
+  }
+}
+
+@media (max-width: 1085px) {
+  .clock {
+    left: 69.5%;
+    rotate: (3deg);
+  }
+}
+
+@media (max-width: 1070px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 38.5%;
+  }
+}
+
+@media (max-width: 1020px) {
+  .desk-text {
+    line-height: 1;
+  }
+
+  .desk-drawer-text-1 {
+    top: 59.5%;
+    left: 37.8%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 67.2%;
+    left: 37.8%;
+  }
+}
+
+@media (max-width: 995px) {
+  .clock {
+    left: 71.5%;
+  }
+}
+
+@media (max-width: 960px) {
+  .desk-text {
+    padding: 6px 7px;
+  }
+
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 37%;
+  }
+}
+
+@media (max-width: 890px) {
+  .clock {
+    left: 73.5%;
+  }
+
+  .desk-text {
+    width: 90px;
+  }
+
+  .desk-drawer-text-1 {
+    left: 36%;
+  }
+
+  .desk-drawer-text-2 {
+    top: 67.3%;
+    left: 36%;
+  }
+}
+
 /* =========================================================
-   25. TABLET RESPONSIVE (MAX-WIDTH: 840PX)
+   26. TABLET RESPONSIVE (MAX-WIDTH: 840PX)
    ========================================================= */
 
 @media (max-width: 840px) {
@@ -2895,8 +3035,83 @@ body.is-transitioning .spin-btn {
   }
 }
 
+/* ================================================================
+   27. RESPONSIVE WIDTH ADJUSTMENTS BETWEEN 
+   TABLET AND MOBILE SIZES 805PX - 560PX
+   ================================================================ */
+
+@media (max-width: 805px) {
+  .clock {
+    left: 74.5%;
+  }
+}
+
+@media (max-width: 800px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 34%;
+  }
+}
+
+@media (max-width: 765px) {
+  .clock {
+    top: 6.5%;
+    left: 77.5%;
+    font-size: 1.25rem;
+    rotate: -2deg;
+  }
+}
+
+@media (max-width: 710px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 32.5%;
+  }
+}
+
+@media (max-width: 705px) {
+  .clock {
+    left: 79.5%;
+  }
+}
+
+@media (max-width: 650px) {
+  .clock {
+    left: 80.5%;
+  }
+
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 31%;
+  }
+}
+
+@media (max-width: 630px) {
+  .clock {
+    top: 7%;
+    left: 82.5%;
+    font-size: 1rem;
+    rotate: -2.25deg;
+  }
+}
+
+@media (max-width: 600px) {
+  .desk-drawer-text-1,
+  .desk-drawer-text-2 {
+    left: 29.5%;
+  }
+}
+
+@media (max-width: 590px) {
+  .clock {
+    font-size: 0.8rem;
+    left: 85%;
+    rotate: -1.75deg;
+  }
+}
+
 /* =========================================================
-   26. MOBILE RESPONSIVE (MAX-WIDTH: 560PX)
+   28. MOBILE RESPONSIVE (MAX-WIDTH: 560PX)
    ========================================================= */
 
 @media (max-width: 560px) {
@@ -3442,211 +3657,8 @@ body.is-transitioning .spin-btn {
 }
 
 /* =========================================================
-   27. NARROW WIDTH ADJUSTMENTS
+   28. NARROW WIDTH ADJUSTMENTS - BELOW 560PX
    ========================================================= */
-
-@media (max-width: 1300px) {
-  .clock {
-    top: 6%;
-    left: 65.5%;
-  }
-}
-
-@media (max-width: 1280px) {
-  .desk-text {
-    font-size: 0.9rem;
-    width: 120px;
-  }
-
-  .desk-drawer-text-1 {
-    top: 61%;
-    left: 39%;
-  }
-
-  .desk-drawer-text-2 {
-    top: 71%;
-    left: 39%;
-  }
-}
-
-@media (max-width: 1225px) {
-  .clock {
-    left: 66.5%;
-  }
-
-  .desk-text {
-    font-size: 0.8rem;
-    width: 110px;
-  }
-
-  .desk-drawer-text-1 {
-    top: 60.5%;
-    left: 39.2%;
-  }
-
-  .desk-drawer-text-2 {
-    top: 69.5%;
-    left: 39.2%;
-  }
-}
-
-@media (max-width: 1150px) {
-  .clock {
-    left: 67.5%;
-  }
-
-  .desk-text {
-    padding: 6px 10px;
-    letter-spacing: 0em;
-    width: 100px;
-  }
-
-  .desk-drawer-text-1 {
-    top: 60%;
-    left: 39%;
-  }
-
-  .desk-drawer-text-2 {
-    top: 68%;
-    left: 39%;
-  }
-}
-
-@media (max-width: 1085px) {
-  .clock {
-    left: 69.5%;
-    rotate: (3deg);
-  }
-}
-
-@media (max-width: 1070px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 38.5%;
-  }
-}
-
-@media (max-width: 1020px) {
-  .desk-text {
-    line-height: 1;
-  }
-
-  .desk-drawer-text-1 {
-    top: 59.5%;
-    left: 37.8%;
-  }
-
-  .desk-drawer-text-2 {
-    top: 67.2%;
-    left: 37.8%;
-  }
-}
-
-@media (max-width: 995px) {
-  .clock {
-    left: 71.5%;
-  }
-}
-
-@media (max-width: 960px) {
-  .desk-text {
-    padding: 6px 7px;
-  }
-
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 37%;
-  }
-}
-
-@media (max-width: 890px) {
-  .clock {
-    left: 73.5%;
-  }
-
-  .desk-text {
-    width: 90px;
-  }
-
-  .desk-drawer-text-1 {
-    left: 36%;
-  }
-
-  .desk-drawer-text-2 {
-    top: 67.3%;
-    left: 36%;
-  }
-}
-
-@media (max-width: 805px) {
-  .clock {
-    left: 74.5%;
-  }
-}
-
-@media (max-width: 800px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 34%;
-  }
-}
-
-@media (max-width: 765px) {
-  .clock {
-    top: 6.5%;
-    left: 77.5%;
-    font-size: 1.25rem;
-    rotate: -2deg;
-  }
-}
-
-@media (max-width: 710px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 32.5%;
-  }
-}
-
-@media (max-width: 705px) {
-  .clock {
-    left: 79.5%;
-  }
-}
-
-@media (max-width: 650px) {
-  .clock {
-    left: 80.5%;
-  }
-
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 31%;
-  }
-}
-
-@media (max-width: 630px) {
-  .clock {
-    top: 7%;
-    left: 82.5%;
-    font-size: 1rem;
-    rotate: -2.25deg;
-  }
-}
-
-@media (max-width: 600px) {
-  .desk-drawer-text-1,
-  .desk-drawer-text-2 {
-    left: 29.5%;
-  }
-}
-
-@media (max-width: 590px) {
-  .clock {
-    font-size: 0.8rem;
-    left: 85%;
-    rotate: -1.75deg;
-  }
-}
 
 @media (max-width: 530px) {
   .desk-text {
