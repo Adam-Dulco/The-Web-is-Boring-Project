@@ -2426,7 +2426,7 @@ body.is-transitioning .spin-btn {
 .help-paper-title::after {
   content: "ARCHIVE HELP";
   display: block;
-  margin: 10px auto 0;
+  margin: 30px auto 0;
   width: fit-content;
   padding: 2px 8px;
   border: 1px solid rgba(140, 35, 35, 0.45);
