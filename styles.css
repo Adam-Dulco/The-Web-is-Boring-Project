@@ -208,48 +208,57 @@ body.scrollable .center-vortex-container {
 }
 
 /* -------------------------
-   06B. Sci-Fi Theme
+   06B. War Theme
    ------------------------- */
 
-.archive-table--scifi {
+.archive-table--war {
   background: linear-gradient(
     180deg,
-    rgba(10, 20, 24, 0.95),
-    rgba(5, 10, 14, 0.94)
+    rgba(18, 28, 12, 0.92),
+    rgba(10, 16, 8, 0.9)
   );
-  border: 1px solid rgba(0, 255, 156, 0.35);
+  border: 2px solid rgba(115, 191, 0, 0.45);
   box-shadow:
-    0 0 12px rgba(0, 255, 156, 0.14),
+    0 0 12px rgba(115, 191, 0, 0.15),
     0 0 28px rgba(0, 0, 0, 0.45),
-    inset 0 0 18px rgba(0, 255, 156, 0.05);
-  color: #d7fff0;
-  font-family: monospace, serif;
+    inset 0 0 18px rgba(115, 191, 0, 0.05);
+  color: #d8efb3;
+  font-family: "Special Elite", monospace;
 }
 
-.archive-table--scifi th {
-  color: #9affd6;
-  border-bottom: 1px dashed rgba(0, 255, 156, 0.28);
-  background: rgba(0, 255, 156, 0.05);
-  text-shadow: 0 0 5px rgba(0, 255, 156, 0.15);
+/* Column widths */
+.archive-table--war th {
+  width: 35%;
+  background: rgba(115, 191, 0, 0.06);
+  font-weight: normal;
 }
 
-.archive-table--scifi td {
-  color: #e8fff8;
-  border-bottom: 1px dashed rgba(0, 255, 156, 0.18);
-  letter-spacing: 0.03em;
+.archive-table--war td {
+  width: 65%;
+  color: #dce8c0;
+  line-height: 1.7;
+  font-size: 0.98rem;
+  letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
 }
 
-.archive-table--scifi tr:nth-child(even) {
-  background: rgba(255, 255, 255, 0.015);
+/* Row dividers */
+.archive-table--war tr:not(:last-child) th,
+.archive-table--war tr:not(:last-child) td {
+  border-bottom: 1px dashed rgba(115, 191, 0, 0.25);
 }
 
-.archive-table--scifi a {
-  color: #00ff9c;
+/* Links */
+.archive-table--war a {
+  color: #9dff66;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(157, 255, 102, 0.7);
 }
 
-.archive-table--scifi a:hover,
-.archive-table--scifi a:focus-visible {
-  color: #8affcf;
+.archive-table--war a:hover,
+.archive-table--war a:focus-visible {
+  color: #d9ffbf;
+  border-bottom-style: solid;
 }
 
 /* -------------------------
@@ -1108,68 +1117,9 @@ model-viewer::part(default-ar-button) {
   font-size: 2rem;
 }
 
-/* -------------------------
-   15A. Bradshaw Archive Table
-   ------------------------- */
-
-.bradshaws-archive-table {
-  width: 60%;
-  margin: 3rem 24% 4rem 16%;
-  border-collapse: separate;
-  border-spacing: 0;
-  table-layout: fixed;
-  background: linear-gradient(
-    180deg,
-    rgba(18, 28, 12, 0.92),
-    rgba(10, 16, 8, 0.9)
-  );
-  border: 2px solid rgba(115, 191, 0, 0.45);
-  box-shadow:
-    0 0 12px rgba(115, 191, 0, 0.15),
-    0 0 28px rgba(0, 0, 0, 0.45),
-    inset 0 0 18px rgba(115, 191, 0, 0.05);
-  color: #d8efb3;
-  font-family: "Special Elite", monospace;
-}
-
-.bradshaws-archive-table tr:not(:last-child) td {
-  border-bottom: 1px dashed rgba(115, 191, 0, 0.25);
-}
-
-.bradshaws-archive-table td {
-  padding: 1.2rem 1.1rem;
-  vertical-align: top;
-}
-
-.bradshaws-archive-table .bradshaw-label {
-  width: 35%;
-  background: rgba(115, 191, 0, 0.06);
-}
-
-.bradshaws-archive-table .bradshaw-value {
-  width: 65%;
-  color: #dce8c0;
-  line-height: 1.7;
-  font-size: 0.98rem;
-  letter-spacing: 0.04em;
-  overflow-wrap: anywhere;
-}
-
-.bradshaws-archive-table a {
-  color: #9dff66;
-  text-decoration: none;
-  border-bottom: 1px dotted rgba(157, 255, 102, 0.7);
-}
-
-.bradshaws-archive-table a:hover,
-.bradshaws-archive-table a:focus-visible {
-  color: #d9ffbf;
-  border-bottom-style: solid;
-}
-
-/* -------------------------
-   15B. Bradshaw Decorative Elements
-   ------------------------- */
+/* ----------------------------------------
+   15. Bradshaw Decorative Table Elements
+   ---------------------------------------- */
 
 .dog-tag {
   display: inline-block;
@@ -2975,16 +2925,6 @@ body.is-transitioning .spin-btn {
     text-align: left;
   }
 
-  .bradshaws-archive-table .bradshaw-label {
-    width: 38%;
-    font-size: 0.8rem;
-  }
-
-  .bradshaws-archive-table .bradshaw-value {
-    width: 62%;
-    font-size: 0.9rem;
-  }
-
   .dog-tag {
     font-size: 0.5rem;
     padding: 0.72rem 1rem 0.72rem 1.35rem;
@@ -3210,65 +3150,36 @@ body.is-transitioning .spin-btn {
     font-size: 1.8rem;
   }
 
-  .bradshaws-archive-table {
-    margin: 2rem 20% 3rem 20%;
-    display: block;
-    border-spacing: 0;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-  }
-
-  .bradshaws-archive-table tbody {
-    display: block;
-  }
-
-  .bradshaws-archive-table tr {
-    display: block;
-    margin-bottom: 1rem;
-    border: 1px solid rgba(115, 191, 0, 0.28);
+  .archive-table--war tr,
+  .archive-table--war tr:nth-child(even) {
     background: linear-gradient(
       180deg,
       rgba(18, 28, 12, 0.92),
       rgba(10, 16, 8, 0.9)
     );
+  }
+
+  .archive-table--war tr {
+    border: 1px solid rgba(115, 191, 0, 0.28);
     box-shadow:
       0 0 10px rgba(115, 191, 0, 0.08),
       inset 0 0 14px rgba(115, 191, 0, 0.04);
   }
 
-  .bradshaws-archive-table tr:not(:last-child) td {
-    border-bottom: none;
-  }
-
-  .bradshaws-archive-table td,
-  .bradshaws-archive-table .bradshaw-label {
-    display: block;
-    width: 100%;
-  }
-
-  .bradshaws-archive-table td {
-    padding: 0.95rem;
-  }
-
-  .bradshaws-archive-table .bradshaw-label {
+  .archive-table--war th {
     background: rgba(115, 191, 0, 0.08);
-    border-bottom: 1px dashed rgba(115, 191, 0, 0.2);
+    border-bottom: 1px dashed rgba(115, 191, 0, 0.22);
   }
 
-  .bradshaws-archive-table .bradshaw-value {
-    font-size: 0.9rem;
-    line-height: 1.65;
-  }
-
-  .dog-tag {
+  .archive-table--war .dog-tag {
     display: block;
     width: 100%;
     font-size: 0.68rem;
     text-align: center;
+    box-sizing: border-box;
   }
 
-  .stamp {
+  .archive-table--war .stamp {
     font-size: 0.68rem;
   }
 
@@ -3372,27 +3283,6 @@ body.is-transitioning .spin-btn {
 
   .archive-table--paper th {
     border-bottom: 1px dashed rgba(120, 100, 60, 0.25);
-  }
-
-  .archive-table--scifi tr,
-  .archive-table--scifi tr:nth-child(even) {
-    background: linear-gradient(
-      180deg,
-      rgba(10, 20, 24, 0.95),
-      rgba(5, 10, 14, 0.94)
-    );
-  }
-
-  .archive-table--scifi tr {
-    border: 1px solid rgba(0, 255, 156, 0.28);
-    box-shadow:
-      0 0 10px rgba(0, 255, 156, 0.08),
-      inset 0 0 14px rgba(0, 255, 156, 0.04);
-  }
-
-  .archive-table--scifi th {
-    border-bottom: 1px dashed rgba(0, 255, 156, 0.22);
-    background: rgba(0, 255, 156, 0.06);
   }
 
   .archive-table--medical tr,
