@@ -1851,7 +1851,7 @@ model-viewer::part(default-ar-button) {
   border: none;
   font-family: "Rock Salt", cursive;
   font-size: 1.5rem;
-  color: #1f1f1f;
+  color: #000;
 }
 
 .confetti-piece {
@@ -3537,7 +3537,6 @@ body.is-transitioning .spin-btn {
     transform: translate(-50%, -60%);
     width: 150px;
     font-size: 1rem;
-    color: #1f1f1f;
   }
 
   .about-horizontal-container,
