@@ -369,6 +369,16 @@ initialiseDoors();
 //   });
 // }
 
+/* ADDING TANK USER ACTIONS BACK IN AFTER DISABLING THE SOUND */
+const tank = document.getElementById("tank");
+
+if (tank) {
+  tank.addEventListener("animationend", () => {
+    tank.setAttribute("camera-controls", "");
+    tank.style.pointerEvents = "auto";
+  });
+}
+
 /* =========================================================
    03. CLOCK
    ========================================================= */
