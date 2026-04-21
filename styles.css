@@ -2597,7 +2597,7 @@ body.is-transitioning .spin-btn {
     visibility 0s linear 0s;
 }
 
-.door-disclaimer-panel h2 {
+.door-disclaimer-panel h1 {
   margin: 0 0 0.7rem 0;
   font-size: clamp(1.2rem, 2rem, 1.9rem);
   text-align: center;
