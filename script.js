@@ -316,58 +316,58 @@ initialiseDoors();
    02. TANK SOUND EFFECTS
    ========================================================= */
 
-const tank = document.getElementById("tank");
-const sound = document.getElementById("tankSound");
+// const tank = document.getElementById("tank");
+// const sound = document.getElementById("tankSound");
 
-let audioUnlocked = false;
+// let audioUnlocked = false;
 
-document.addEventListener(
-  "click",
-  () => {
-    if (!audioUnlocked || !sound) {
-      if (!sound) return;
-    }
+// document.addEventListener(
+//   "click",
+//   () => {
+//     if (!audioUnlocked || !sound) {
+//       if (!sound) return;
+//     }
 
-    sound
-      .play()
-      .then(() => {
-        sound.pause();
-        sound.currentTime = 0;
-        audioUnlocked = true;
-      })
-      .catch((err) => {
-        console.log("Audio unlock failed:", err);
-      });
-  },
-  { once: true },
-);
+//     sound
+//       .play()
+//       .then(() => {
+//         sound.pause();
+//         sound.currentTime = 0;
+//         audioUnlocked = true;
+//       })
+//       .catch((err) => {
+//         console.log("Audio unlock failed:", err);
+//       });
+//   },
+//   { once: true },
+// );
 
-if (tank && sound) {
-  tank.addEventListener("animationstart", () => {
-    sound.currentTime = 0;
-    sound.volume = 0.5;
+// if (tank && sound) {
+//   tank.addEventListener("animationstart", () => {
+//     sound.currentTime = 0;
+//     sound.volume = 0.5;
 
-    sound.play().catch((err) => {
-      console.log("Sound play blocked:", err);
-    });
-  });
+//     sound.play().catch((err) => {
+//       console.log("Sound play blocked:", err);
+//     });
+//   });
 
-  tank.addEventListener("animationend", () => {
-    tank.setAttribute("camera-controls", "");
-    tank.style.pointerEvents = "auto";
+//   tank.addEventListener("animationend", () => {
+//     tank.setAttribute("camera-controls", "");
+//     tank.style.pointerEvents = "auto";
 
-    const fade = setInterval(() => {
-      if (sound.volume > 0.05) {
-        sound.volume -= 0.05;
-      } else {
-        sound.pause();
-        sound.currentTime = 0;
-        sound.volume = 0.5;
-        clearInterval(fade);
-      }
-    }, 100);
-  });
-}
+//     const fade = setInterval(() => {
+//       if (sound.volume > 0.05) {
+//         sound.volume -= 0.05;
+//       } else {
+//         sound.pause();
+//         sound.currentTime = 0;
+//         sound.volume = 0.5;
+//         clearInterval(fade);
+//       }
+//     }, 100);
+//   });
+// }
 
 /* =========================================================
    03. CLOCK
