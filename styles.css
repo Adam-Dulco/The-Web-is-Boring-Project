@@ -3479,6 +3479,12 @@ body.is-transitioning .spin-btn {
     transform: scale(1.4);
   }
 
+  /* Hide Fire Effect in Mobile View */
+  .fireplace-embers,
+  .fireplace-fire {
+    display: none;
+  }
+
   .desk-text {
     font-size: 0.9rem;
     width: 110px;
@@ -3615,10 +3621,14 @@ body.is-transitioning .spin-btn {
   }
 }
 
+/* Accomodating specifically to most used screensize */
 @media (max-width: 415px) {
   .desk-drawer-text-1,
   .desk-drawer-text-2 {
-    left: 52%;
+    left: 75%;
+    height: 55px;
+    width: 40%;
+    font-size: 1.1rem;
   }
 }
 
