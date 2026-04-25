@@ -42,7 +42,8 @@ h2 {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  /* clip: rect(0, 0, 0, 0); */
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
   color: #fff;
@@ -454,13 +455,14 @@ body.scrollable .center-vortex-container {
     #00ffcc,
     #0066ff,
     #cc00ff,
+    #cc00ff,
     #ff004c
   );
   background-size: 300% 300%;
   animation: disco-border 6s linear infinite;
   -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
+    linear-gradient(#000 0%, #000 100%) content-box,
+    linear-gradient(#000 0%, #000 100%);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   padding: 10px;
@@ -2212,7 +2214,7 @@ body.is-transitioning .spin-btn {
   margin: -1px;
   padding: 0;
   overflow: hidden;
-  clip: rect(0 0 0 0);
+  /* clip: rect(0 0 0 0); */
   clip-path: inset(50%);
   border: 0;
   white-space: nowrap;
@@ -2800,7 +2802,7 @@ body.is-transitioning .spin-btn {
 @media (max-width: 1085px) {
   .clock {
     left: 69.5%;
-    rotate: (3deg);
+    transform: rotate(3deg);
   }
 }
 
