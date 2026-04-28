@@ -18,6 +18,8 @@ Research & Development Project for University
 
 - Internet Connection
 - Internet Browser
+- Mouse & Keyboard
+- Monitor
 
 ## Entering the Website
 
