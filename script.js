@@ -312,63 +312,6 @@ if (disclaimerMiniBtn) {
 
 initialiseDoors();
 
-/* =========================================================
-   02. TANK SOUND EFFECTS
-   ========================================================= */
-
-// const tank = document.getElementById("tank");
-// const sound = document.getElementById("tankSound");
-
-// let audioUnlocked = false;
-
-// document.addEventListener(
-//   "click",
-//   () => {
-//     if (!audioUnlocked || !sound) {
-//       if (!sound) return;
-//     }
-
-//     sound
-//       .play()
-//       .then(() => {
-//         sound.pause();
-//         sound.currentTime = 0;
-//         audioUnlocked = true;
-//       })
-//       .catch((err) => {
-//         console.log("Audio unlock failed:", err);
-//       });
-//   },
-//   { once: true },
-// );
-
-// if (tank && sound) {
-//   tank.addEventListener("animationstart", () => {
-//     sound.currentTime = 0;
-//     sound.volume = 0.5;
-
-//     sound.play().catch((err) => {
-//       console.log("Sound play blocked:", err);
-//     });
-//   });
-
-//   tank.addEventListener("animationend", () => {
-//     tank.setAttribute("camera-controls", "");
-//     tank.style.pointerEvents = "auto";
-
-//     const fade = setInterval(() => {
-//       if (sound.volume > 0.05) {
-//         sound.volume -= 0.05;
-//       } else {
-//         sound.pause();
-//         sound.currentTime = 0;
-//         sound.volume = 0.5;
-//         clearInterval(fade);
-//       }
-//     }, 100);
-//   });
-// }
-
 /* ADDING TANK USER ACTIONS BACK IN AFTER DISABLING THE SOUND */
 const tank = document.getElementById("tank");
 
@@ -380,7 +323,7 @@ if (tank) {
 }
 
 /* =========================================================
-   03. CLOCK
+   02. CLOCK
    ========================================================= */
 
 const clock = document.getElementById("clock");
@@ -402,7 +345,7 @@ if (clock) {
 }
 
 /* =========================================================
-   04. MEDIA TEXT REVEAL ON SCROLL
+   03. MEDIA TEXT REVEAL ON SCROLL (TV & RADIO PRESS PACKS)
    ========================================================= */
 
 const mediaSection = document.querySelector(".media-room-container");
@@ -427,7 +370,7 @@ window.addEventListener("scroll", updateMediaTextReveal, { passive: true });
 window.addEventListener("resize", updateMediaTextReveal);
 
 /* =========================================================
-   05. RETURN TO TOP BUTTON
+   04. RETURN TO TOP BUTTON
    ========================================================= */
 
 const returnToLandingDestinationButton = document.getElementById(
@@ -444,7 +387,7 @@ if (returnToLandingDestinationButton) {
 }
 
 /* =========================================================
-   06. WHITEBOARD WRITING SYSTEM
+   05. WHITEBOARD WRITING SYSTEM
    ========================================================= */
 
 const whiteboardTextBox = document.getElementById("whiteboardTextBox");
@@ -534,7 +477,7 @@ function resetWhiteboardTyping() {
 }
 
 /* =========================================================
-   07. PARCEL CONFETTI BURST
+   06. PARCEL CONFETTI BURST (DONATING PAGE)
    ========================================================= */
 
 const parcelImage = document.querySelector(".parcel-img");
@@ -607,7 +550,7 @@ if (donateButton) {
 }
 
 /* =========================================================
-   08. ABOUT PAGE HORIZONTAL IMAGE MOTION
+   07. ABOUT PAGE HORIZONTAL IMAGE MOTION
    ========================================================= */
 
 function initialiseAboutHorizontal() {
@@ -755,7 +698,7 @@ function initialiseAboutHorizontal() {
 }
 
 /* =========================================================
-   09. PAGE VORTEX NAV TRANSITION
+   08. PAGE VORTEX NAV TRANSITION
    ========================================================= */
 
 function setupPageLinkTransitions() {
@@ -808,7 +751,7 @@ function setupPageLinkTransitions() {
 }
 
 /* =========================================================
-   10. HELP PAGE PAPER POPUPS
+   9. HELP PAGE PAPER POPUPS
    ========================================================= */
 
 function initialiseHelpPaperPopups() {
@@ -880,7 +823,7 @@ function initialiseHelpPaperPopups() {
 }
 
 /* =========================================================
-   11. HELP PAGE FIREPLACE + EMBERS
+   10. HELP PAGE FIREPLACE + EMBERS
    ========================================================= */
 
 function initialiseFireplace() {
@@ -1039,7 +982,7 @@ function initialiseFireplace() {
 }
 
 /* =========================================================
-   12. RAIN + LIGHTNING
+   11. RAIN + LIGHTNING (PREDECESSORS PAGE)
    ========================================================= */
 
 function initialiseRainAndLightning() {
@@ -1101,7 +1044,7 @@ function initialiseRainAndLightning() {
 }
 
 /* =========================================================
-   13. DOM READY INITIALISERS
+   12. DOM READY INITIALISERS
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {

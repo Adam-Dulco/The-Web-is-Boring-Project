@@ -720,9 +720,9 @@ body.scrollable .center-vortex-container {
   pointer-events: none;
 }
 
-/* -------------------------
+/* =======================
    12A. Door Open Button
-   ------------------------- */
+   ======================= */
 
 .door-open-btn {
   position: absolute;
@@ -1034,7 +1034,7 @@ body.scrollable .center-vortex-container {
 }
 
 /* =========================================================
-   15. TANK PAGE
+   15. BRADSHAWS COLLECTION PAGE
    ========================================================= */
 
 .tank-hero-section {
@@ -1120,7 +1120,7 @@ model-viewer::part(default-ar-button) {
 }
 
 /* ----------------------------------------
-   15. Bradshaw Decorative Table Elements
+   15A. Bradshaw Decorative Table Elements
    ---------------------------------------- */
 
 .dog-tag {
@@ -2018,9 +2018,9 @@ model-viewer::part(default-ar-button) {
     0 0 30px rgba(180, 70, 255, 0.55);
 }
 
-/* =========================================================
-   22. VORTEX TRANSITION SYSTEM
-   ========================================================= */
+/* ============================================================
+   22. VORTEX TRANSITION SYSTEM (HIDES ELEMENTS ON TRANSITION)
+   ============================================================ */
 
 body.home-page .center-vortex-container,
 body.is-transitioning .center-vortex-container {
@@ -3567,7 +3567,7 @@ body.is-transitioning .spin-btn {
 }
 
 /* =========================================================
-   28. NARROW WIDTH ADJUSTMENTS - BELOW 560PX
+   29. NARROW WIDTH ADJUSTMENTS - BELOW 560PX
    ========================================================= */
 
 @media (max-width: 530px) {
