@@ -29,11 +29,17 @@ Research & Development Project for University Coursework
 To access the website, follow these steps:
 
 1. Open the project folder in VS Code.
+
 2. Select the "index.html" file.
+
 3. Select "Go Live" in the bottom right corner (If you do not see this, please install the "Live Server" extension by Ritwick Dey and reload the page to try again).
+
 4. Ensure the landing page is visible (double doors).
+
 5. Read the provided disclaimer (Important Notice).
+
 6. If you have read the disclaimer and wish to proceed, click "I have read this & accept entrance". Otherwise, do not enter the website.
+
 7. Click the "Enter" button in the middle of the page to enter the website.
 
 ## Exiting the Website
