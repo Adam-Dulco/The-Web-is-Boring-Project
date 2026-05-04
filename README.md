@@ -12,7 +12,6 @@ Research & Development Project for University Coursework
 - [Donating to the Archive](#donating-to-the-archive)
 - [Using the About Page & Time Warp Feature](#using-the-about-page--time-warp-feature)
 - [Interacting with the 3D Tank Model](#interacting-with-the-3d-tank-model)
-- [Contacting Edge Hill via Email](#contacting-edge-hill-via-email)
 
 ## Requirements
 
