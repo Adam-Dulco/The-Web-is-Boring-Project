@@ -85,7 +85,3 @@ To interact with the 3D tank model, which appears on the "The Bradshaws Collecti
 2. Click and hold the left mouse button, then drag the tank model in any direction.
 
 > **Note:** The tank can also be resized and moved across the screen by clicking and holding the right mouse button.
-
-## Contacting Edge Hill via Email
-
-Contact information for Edge Hill can be found on the "About", "Opening Times", and "Contact Us" pages.
